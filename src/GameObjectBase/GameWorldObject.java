@@ -1,28 +1,31 @@
 package GameObjectBase;
 
+import PhysicsBase.VelocityVector;
+
 import java.awt.*;
 
 public class GameWorldObject extends GameObject
 {
-    //Variables
-    private Rectangle _hitBox;
-    private int _velocity;
+    //Properties
+    private Rectangle HitBox;
+    private VelocityVector Velocity;
 
     //Constructor
     public GameWorldObject()
     {
         super();
+        Velocity = new VelocityVector(0, 0);
     }
 
     //GetMethods
     public Rectangle GetHitBox()
     {
-        return _hitBox;
+        return HitBox;
     }
 
-    public int GetVelocity()
+    public VelocityVector GetVelocity()
     {
-        return _velocity;
+        return Velocity;
     }
 
     //SetMethods
@@ -30,12 +33,12 @@ public class GameWorldObject extends GameObject
     {
         //should this even have a setter? it's based of the size.
         //probably should be managed internally
-        _hitBox = hitBox;
+        HitBox = hitBox;
     }
 
-    public void SetVelocity(int velocity)
+    public void SetVelocity(VelocityVector velocity)
     {
-        _velocity = velocity;
+        Velocity = velocity;
     }
 
 }

@@ -2,24 +2,24 @@ package PhysicsBase;
 
 public class Vector
 {
-    //Variables
-    private double _radianRotation;
+    //Properties
+    private double RadianRotation;
 
     //Constructor
     public Vector(double radianRotation)
     {
-        _radianRotation = radianRotation;
+        RadianRotation = radianRotation;
     }
 
     //GetMethods
     public double GetRadianRotation()
     {
-        return _radianRotation;
+        return RadianRotation;
     }
 
     //SetMethods
     public void SetRadianRotation(double radianRotation)
     {
-        _radianRotation = radianRotation;
+        RadianRotation = radianRotation;
     }
 }

@@ -3,6 +3,11 @@
   <component name="ChangeListManager">
     <list default="true" id="4009fe6e-5e9f-4c1f-bb33-67e371d5c5fa" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameObjectBase/GameObject.java" afterPath="$PROJECT_DIR$/src/GameObjectBase/GameObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameObjectBase/GameWorldObject.java" afterPath="$PROJECT_DIR$/src/GameObjectBase/GameWorldObject.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PhysicsBase/DistanceVector.java" afterPath="$PROJECT_DIR$/src/PhysicsBase/DistanceVector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PhysicsBase/Vector.java" afterPath="$PROJECT_DIR$/src/PhysicsBase/Vector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PhysicsBase/VelocityVector.java" afterPath="$PROJECT_DIR$/src/PhysicsBase/VelocityVector.java" />
     </list>
     <ignored path="S.Studio.Engine.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -24,16 +29,56 @@
   </component>
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="GameObject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameObjectBase/GameObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="GameWorldObject.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/GameObjectBase/GameWorldObject.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+              <folding>
+                <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="Vector.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/PhysicsBase/Vector.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="VelocityVector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/PhysicsBase/VelocityVector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="16" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="16" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Sector.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SectorBase/Sector.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0">
+              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
               <folding>
-                <element signature="e#160#161#0" expanded="true" />
-                <element signature="e#208#209#0" expanded="true" />
-                <element signature="e#389#390#0" expanded="true" />
-                <element signature="e#437#438#0" expanded="true" />
+                <element signature="e#204#205#0" expanded="true" />
+                <element signature="e#236#237#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -43,26 +88,33 @@
         <entry file="file://$PROJECT_DIR$/src/PhysicsBase/DistanceVector.java">
           <provider selected="true" editor-type-id="text-editor">
             <state vertical-scroll-proportion="0.0">
-              <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
+              <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
               <folding>
-                <element signature="e#401#402#0" expanded="true" />
-                <element signature="e#433#434#0" expanded="true" />
+                <element signature="e#399#400#0" expanded="true" />
+                <element signature="e#430#431#0" expanded="true" />
               </folding>
             </state>
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="VelocityVector.java" pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/src/PhysicsBase/VelocityVector.java">
+      <file leaf-file-name="SectorMap.java" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/SectorBase/SectorMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.3267974">
-              <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
               <folding>
-                <element signature="e#301#302#0" expanded="true" />
-                <element signature="e#330#331#0" expanded="true" />
-                <element signature="e#390#391#0" expanded="true" />
-                <element signature="e#420#421#0" expanded="true" />
+                <element signature="imports" expanded="true" />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="SectorMapHelper.java" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/SectorBase/SectorMapHelper.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.29956427">
+              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -85,11 +137,14 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/src/GameObject.java" />
-        <option value="$PROJECT_DIR$/src/GameObjectBase/GameObject.java" />
-        <option value="$PROJECT_DIR$/src/GameObjectBase/GameWorldObject.java" />
+        <option value="$PROJECT_DIR$/src/SectorBase/Sector.java" />
+        <option value="$PROJECT_DIR$/src/PhysicsBase/VelocityVector.java" />
         <option value="$PROJECT_DIR$/src/PhysicsBase/Vector.java" />
         <option value="$PROJECT_DIR$/src/PhysicsBase/DistanceVector.java" />
-        <option value="$PROJECT_DIR$/src/PhysicsBase/VelocityVector.java" />
+        <option value="$PROJECT_DIR$/src/GameObjectBase/GameWorldObject.java" />
+        <option value="$PROJECT_DIR$/src/GameObjectBase/GameObject.java" />
+        <option value="$PROJECT_DIR$/src/SectorBase/SectorMap.java" />
+        <option value="$PROJECT_DIR$/src/SectorBase/SectorMapHelper.java" />
       </list>
     </option>
   </component>
@@ -155,6 +210,24 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="S.Studio2.Engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="S.Studio.Engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="S.Studio2.Engine" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="SectorBase" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -479,7 +552,8 @@
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Designer" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18020834" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.17447917" sideWeight="0.5" order="3" side_tool="false" content_ui="combo" />
+      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="UI Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
@@ -491,7 +565,6 @@
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="8" side_tool="false" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="5" side_tool="false" content_ui="combo" />
-      <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
       <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.4" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
     </layout>
     <layout-to-restore>
@@ -551,8 +624,8 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
           <folding>
-            <element signature="e#221#222#0" expanded="true" />
-            <element signature="e#244#245#0" expanded="true" />
+            <element signature="e#267#268#0" expanded="true" />
+            <element signature="e#335#336#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -563,9 +636,9 @@
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
             <element signature="e#160#161#0" expanded="true" />
-            <element signature="e#208#209#0" expanded="true" />
-            <element signature="e#389#390#0" expanded="true" />
-            <element signature="e#437#438#0" expanded="true" />
+            <element signature="e#207#208#0" expanded="true" />
+            <element signature="e#387#388#0" expanded="true" />
+            <element signature="e#434#435#0" expanded="true" />
           </folding>
         </state>
       </provider>
@@ -583,16 +656,9 @@
         <state vertical-scroll-proportion="0.0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#221#222#0" expanded="true" />
-            <element signature="e#244#245#0" expanded="true" />
+            <element signature="e#267#268#0" expanded="true" />
+            <element signature="e#335#336#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://D:/Program Files (x86)/Java/jdk1.8.0_65/src.zip!/java/awt/Rectangle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="-20.284313">
-          <caret line="118" column="13" selection-start-line="118" selection-start-column="13" selection-end-line="118" selection-end-column="13" />
         </state>
       </provider>
     </entry>
@@ -610,59 +676,85 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjectBase/GameObject.java">
+    <entry file="jar://D:/Program Files (x86)/Java/jdk1.8.0_65/src.zip!/java/awt/Rectangle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.708061">
-          <caret line="38" column="0" selection-start-line="38" selection-start-column="0" selection-end-line="38" selection-end-column="0" />
+        <state vertical-scroll-proportion="2.559913">
+          <caret line="118" column="13" selection-start-line="118" selection-start-column="13" selection-end-line="118" selection-end-column="13" />
           <folding />
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/GameObjectBase/GameWorldObject.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.34640524">
-          <caret line="14" column="5" selection-start-line="14" selection-start-column="5" selection-end-line="14" selection-end-column="5" />
-          <folding>
-            <element signature="e#221#222#0" expanded="true" />
-            <element signature="e#244#245#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PhysicsBase/Vector.java">
+    <entry file="file://$PROJECT_DIR$/src/SectorBase/Sector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
-          <caret line="6" column="0" selection-start-line="6" selection-start-column="0" selection-end-line="6" selection-end-column="0" />
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
           <folding>
-            <element signature="e#160#161#0" expanded="true" />
-            <element signature="e#208#209#0" expanded="true" />
-            <element signature="e#389#390#0" expanded="true" />
-            <element signature="e#437#438#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/PhysicsBase/DistanceVector.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="24" column="5" selection-start-line="24" selection-start-column="5" selection-end-line="24" selection-end-column="5" />
-          <folding>
-            <element signature="e#401#402#0" expanded="true" />
-            <element signature="e#433#434#0" expanded="true" />
+            <element signature="e#204#205#0" expanded="true" />
+            <element signature="e#236#237#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/PhysicsBase/VelocityVector.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.3267974">
-          <caret line="12" column="5" selection-start-line="12" selection-start-column="5" selection-end-line="12" selection-end-column="5" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="6" selection-end-line="4" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PhysicsBase/Vector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/PhysicsBase/DistanceVector.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="4" column="16" selection-start-line="4" selection-start-column="16" selection-end-line="4" selection-end-column="16" />
           <folding>
-            <element signature="e#301#302#0" expanded="true" />
-            <element signature="e#330#331#0" expanded="true" />
-            <element signature="e#390#391#0" expanded="true" />
-            <element signature="e#420#421#0" expanded="true" />
+            <element signature="e#399#400#0" expanded="true" />
+            <element signature="e#430#431#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjectBase/GameWorldObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="8" column="16" selection-start-line="8" selection-start-column="16" selection-end-line="8" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/GameObjectBase/GameObject.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="6" column="16" selection-start-line="6" selection-start-column="16" selection-end-line="6" selection-end-column="16" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SectorBase/SectorMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0">
+          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SectorBase/SectorMapHelper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.29956427">
+          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+          <folding />
         </state>
       </provider>
     </entry>

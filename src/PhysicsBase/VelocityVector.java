@@ -2,25 +2,25 @@ package PhysicsBase;
 
 public class VelocityVector extends Vector
 {
-    //Variables
-    private int _speed;
+    //Properties
+    private int Speed;
 
     //Constructor
     public VelocityVector(double radianRotation, int speed)
     {
         super(radianRotation);
-        _speed = speed;
+        Speed = speed;
     }
 
     //GetMethods
     public int GetSpeed()
     {
-        return _speed;
+        return Speed;
     }
 
     //SetMethods
     public void SetSpeed(int speed)
     {
-        _speed = speed;
+        Speed = speed;
     }
 }
