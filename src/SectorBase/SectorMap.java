@@ -25,10 +25,16 @@ public class SectorMap extends Rectangle
     //SetMethods
 
     //Public Methods
-    public void InsertObject(int x, int y, GameWorldObject obj)
+    public void InsertObject(Point point, GameWorldObject obj)
     {
-        Point p = SectorMapHelper.CoordinateToGridPosition(x, y, _gridUnitSize);
+        Point p = SectorMapHelper.CoordinateToGridPosition(point.x, point.y, _gridUnitSize);
         _map[p.x][p.y].add(obj);
+    }
+
+    public GameWorldObject[] GetObjectsAtSubSector(Point point)
+    {
+        Point p = SectorMapHelper.CoordinateToGridPosition(point.x, point.y, _gridUnitSize);
+        return (GameWorldObject[])_map[p.x][p.y].toArray();
     }
 
     //Private Methods
