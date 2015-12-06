@@ -24,11 +24,18 @@ public class SectorMap extends Rectangle
 
     //SetMethods
 
+    //Public Methods
+    public void InsertObject(int x, int y, GameWorldObject obj)
+    {
+        Point p = SectorMapHelper.CoordinateToGridPosition(x, y, _gridUnitSize);
+        _map[p.x][p.y].add(obj);
+    }
+
     //Private Methods
     private void InitMap()
     {
-        //need a conversion from pixels to grid coordinate units - helper?
+        Point p = SectorMapHelper.CoordinateToGridPosition(width, height, _gridUnitSize);
 
-
+        _map = new ArrayList[p.x][p.y];
     }
 }
