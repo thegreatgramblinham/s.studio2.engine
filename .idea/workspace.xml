@@ -3,11 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="4009fe6e-5e9f-4c1f-bb33-67e371d5c5fa" name="Default" comment="">
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameObjectBase/GameObject.java" afterPath="$PROJECT_DIR$/src/GameObjectBase/GameObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/GameObjectBase/GameWorldObject.java" afterPath="$PROJECT_DIR$/src/GameObjectBase/GameWorldObject.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PhysicsBase/DistanceVector.java" afterPath="$PROJECT_DIR$/src/PhysicsBase/DistanceVector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PhysicsBase/Vector.java" afterPath="$PROJECT_DIR$/src/PhysicsBase/Vector.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/PhysicsBase/VelocityVector.java" afterPath="$PROJECT_DIR$/src/PhysicsBase/VelocityVector.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SectorBase/SectorMap.java" afterPath="$PROJECT_DIR$/src/SectorBase/SectorMap.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/SectorBase/SectorMapHelper.java" afterPath="$PROJECT_DIR$/src/SectorBase/SectorMapHelper.java" />
     </list>
     <ignored path="S.Studio.Engine.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -97,11 +94,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SectorMap.java" pinned="false" current-in-tab="false">
+      <file leaf-file-name="SectorMap.java" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/SectorBase/SectorMap.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.0">
-              <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+            <state vertical-scroll-proportion="0.40087146">
+              <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
               <folding>
                 <element signature="imports" expanded="true" />
               </folding>
@@ -109,11 +106,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="SectorMapHelper.java" pinned="false" current-in-tab="true">
+      <file leaf-file-name="SectorMapHelper.java" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/SectorBase/SectorMapHelper.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.29956427">
-              <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+            <state vertical-scroll-proportion="0.0">
+              <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
               <folding />
             </state>
           </provider>
@@ -676,14 +673,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="jar://D:/Program Files (x86)/Java/jdk1.8.0_65/src.zip!/java/awt/Rectangle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="2.559913">
-          <caret line="118" column="13" selection-start-line="118" selection-start-column="13" selection-end-line="118" selection-end-column="13" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/SectorBase/Sector.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0">
@@ -740,21 +729,33 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/SectorBase/SectorMap.java">
+    <entry file="jar://D:/Program Files (x86)/Java/jdk1.8.0_65/src.zip!/java/awt/Rectangle.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.0">
-          <caret line="14" column="16" selection-start-line="14" selection-start-column="16" selection-end-line="14" selection-end-column="16" />
+        <state vertical-scroll-proportion="-1.9803921">
+          <caret line="122" column="4" selection-start-line="122" selection-start-column="4" selection-end-line="122" selection-end-column="4" />
           <folding>
-            <element signature="imports" expanded="true" />
+            <element signature="docComment;field#x#0;class#Rectangle#0" expanded="false" />
+            <element signature="e#7761#7762#0" expanded="true" />
+            <element signature="e#7802#7803#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/SectorBase/SectorMapHelper.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.29956427">
-          <caret line="11" column="4" selection-start-line="11" selection-start-column="4" selection-end-line="11" selection-end-column="4" />
+        <state vertical-scroll-proportion="0.0">
+          <caret line="10" column="0" selection-start-line="10" selection-start-column="0" selection-end-line="10" selection-end-column="0" />
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/SectorBase/SectorMap.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.40087146">
+          <caret line="18" column="48" selection-start-line="18" selection-start-column="48" selection-end-line="18" selection-end-column="48" />
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
         </state>
       </provider>
     </entry>

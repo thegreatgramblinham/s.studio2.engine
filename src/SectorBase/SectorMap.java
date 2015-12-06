@@ -8,17 +8,16 @@ import java.util.ArrayList;
 public class SectorMap extends Rectangle
 {
     //Private Variables
-    private int _heightUnit;
-    private int _widthUnit;
+    private int _gridUnitSize;
     private ArrayList<GameWorldObject>[][] _map;
 
     //Properties
 
     //Constructor
-    public SectorMap(int width, int height)
+    public SectorMap(int width, int height, int gridUnitSize)
     {
         super(width,height);
-
+        _gridUnitSize = gridUnitSize;
     }
 
     //GetMethods
