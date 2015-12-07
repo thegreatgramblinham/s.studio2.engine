@@ -2,7 +2,7 @@ package GameObjectBase;
 
 import java.awt.*;
 
-public class GameObject
+public abstract class GameObject
 {
     //Properties
     private Rectangle Size;
@@ -10,9 +10,9 @@ public class GameObject
     private int Y;
 
     //Constructors
-    public GameObject()
+    public GameObject(Rectangle size)
     {
-
+        Size = size;
     }
 
     //Get Methods

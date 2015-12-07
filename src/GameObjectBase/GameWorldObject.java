@@ -4,23 +4,24 @@ import PhysicsBase.VelocityVector;
 
 import java.awt.*;
 
-public class GameWorldObject extends GameObject
+public abstract class GameWorldObject extends GameObject
 {
     //Properties
     private Rectangle HitBox;
     private VelocityVector Velocity;
 
     //Constructor
-    public GameWorldObject()
+    public GameWorldObject(Rectangle size)
     {
-        super();
+        super(size);
         Velocity = new VelocityVector(0, 0);
     }
 
     //GetMethods
     public Rectangle GetHitBox()
     {
-        return HitBox;
+        //return HitBox;
+        return GetSize();
     }
 
     public VelocityVector GetVelocity()
@@ -29,7 +30,7 @@ public class GameWorldObject extends GameObject
     }
 
     //SetMethods
-    public void SetHitBox(Rectangle hitBox)
+    protected void SetHitBox(Rectangle hitBox)
     {
         //should this even have a setter? it's based of the size.
         //probably should be managed internally
