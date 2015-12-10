@@ -1,6 +1,6 @@
-package PhysicsBase;
+package PhysicsBase.Vectors;
 
-public class VelocityVector extends Vector
+public class VelocityVector extends VectorBase
 {
     //Properties
     private int Speed;

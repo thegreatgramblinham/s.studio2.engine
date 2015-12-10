@@ -1,6 +1,6 @@
-package PhysicsBase;
+package PhysicsBase.Vectors;
 
-public class DistanceVector extends Vector
+public class DistanceVector extends VectorBase
 {
     //Properties
     private int Length;

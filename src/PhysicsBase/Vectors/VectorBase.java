@@ -1,12 +1,12 @@
-package PhysicsBase;
+package PhysicsBase.Vectors;
 
-public class Vector
+public class VectorBase
 {
     //Properties
     private double RadianRotation;
 
     //Constructor
-    public Vector(double radianRotation)
+    public VectorBase(double radianRotation)
     {
         RadianRotation = radianRotation;
     }
