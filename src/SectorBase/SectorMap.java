@@ -5,6 +5,7 @@ import GameObjectBase.GameWorldObject;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Set;
 
 public class SectorMap extends Rectangle
 {
@@ -12,7 +13,7 @@ public class SectorMap extends Rectangle
     private int _gridUnitSize;
     private int _totalObjectCount;
     private HashSet<GameWorldObject>[][] _map;
-    private HashMap<GameWorldObject, HashSet<GameWorldObject>> _subSectorLookup;
+    private HashMap<GameWorldObject, HashSet<GameWorldObject>> _objectToSubSector;
 
     //Properties
 
@@ -29,6 +30,11 @@ public class SectorMap extends Rectangle
     public int GetObjectCount()
     {
         return _totalObjectCount;
+    }
+
+    public Object[] GetObjectCollection()
+    {
+        return _objectToSubSector.keySet().toArray();
     }
 
     //SetMethods
@@ -53,18 +59,18 @@ public class SectorMap extends Rectangle
             subSector.add(obj);
         }
 
-        _subSectorLookup.put(obj, subSector);
+        _objectToSubSector.put(obj, subSector);
         _totalObjectCount++;
     }
 
     public void UpdateObjectLocation(GameWorldObject obj)
     {
         if(obj == null) return;
-        if(!_subSectorLookup.containsKey(obj)) return;
+        if(!_objectToSubSector.containsKey(obj)) return;
 
         Point p = SectorMapHelper.CoordinateToGridPosition(obj.GetX(), obj.GetY(), _gridUnitSize);
 
-        HashSet oldSector = _subSectorLookup.get(obj);
+        HashSet oldSector = _objectToSubSector.get(obj);
         HashSet newSector = _map[p.x][p.y];
 
         if(newSector == null)
@@ -80,18 +86,18 @@ public class SectorMap extends Rectangle
             oldSector.remove(obj);
         }
 
-        _subSectorLookup.put(obj, newSector);
+        _objectToSubSector.put(obj, newSector);
     }
 
     public void RemoveObject(GameWorldObject obj)
     {
         if(obj == null) return;
-        if(!_subSectorLookup.containsKey(obj)) return;
+        if(!_objectToSubSector.containsKey(obj)) return;
 
-        HashSet subSector = _subSectorLookup.get(obj);
+        HashSet subSector = _objectToSubSector.get(obj);
 
         subSector.remove(obj);
-        _subSectorLookup.remove(obj);
+        _objectToSubSector.remove(obj);
 
         _totalObjectCount--;
     }
@@ -103,12 +109,17 @@ public class SectorMap extends Rectangle
         return objSet.toArray();
     }
 
+    public Object[] GetObjectsAtSubSector(int x, int y)
+    {
+        return GetObjectsAtSubSector(new Point(x,y));
+    }
+
     //Private Methods
     private void InitMap()
     {
         Point p = SectorMapHelper.CoordinateToGridPosition(width, height, _gridUnitSize);
 
         _map = new HashSet[p.x][p.y];
-        _subSectorLookup = new HashMap<>();
+        _objectToSubSector = new HashMap<>();
     }
 }
