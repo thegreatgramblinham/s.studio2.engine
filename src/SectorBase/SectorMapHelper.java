@@ -2,8 +2,11 @@ package SectorBase;
 
 import java.awt.*;
 
-public abstract class SectorMapHelper
+public final class SectorMapHelper
 {
+    //Constructor
+    private SectorMapHelper(){}
+
     //Public Methods
     public static int CoordinateToGridPosition(int coord, int gridUnitSize)
     {
