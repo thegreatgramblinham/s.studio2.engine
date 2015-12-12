@@ -12,7 +12,16 @@ public abstract class GameObject extends BoundedObject
     public GameObject(Rectangle size)
     {
         super(size);
-        _id = UUID.randomUUID();
+    }
+
+    public GameObject(int x, int y, int width, int height)
+    {
+        super(x,y,width,height);
+    }
+
+    public GameObject(int width, int height)
+    {
+        super(width, height);
     }
 
     //Get Methods
@@ -41,5 +50,11 @@ public abstract class GameObject extends BoundedObject
     public int hashCode()
     {
         return _id.hashCode();
+    }
+
+    //Private Methods
+    private void Init()
+    {
+        _id = UUID.randomUUID();
     }
 }
