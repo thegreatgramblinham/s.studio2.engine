@@ -5,7 +5,6 @@ import GameObjectBase.GameWorldObject;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
 
 public class SectorMap extends Rectangle
 {
@@ -44,7 +43,7 @@ public class SectorMap extends Rectangle
     {
         if(obj == null) return;
 
-        Point p = SectorMapHelper.CoordinateToGridPosition(obj.GetX(), obj.GetY(), _gridUnitSize);
+        Point p = SectorMapHelper.CoordinateToGridPosition(obj.x, obj.y, _gridUnitSize);
 
         HashSet subSector = _map[p.x][p.y];
 
@@ -68,7 +67,7 @@ public class SectorMap extends Rectangle
         if(obj == null) return;
         if(!_objectToSubSector.containsKey(obj)) return;
 
-        Point p = SectorMapHelper.CoordinateToGridPosition(obj.GetX(), obj.GetY(), _gridUnitSize);
+        Point p = SectorMapHelper.CoordinateToGridPosition(obj.x, obj.y, _gridUnitSize);
 
         HashSet oldSector = _objectToSubSector.get(obj);
         HashSet newSector = _map[p.x][p.y];

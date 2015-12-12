@@ -33,7 +33,7 @@ public class CollisionManager
 
             //check for collisions within each object in the same subsector
             Object[] sectorObjs =
-                    _map.GetObjectsAtSubSector(gameObj.GetX(), gameObj.GetY());
+                    _map.GetObjectsAtSubSector(gameObj.x, gameObj.y);
         }
     }
 
