@@ -1,12 +1,13 @@
 package SectorBase;
 
+import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
 
 import java.awt.*;
 import java.util.HashMap;
 import java.util.HashSet;
 
-public class SectorMap extends Rectangle
+public class SectorMap extends BoundedObject
 {
     //Private Variables
     private int _gridUnitSize;

@@ -2,6 +2,9 @@ package PhysicsBase;
 
 import GameObjectBase.GameWorldObject;
 import SectorBase.SectorMap;
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Set;
 
 public class CollisionManager
 {
@@ -21,31 +24,49 @@ public class CollisionManager
     //SetMethods
 
     //Public Methods
-    public void CheckCollisions()
+    public HashMap<GameWorldObject, HashSet<GameWorldObject>> CheckCollisions()
     {
+        HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions
+                = new HashMap<>();
+
         Object[] objArr = _map.GetObjectCollection();
 
-        if(objArr == null || objArr.length == 0) return;
+        if(objArr == null || objArr.length == 0) return collisions;
 
         for(int i = 0; i< objArr.length; i++)
         {
             GameWorldObject gameObj = (GameWorldObject)objArr[i];
 
             //check for collisions within each object in the same subsector
-            Object[] sectorObjs =
+            Object[] sectorObjArr =
                     _map.GetObjectsAtSubSector(gameObj.x, gameObj.y);
 
-            for(int j = 0; j< sectorObjs.length; i++)
+            for(int j = 0; j< sectorObjArr.length; i++)
             {
-                boolean collisionEvent = CollisionHelper.Collision(gameObj,
-                        (GameWorldObject)sectorObjs[j]);
+                GameWorldObject sectorGameObj = (GameWorldObject)sectorObjArr[j];
 
-                if(collisionEvent)
+                //No need to collide with self
+                if(sectorGameObj == gameObj) continue;
+
+                boolean collisionEvent = CollisionHelper.Collision(gameObj,
+                        sectorGameObj);
+
+                if(!collisionEvent) continue;
+
+                if(!collisions.containsKey(gameObj))
                 {
-                    //todo COLLISION EVENT
+                    collisions.put(gameObj,
+                            new HashSet<GameWorldObject>(){{add(sectorGameObj);}});
+                }
+                else
+                {
+                    //This object is colliding with multiple objects.
+                    collisions.get(gameObj).add(sectorGameObj);
                 }
             }
         }
+
+        return collisions;
     }
 
     //Private Methods

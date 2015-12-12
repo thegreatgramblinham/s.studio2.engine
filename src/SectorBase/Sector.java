@@ -1,14 +1,16 @@
 package SectorBase;
 
-public class Sector
+import GameObjectBase.BoundedObject;
+
+public class Sector extends BoundedObject
 {
     //Properties
     private SectorMap SectorMap;
 
     //Constructor
-    public Sector()
+    public Sector(int width, int height)
     {
-
+        super(width, height);
     }
 
     //GetMethods
