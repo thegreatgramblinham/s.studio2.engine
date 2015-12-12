@@ -24,11 +24,11 @@ public abstract class BoundedObject extends Rectangle
         super(width, height);
     }
 
-    //GetMethods
-
-    //SetMethods
-
     //Public Methods
+    public Point GetCenterPoint()
+    {
+        return new Point((int)this.getCenterX(), (int)this.getCenterY());
+    }
 
     //Private Methods
 }

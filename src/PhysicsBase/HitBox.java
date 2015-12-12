@@ -1,8 +1,10 @@
 package PhysicsBase;
 
+import GameObjectBase.BoundedObject;
+
 import java.awt.*;
 
-public class HitBox extends Rectangle
+public class HitBox extends BoundedObject
 {
     //Private Variables
 
