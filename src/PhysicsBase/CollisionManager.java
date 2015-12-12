@@ -42,7 +42,7 @@ public class CollisionManager
 
                 if(collisionEvent)
                 {
-                    //todo COLLISION EVENT    
+                    //todo COLLISION EVENT
                 }
             }
         }
