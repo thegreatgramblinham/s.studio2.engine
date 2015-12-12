@@ -27,4 +27,14 @@ public final class PointHelper
 
         return slp;
     }
+
+    public static double HorizontalDistanceBetween(Point p1, Point p2)
+    {
+        return Math.abs(p2.x - p1.x);
+    }
+
+    public static double VerticalDistanceBetween(Point p1, Point p2)
+    {
+        return Math.abs(p2.y - p2.y);
+    }
 }

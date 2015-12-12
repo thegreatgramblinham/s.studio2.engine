@@ -22,7 +22,7 @@ public final class CollisionHelper
     private boolean CheckVerticalOverlap(HitBox o1, HitBox o2)
     {
         if(o1.GetHalfHeight() + o2.GetHalfHeight() <=
-                Math.cos(PointHelper.DistanceTo(o1.GetCenterPoint(), o2.GetCenterPoint())))
+                PointHelper.VerticalDistanceBetween(o1.GetCenterPoint(),o2.GetCenterPoint()))
             return true;
         return false;
     }
@@ -30,7 +30,7 @@ public final class CollisionHelper
     private boolean CheckHorizontalOverlap(HitBox o1, HitBox o2)
     {
         if(o1.GetHalfWidth() + o2.GetHalfWidth() <=
-                Math.sin(PointHelper.DistanceTo(o1.GetCenterPoint(), o2.GetCenterPoint())))
+                PointHelper.HorizontalDistanceBetween(o1.GetCenterPoint(), o2.GetCenterPoint()))
             return true;
         return false;
     }
