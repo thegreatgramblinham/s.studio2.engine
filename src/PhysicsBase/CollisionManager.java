@@ -4,7 +4,6 @@ import GameObjectBase.GameWorldObject;
 import SectorBase.SectorMap;
 import java.util.HashMap;
 import java.util.HashSet;
-import java.util.Set;
 
 public class CollisionManager
 {
@@ -41,7 +40,7 @@ public class CollisionManager
             Object[] sectorObjArr =
                     _map.GetObjectsAtSubSector(gameObj.x, gameObj.y);
 
-            for(int j = 0; j< sectorObjArr.length; i++)
+            for(int j = 0; j< sectorObjArr.length; j++)
             {
                 GameWorldObject sectorGameObj = (GameWorldObject)sectorObjArr[j];
 

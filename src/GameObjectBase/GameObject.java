@@ -12,16 +12,19 @@ public abstract class GameObject extends BoundedObject
     public GameObject(Rectangle size)
     {
         super(size);
+        Init();
     }
 
     public GameObject(int x, int y, int width, int height)
     {
         super(x,y,width,height);
+        Init();
     }
 
     public GameObject(int width, int height)
     {
         super(width, height);
+        Init();
     }
 
     //Get Methods
