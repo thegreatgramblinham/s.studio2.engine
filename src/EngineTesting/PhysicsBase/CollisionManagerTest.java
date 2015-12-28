@@ -63,6 +63,9 @@ public class CollisionManagerTest
         Assert.assertTrue(!collisions.isEmpty());
         Assert.assertTrue(collisions.size() == 2);
 
+        Assert.assertTrue(collisions.containsKey(obj1));
+        Assert.assertTrue(collisions.containsKey(obj2));
+
         Assert.assertTrue(collisions.get(obj1).size() == 1);
         Assert.assertTrue(collisions.get(obj1).contains(obj2));
 

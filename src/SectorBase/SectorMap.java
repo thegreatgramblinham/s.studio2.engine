@@ -73,6 +73,9 @@ public class SectorMap extends BoundedObject
         HashSet oldSector = _objectToSubSector.get(obj);
         HashSet newSector = _map[p.x][p.y];
 
+        //no need to do anything else if we aren't macro moving.
+        if(newSector == oldSector) return;
+
         if(newSector == null)
         {
             newSector = new HashSet();
@@ -82,8 +85,8 @@ public class SectorMap extends BoundedObject
         }
         else
         {
-            newSector.add(obj);
             oldSector.remove(obj);
+            newSector.add(obj);
         }
 
         _objectToSubSector.put(obj, newSector);
