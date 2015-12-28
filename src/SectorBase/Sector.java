@@ -2,12 +2,18 @@ package SectorBase;
 
 import GameObjectBase.BoundedObject;
 import PhysicsBase.CollisionManager;
+import SectorBase.enums.Direction;
 
 public class Sector extends BoundedObject
 {
     //Private Fields
     private CollisionManager _collisionManager;
     private SectorMap _map;
+
+    protected Sector _up;
+    protected Sector _down;
+    protected Sector _left;
+    protected Sector _right;
 
     //Constructor
     public Sector(int width, int height, int gridUnitSize)
@@ -19,6 +25,30 @@ public class Sector extends BoundedObject
     //GetMethods
 
     //SetMethods
+
+    //Public Methods
+    public void LinkToSide(Sector other, Direction d)
+    {
+        switch (d)
+        {
+            case Up:
+                _up = other;
+                other._down = this;
+                break;
+            case Down:
+                _down = other;
+                other._up = this;
+                break;
+            case Left:
+                _left = other;
+                other._right = this;
+                break;
+            case Right:
+                _right = other;
+                other._left = this;
+                break;
+        }
+    }
 
     //Private Methods
     private void Init(int gridUnitSize)
