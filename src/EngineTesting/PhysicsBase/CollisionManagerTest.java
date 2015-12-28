@@ -51,6 +51,7 @@ public class CollisionManagerTest
     @Test
     public void testCheckCollisionsSecondMove() throws Exception
     {
+        //Objects are bounds touching.
         obj1.SetLocation(new Point(11, 11));
         _map.UpdateObjectLocation(obj1);
 
@@ -74,8 +75,28 @@ public class CollisionManagerTest
     }
 
     @Test
-    public void testCheckInitCollisions() throws Exception
+    public void testCheckInitCollisionsThirdMove() throws Exception
     {
-        Assert.assertTrue(_manager.CheckCollisions().isEmpty());
+        //Objects are inside each other.
+        obj1.SetLocation(new Point(12, 12));
+        _map.UpdateObjectLocation(obj1);
+
+        obj2.SetLocation(new Point(13, 13));
+        _map.UpdateObjectLocation(obj2);
+
+        HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions
+                = _manager.CheckCollisions();
+
+        Assert.assertTrue(!collisions.isEmpty());
+        Assert.assertTrue(collisions.size() == 2);
+
+        Assert.assertTrue(collisions.containsKey(obj1));
+        Assert.assertTrue(collisions.containsKey(obj2));
+
+        Assert.assertTrue(collisions.get(obj1).size() == 1);
+        Assert.assertTrue(collisions.get(obj1).contains(obj2));
+
+        Assert.assertTrue(collisions.get(obj2).size() == 1);
+        Assert.assertTrue(collisions.get(obj2).contains(obj1));
     }
 }
