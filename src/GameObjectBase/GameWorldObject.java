@@ -39,4 +39,12 @@ public abstract class GameWorldObject extends GameObject
         Velocity = velocity;
     }
 
+    public void SetLocation(Point p)
+    {
+        this.x = p.x;
+        this.y = p.y;
+        _hitBox.x = p.x;
+        _hitBox.y = p.y;
+    }
+
 }

@@ -39,12 +39,10 @@ public class CollisionManagerTest
     @Test
     public void testCheckCollisionsFirstMove() throws Exception
     {
-        obj1.x = 10;
-        obj1.y = 10;
+        obj1.SetLocation(new Point(10, 10));
         _map.UpdateObjectLocation(obj1);
 
-        obj2.x = 15;
-        obj2.y = 15;
+        obj2.SetLocation(new Point(15, 15));
         _map.UpdateObjectLocation(obj2);
 
         Assert.assertTrue(_manager.CheckCollisions().isEmpty());
@@ -53,12 +51,10 @@ public class CollisionManagerTest
     @Test
     public void testCheckCollisionsSecondMove() throws Exception
     {
-        obj1.x = 11;
-        obj1.y = 11;
+        obj1.SetLocation(new Point(11, 11));
         _map.UpdateObjectLocation(obj1);
 
-        obj2.x = 14;
-        obj2.y = 14;
+        obj2.SetLocation(new Point(14, 14));
         _map.UpdateObjectLocation(obj2);
 
         HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions
