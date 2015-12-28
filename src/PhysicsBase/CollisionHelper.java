@@ -19,16 +19,20 @@ public final class CollisionHelper
     //Private Methods
     private static boolean CheckVerticalOverlap(HitBox o1, HitBox o2)
     {
-        if(o1.GetHalfHeight() + o2.GetHalfHeight() <=
-                PointHelper.VerticalDistanceBetween(o1.GetCenterPoint(),o2.GetCenterPoint()))
+        double d1 = o1.GetHalfHeight() + o2.GetHalfHeight();
+        double d2 = PointHelper.VerticalDistanceBetween(o1.GetCenterPoint(),o2.GetCenterPoint());
+
+        if( d1 <= d2 )
             return true;
         return false;
     }
 
     private static boolean CheckHorizontalOverlap(HitBox o1, HitBox o2)
     {
-        if(o1.GetHalfWidth() + o2.GetHalfWidth() <=
-                PointHelper.HorizontalDistanceBetween(o1.GetCenterPoint(), o2.GetCenterPoint()))
+        double d1 = o1.GetHalfWidth() + o2.GetHalfWidth();
+        double d2 = PointHelper.HorizontalDistanceBetween(o1.GetCenterPoint(), o2.GetCenterPoint());
+
+        if( d1 <= d2 )
             return true;
         return false;
     }

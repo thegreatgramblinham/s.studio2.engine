@@ -27,32 +27,32 @@ public abstract class BoundedObject extends Rectangle
     //Get Methods
     public int GetTop()
     {
-        return (int)this.getCenterY() + this.GetHalfHeight();
+        return y + height;
     }
 
     public int GetRight()
     {
-        return (int)this.getCenterX() + this.GetHalfWidth();
+        return x + width;
     }
 
     public int GetBottom()
     {
-        return (int)this.getCenterY() -  this.GetHalfHeight();
+        return y;
     }
 
     public int GetLeft()
     {
-        return (int)this.getCenterX() - this.GetHalfWidth();
+        return x;
     }
 
-    public int GetHalfWidth()
+    public double GetHalfWidth()
     {
-        return (int)Math.ceil(this.width/2.0);
+        return (this.width/2.0);
     }
 
-    public int GetHalfHeight()
+    public double GetHalfHeight()
     {
-        return (int)Math.ceil(this.height/2.0);
+        return (this.height/2.0);
     }
 
     //Public Methods

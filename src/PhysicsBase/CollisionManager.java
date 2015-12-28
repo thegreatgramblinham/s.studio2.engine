@@ -5,6 +5,7 @@ import SectorBase.SectorMap;
 import java.util.HashMap;
 import java.util.HashSet;
 
+//todo support for varying speeds - vector collision
 public class CollisionManager
 {
     //Private Variables

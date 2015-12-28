@@ -1,11 +1,14 @@
 package EngineTesting.PhysicsBase;
 
 import EngineTesting.GameObjectBase.DummyGameObject;
+import GameObjectBase.GameWorldObject;
 import PhysicsBase.CollisionManager;
 import SectorBase.SectorMap;
 import org.junit.Assert;
 import org.junit.Test;
 import java.awt.*;
+import java.util.HashMap;
+import java.util.HashSet;
 
 public class CollisionManagerTest
 {
@@ -28,7 +31,51 @@ public class CollisionManagerTest
     }
 
     @Test
-    public void testCheckCollisions() throws Exception
+    public void testCheckCollisionsInit() throws Exception
+    {
+        Assert.assertTrue(_manager.CheckCollisions().isEmpty());
+    }
+
+    @Test
+    public void testCheckCollisionsFirstMove() throws Exception
+    {
+        obj1.x = 10;
+        obj1.y = 10;
+        _map.UpdateObjectLocation(obj1);
+
+        obj2.x = 15;
+        obj2.y = 15;
+        _map.UpdateObjectLocation(obj2);
+
+        Assert.assertTrue(_manager.CheckCollisions().isEmpty());
+    }
+
+    @Test
+    public void testCheckCollisionsSecondMove() throws Exception
+    {
+        obj1.x = 11;
+        obj1.y = 11;
+        _map.UpdateObjectLocation(obj1);
+
+        obj2.x = 14;
+        obj2.y = 14;
+        _map.UpdateObjectLocation(obj2);
+
+        HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions
+                = _manager.CheckCollisions();
+
+        Assert.assertTrue(!collisions.isEmpty());
+        Assert.assertTrue(collisions.size() == 2);
+
+        Assert.assertTrue(collisions.get(obj1).size() == 1);
+        Assert.assertTrue(collisions.get(obj1).contains(obj2));
+
+        Assert.assertTrue(collisions.get(obj2).size() == 1);
+        Assert.assertTrue(collisions.get(obj2).contains(obj1));
+    }
+
+    @Test
+    public void testCheckInitCollisions() throws Exception
     {
         Assert.assertTrue(_manager.CheckCollisions().isEmpty());
     }
