@@ -73,7 +73,7 @@ public class CollisionManager
                                 HashSet<GameWorldObject> collidingObjs)
     {
         //simple case, start with one object
-
+        System.out.println("COLLISION");
         //todo collision with multiple objects
     }
 

@@ -6,10 +6,14 @@ import GameObjectBase.GameWorldObject;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class SectorMap extends BoundedObject
 {
     //Private Variables
+    private int _xUnits;
+    private int _yUnits;
+
     private int _gridUnitSize;
     private int _totalObjectCount;
     private HashSet<GameWorldObject>[][] _map;
@@ -35,6 +39,11 @@ public class SectorMap extends BoundedObject
     public Object[] GetObjectCollection()
     {
         return _objectToSubSector.keySet().toArray();
+    }
+
+    public Iterator<GameWorldObject> GetObjectIterator()
+    {
+        return _objectToSubSector.keySet().iterator();
     }
 
     //SetMethods
@@ -109,7 +118,15 @@ public class SectorMap extends BoundedObject
     {
         Point p = SectorMapHelper.CoordinateToGridPosition(point.x, point.y, _gridUnitSize);
         HashSet objSet = _map[p.x][p.y];
-        return objSet.toArray();
+
+        if(objSet == null)
+        {
+            return new Object[0];
+        }
+        else
+        {
+            return objSet.toArray();
+        }
     }
 
     public Object[] GetObjectsAtSubSector(int x, int y)
@@ -122,7 +139,10 @@ public class SectorMap extends BoundedObject
     {
         Point p = SectorMapHelper.CoordinateToGridPosition(width, height, _gridUnitSize);
 
-        _map = new HashSet[p.x][p.y];
+        _xUnits = p.x+1;
+        _yUnits = p.y+1;
+
+        _map = new HashSet[_xUnits][_yUnits];
         _objectToSubSector = new HashMap<>();
     }
 }

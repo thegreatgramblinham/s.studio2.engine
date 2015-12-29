@@ -28,7 +28,10 @@ public class Sector extends BoundedObject
     }
 
     //GetMethods
-
+    public Iterator<GameWorldObject> GetObjectsInSector()
+    {
+        return _map.GetObjectIterator();
+    }
 
     //SetMethods
 

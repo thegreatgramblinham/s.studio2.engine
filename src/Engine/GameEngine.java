@@ -20,6 +20,7 @@ public class GameEngine
     //Constructor
     public GameEngine(double frameRate)
     {
+        Init();
         _frameRate = frameRate;
     }
 
@@ -40,7 +41,8 @@ public class GameEngine
     public void Start()
     {
         _physicsLoop = new PhysicsLoop(_activeSector, _frameRate);
-        _physicsThread = new Thread();
+        _physicsThread = new Thread(_physicsLoop);
+        _physicsThread.start();
     }
 
     public void Stop()

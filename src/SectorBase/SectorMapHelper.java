@@ -18,6 +18,6 @@ final class SectorMapHelper
         int xCoords = SectorMapHelper.CoordinateToGridPosition(x, gridUnitSize);
         int yCoords = SectorMapHelper.CoordinateToGridPosition(y, gridUnitSize);
 
-        return new Point(xCoords,yCoords);
+        return new Point(xCoords-1,yCoords-1);
     }
 }
