@@ -1,6 +1,6 @@
 package PhysicsBase.Vectors;
 
-public class VectorBase
+class VectorBase
 {
     //Properties
     private double RadianRotation;

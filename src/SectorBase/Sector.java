@@ -1,6 +1,7 @@
 package SectorBase;
 
 import GameObjectBase.BoundedObject;
+import GameObjectBase.GameWorldObject;
 import PhysicsBase.CollisionManager;
 import SectorBase.enums.Direction;
 
@@ -23,10 +24,24 @@ public class Sector extends BoundedObject
     }
 
     //GetMethods
+    public CollisionManager GetCollisionManager()
+    {
+        return _collisionManager;
+    }
 
     //SetMethods
 
     //Public Methods
+    public void AddObject(GameWorldObject obj)
+    {
+        _map.InsertObject(obj);
+    }
+
+    public void RemoveObj(GameWorldObject obj)
+    {
+        _map.RemoveObject(obj);
+    }
+
     public void LinkToSide(Sector other, Direction d)
     {
         switch (d)

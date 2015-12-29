@@ -3,7 +3,7 @@ package GameObjectBase;
 import java.awt.*;
 import java.util.UUID;
 
-public abstract class GameObject extends BoundedObject
+abstract class GameObject extends BoundedObject
 {
     //Properties
     private UUID _id;
