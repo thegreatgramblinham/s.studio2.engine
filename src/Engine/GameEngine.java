@@ -39,7 +39,7 @@ public class GameEngine
     //Public Methods
     public void Start()
     {
-        _physicsLoop = new PhysicsLoop(_activeSector);
+        _physicsLoop = new PhysicsLoop(_activeSector, _frameRate);
         _physicsThread = new Thread();
     }
 
