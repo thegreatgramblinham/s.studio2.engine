@@ -4,6 +4,7 @@ import GameObjectBase.GameWorldObject;
 import SectorBase.SectorMap;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 //todo support for varying speeds - vector collision
 public class CollisionManager
@@ -67,6 +68,12 @@ public class CollisionManager
         }
 
         return collisions;
+    }
+
+    public void HandleCollision(GameWorldObject obj,
+                                HashSet<GameWorldObject> collidingObjs)
+    {
+
     }
 
     //Private Methods

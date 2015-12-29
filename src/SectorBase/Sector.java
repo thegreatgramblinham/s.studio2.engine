@@ -5,6 +5,10 @@ import GameObjectBase.GameWorldObject;
 import PhysicsBase.CollisionManager;
 import SectorBase.enums.Direction;
 
+import java.util.HashMap;
+import java.util.HashSet;
+import java.util.Iterator;
+
 public class Sector extends BoundedObject
 {
     //Private Fields
@@ -24,14 +28,37 @@ public class Sector extends BoundedObject
     }
 
     //GetMethods
-    public CollisionManager GetCollisionManager()
-    {
-        return _collisionManager;
-    }
+
 
     //SetMethods
 
     //Public Methods
+    public void HandleCollisions()
+    {
+        HashMap<GameWorldObject,HashSet<GameWorldObject>> collisons
+                = _collisionManager.CheckCollisions();
+
+        if(collisons.isEmpty()) return;
+
+        Iterator<GameWorldObject> objs = collisons.keySet().iterator();
+
+        GameWorldObject currObj;
+        HashSet<GameWorldObject> collidingWith;
+
+        while(objs.hasNext())
+        {
+            currObj = objs.next();
+            collidingWith = collisons.get(currObj);
+
+            _collisionManager.HandleCollision(currObj, collidingWith);
+        }
+    }
+
+    public void UpdateVectors()
+    {
+
+    }
+
     public void AddObject(GameWorldObject obj)
     {
         _map.InsertObject(obj);
