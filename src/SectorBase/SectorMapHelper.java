@@ -2,7 +2,7 @@ package SectorBase;
 
 import java.awt.*;
 
-public final class SectorMapHelper
+final class SectorMapHelper
 {
     //Constructor
     private SectorMapHelper(){}

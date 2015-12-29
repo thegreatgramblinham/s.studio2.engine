@@ -2,15 +2,16 @@ import SectorBase.Sector;
 
 import java.util.HashSet;
 
-public class Engine
+public class GameEngine
 {
     //Private Variables
+    private double _framerate;
     private HashSet<Sector> _sectorSet;
 
     //Properties
 
     //Constructor
-    public Engine()
+    public GameEngine()
     {
 
     }
