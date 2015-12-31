@@ -1,9 +1,11 @@
 package EngineTesting.SectorBase;
 
 import EngineTesting.GameObjectBase.DummyGameObject;
+import GameObjectBase.GameWorldObject;
 import SectorBase.SectorMap;
 import org.junit.Assert;
 import java.awt.*;
+import java.util.Iterator;
 
 public class SectorMapTest
 {
@@ -32,45 +34,67 @@ public class SectorMapTest
     public void testGetObjectsAtSubSector() throws Exception
     {
         _map.InsertObject(_testObject);
-        Object[] objArr = _map.GetObjectsAtSubSector(_testPoint);
-        Assert.assertTrue(objArr.length == 1);
-        Assert.assertTrue(objArr[0] == _testObject);
+
+        Iterator<GameWorldObject> objIter
+                = _map.GetObjectsAtSubSector(_testPoint);
+
+        GameWorldObject obj = null;
+
+        int cnt = 0;
+        while (objIter.hasNext())
+        {
+            obj = objIter.next();
+
+            cnt++;
+        }
+        Assert.assertTrue(cnt == 1);
+        Assert.assertTrue(obj == _testObject);
     }
 
     @org.junit.Test
     public void testRemoveObject() throws Exception
     {
+        //Insertion
         _map.InsertObject(_testObject);
         Assert.assertTrue(_map.GetObjectCount() == 1);
-        Object[] objArr = _map.GetObjectsAtSubSector(_testPoint);
-        Assert.assertTrue(objArr.length == 1);
+        Iterator<GameWorldObject> objIter = _map.GetObjectsAtSubSector(_testPoint);
 
+        Assert.assertTrue(objIter.next() == _testObject);
+        Assert.assertTrue(!objIter.hasNext());
+
+        //Removal
         _map.RemoveObject(_testObject);
         Assert.assertTrue(_map.GetObjectCount() == 0);
-        objArr = _map.GetObjectsAtSubSector(_testPoint);
-        Assert.assertTrue(objArr.length == 0);
+
+        objIter = _map.GetObjectsAtSubSector(_testPoint);
+        Assert.assertTrue(!objIter.hasNext());
     }
 
     @org.junit.Test
     public void testUpdateObjectLocation() throws Exception
     {
+        //Check origin location
         _map.InsertObject(_testObject);
-        Object[] objArr = _map.GetObjectsAtSubSector(_testPoint);
-        Assert.assertTrue(objArr.length == 1);
+        Iterator<GameWorldObject> objIter
+                = _map.GetObjectsAtSubSector(_testPoint);
 
+        Assert.assertTrue(objIter.next() == _testObject);
+        Assert.assertTrue(!objIter.hasNext());
+
+        //Change location
         Point newLoc = new Point(50,25);
         _testObject.SetLocation(newLoc);
 
         _map.UpdateObjectLocation(_testObject);
 
         //Check old location
-        objArr = _map.GetObjectsAtSubSector(_testPoint);
-        Assert.assertTrue(objArr.length == 0);
+        objIter = _map.GetObjectsAtSubSector(_testPoint);
+        Assert.assertTrue(!objIter.hasNext());
 
         //Check new location
-        objArr = _map.GetObjectsAtSubSector(newLoc);
-        Assert.assertTrue(objArr.length == 1);
-        Assert.assertTrue(objArr[0] == _testObject);
+        objIter = _map.GetObjectsAtSubSector(newLoc);
+        Assert.assertTrue(objIter.next() == _testObject);
+        Assert.assertTrue(!objIter.hasNext());
     }
 
 

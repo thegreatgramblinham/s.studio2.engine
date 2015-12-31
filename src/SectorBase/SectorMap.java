@@ -42,7 +42,7 @@ public class SectorMap extends BoundedObject
         return _objectToSubSector.keySet().toArray();
     }
 
-    public Iterator<GameWorldObject> GetObjectIterator()
+    public Iterator<GameWorldObject> GetAllObjectIterator()
     {
         return _objectToSubSector.keySet().iterator();
     }
@@ -172,7 +172,7 @@ public class SectorMap extends BoundedObject
         return totalObjSet.iterator();
     }
 
-    public Object[] GetObjectsAtSubSector(Point point)
+    public Iterator<GameWorldObject> GetObjectsAtSubSector(Point point)
     {
         Point p = SectorMapHelper.CoordinateToGridPosition(point.x,
                 point.y, _gridUnitSize);
@@ -181,15 +181,15 @@ public class SectorMap extends BoundedObject
 
         if(objSet == null)
         {
-            return new Object[0];
+            return null;
         }
         else
         {
-            return objSet.toArray();
+            return objSet.iterator();
         }
     }
 
-    public Object[] GetObjectsAtSubSector(int x, int y)
+    public Iterator<GameWorldObject> GetObjectsAtSubSector(int x, int y)
     {
         return GetObjectsAtSubSector(new Point(x,y));
     }
