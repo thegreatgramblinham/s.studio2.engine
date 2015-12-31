@@ -13,9 +13,7 @@ public class GameEngine
 
     private Sector _activeSector;
 
-    private Thread _physicsThread;
-    private PhysicsManager _physicsLoop;
-
+    private PhysicsManager _physicsManager;
 
     //Constructor
     public GameEngine(double frameRate)
@@ -40,26 +38,17 @@ public class GameEngine
     //Public Methods
     public void CycleEngine()
     {
-
+        _physicsManager.CyclePhysicsFrame();
     }
 
     public void Start()
     {
-        _physicsLoop = new PhysicsManager(_activeSector, _frameRate);
-        _physicsThread = new Thread(_physicsLoop);
-        _physicsThread.start();
+        _physicsManager = new PhysicsManager(_activeSector);
     }
 
     public void Stop()
     {
-        _physicsLoop.RequestCancellation();
-        _physicsThread.interrupt();
-        _physicsThread = null;
-    }
-
-    public boolean IsRunning()
-    {
-        return _physicsThread == null;
+        _physicsManager = null;
     }
 
     public Sector CreateSector(int width, int height, int gridUnitSize)
