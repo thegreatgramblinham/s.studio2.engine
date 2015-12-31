@@ -149,9 +149,34 @@ public class SectorMap extends BoundedObject
         _totalObjectCount--;
     }
 
+    public Iterator<GameWorldObject> GetObjectsAtSubSectors(Rectangle rect)
+    {
+        HashSet<Point> gPoints
+                = SectorMapHelper.RectToGridPositions(rect, _gridUnitSize);
+
+        HashSet<GameWorldObject> totalObjSet = new HashSet<>();
+
+        Iterator<Point> pIter = gPoints.iterator();
+
+        while(pIter.hasNext())
+        {
+            Point p = pIter.next();
+
+            HashSet objSet = _map[p.x][p.y];
+
+            if(objSet == null || objSet.isEmpty()) continue;
+
+            totalObjSet.addAll(objSet);
+        }
+
+        return totalObjSet.iterator();
+    }
+
     public Object[] GetObjectsAtSubSector(Point point)
     {
-        Point p = SectorMapHelper.CoordinateToGridPosition(point.x, point.y, _gridUnitSize);
+        Point p = SectorMapHelper.CoordinateToGridPosition(point.x,
+                point.y, _gridUnitSize);
+
         HashSet objSet = _map[p.x][p.y];
 
         if(objSet == null)

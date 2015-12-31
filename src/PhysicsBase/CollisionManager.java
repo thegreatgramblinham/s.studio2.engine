@@ -4,6 +4,7 @@ import GameObjectBase.GameWorldObject;
 import SectorBase.SectorMap;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 //todo support for varying speeds - vector collision
 public class CollisionManager
@@ -38,12 +39,19 @@ public class CollisionManager
             GameWorldObject gameObj = (GameWorldObject)objArr[i];
 
             //check for collisions within each object in the same subsector
-            Object[] sectorObjArr =
-                    _map.GetObjectsAtSubSector(gameObj.x, gameObj.y);
+            // todo this needs to be for entire area.
+            //Object[] sectorObjArr =
+            //        _map.GetObjectsAtSubSector(gameObj.x, gameObj.y);
 
-            for(int j = 0; j< sectorObjArr.length; j++)
+            Iterator<GameWorldObject> sectorObjs
+                    = _map.GetObjectsAtSubSectors(gameObj.GetHitBox());
+            while (sectorObjs.hasNext())
             {
-                GameWorldObject sectorGameObj = (GameWorldObject)sectorObjArr[j];
+                GameWorldObject sectorGameObj = sectorObjs.next();
+
+            //for(int j = 0; j< sectorObjArr.length; j++)
+            //{
+            //    GameWorldObject sectorGameObj = (GameWorldObject)sectorObjArr[j];
 
                 //No need to collide with self
                 if(sectorGameObj == gameObj) continue;
