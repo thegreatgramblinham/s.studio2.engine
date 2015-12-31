@@ -14,7 +14,7 @@ public class GameEngine
     private Sector _activeSector;
 
     private Thread _physicsThread;
-    private PhysicsLoop _physicsLoop;
+    private PhysicsManager _physicsLoop;
 
 
     //Constructor
@@ -38,9 +38,14 @@ public class GameEngine
     }
 
     //Public Methods
+    public void CycleEngine()
+    {
+
+    }
+
     public void Start()
     {
-        _physicsLoop = new PhysicsLoop(_activeSector, _frameRate);
+        _physicsLoop = new PhysicsManager(_activeSector, _frameRate);
         _physicsThread = new Thread(_physicsLoop);
         _physicsThread.start();
     }

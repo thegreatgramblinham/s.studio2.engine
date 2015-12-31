@@ -2,7 +2,7 @@ package Engine;
 
 import SectorBase.Sector;
 
-class PhysicsLoop implements Runnable
+class PhysicsManager implements Runnable
 {
     //Private Variables
     private Sector _sector;
@@ -10,11 +10,11 @@ class PhysicsLoop implements Runnable
     private boolean _cancellationRequested;
 
     //Properties
-    public PhysicsLoop(Sector activeSector, double frameRate)
+    public PhysicsManager(Sector activeSector, double fps)
     {
         _sector = activeSector;
         _cancellationRequested = false;
-        _frameRate = frameRate;
+        _frameRate = fps;
     }
 
     //Constructor
@@ -24,9 +24,17 @@ class PhysicsLoop implements Runnable
     //SetMethods
 
     //Public Methods
+    public void CyclePhysicsFrame()
+    {
+        //todo advance location here - according to vectors+gravity.
+        _sector.HandleCollisions();
+        _sector.UpdateVectors();
+    }
+
     @Override
     public void run()
     {
+        System.nanoTime();
         //todo enforce frame rate.
         while(!_cancellationRequested)
         {
