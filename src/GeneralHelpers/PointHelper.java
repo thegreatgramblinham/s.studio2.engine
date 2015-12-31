@@ -35,6 +35,6 @@ public final class PointHelper
 
     public static double VerticalDistanceBetween(Point p1, Point p2)
     {
-        return Math.abs(p2.y - p2.y);
+        return Math.abs(p2.y - p1.y);
     }
 }
