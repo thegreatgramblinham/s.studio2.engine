@@ -2,6 +2,7 @@ package SectorBase;
 
 import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
+import Global.IdHashSet;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -16,8 +17,8 @@ public class SectorMap extends BoundedObject
 
     private int _gridUnitSize;
     private int _totalObjectCount;
-    private HashSet<GameWorldObject>[][] _map;
-    private HashMap<GameWorldObject, HashSet<GameWorldObject>> _objectToSubSector;
+    private IdHashSet<GameWorldObject>[][] _map;
+    private HashMap<GameWorldObject, HashSet<IdHashSet<GameWorldObject>>> _objectToSubSector;
 
     //Properties
 
@@ -53,22 +54,34 @@ public class SectorMap extends BoundedObject
     {
         if(obj == null) return;
 
-        Point p = SectorMapHelper.CoordinateToGridPosition(obj.x, obj.y, _gridUnitSize);
+        HashSet<Point> points = SectorMapHelper.RectToGridPositions(
+                obj.GetHitBox().getBounds(),
+                _gridUnitSize);
 
-        HashSet subSector = _map[p.x][p.y];
+        Iterator<Point> pIter = points.iterator();
 
-        if(subSector == null)
+        HashSet<IdHashSet<GameWorldObject>> subSectors = new HashSet<>();
+
+        while(pIter.hasNext())
         {
-            subSector = new HashSet();
-            subSector.add(obj);
-            _map[p.x][p.y] = subSector;
-        }
-        else
-        {
-            subSector.add(obj);
+            Point p = pIter.next();
+
+            IdHashSet subSector = _map[p.x][p.y];
+
+            if (subSector == null)
+            {
+                subSector = new IdHashSet();
+                subSector.add(obj);
+                _map[p.x][p.y] = subSector;
+            } else
+            {
+                subSector.add(obj);
+            }
+
+            subSectors.add(subSector);
         }
 
-        _objectToSubSector.put(obj, subSector);
+        _objectToSubSector.put(obj, subSectors);
         _totalObjectCount++;
     }
 
@@ -77,28 +90,45 @@ public class SectorMap extends BoundedObject
         if(obj == null) return;
         if(!_objectToSubSector.containsKey(obj)) return;
 
-        Point p = SectorMapHelper.CoordinateToGridPosition(obj.x, obj.y, _gridUnitSize);
+        HashSet<Point> points = SectorMapHelper.RectToGridPositions(
+                obj.GetHitBox().getBounds(),
+                _gridUnitSize);
 
-        HashSet oldSector = _objectToSubSector.get(obj);
-        HashSet newSector = _map[p.x][p.y];
+        //remove from old location
+        HashSet oldSectors = _objectToSubSector.get(obj);
 
-        //no need to do anything else if we aren't macro moving.
-        if(newSector == oldSector) return;
+        Iterator<HashSet<GameWorldObject>> oldIter = oldSectors.iterator();
 
-        if(newSector == null)
+        while(oldIter.hasNext())
         {
-            newSector = new HashSet();
-            newSector.add(obj);
-            oldSector.remove(obj);
-            _map[p.x][p.y] = newSector;
-        }
-        else
-        {
-            oldSector.remove(obj);
-            newSector.add(obj);
+            HashSet oldSet = oldIter.next();
+            oldSet.remove(obj);
         }
 
-        _objectToSubSector.put(obj, newSector);
+        Iterator<Point> pIter = points.iterator();
+        HashSet<IdHashSet<GameWorldObject>> subSectors = new HashSet<>();
+
+        while(pIter.hasNext())
+        {
+            Point p = pIter.next();
+
+            //add to new location
+            IdHashSet newSector = _map[p.x][p.y];
+
+            if (newSector == null)
+            {
+                newSector = new IdHashSet();
+                newSector.add(obj);
+                _map[p.x][p.y] = newSector;
+            } else
+            {
+                newSector.add(obj);
+            }
+
+            subSectors.add(newSector);
+        }
+
+        _objectToSubSector.put(obj, subSectors);
     }
 
     public void RemoveObject(GameWorldObject obj)
@@ -106,10 +136,15 @@ public class SectorMap extends BoundedObject
         if(obj == null) return;
         if(!_objectToSubSector.containsKey(obj)) return;
 
-        HashSet subSector = _objectToSubSector.get(obj);
+        HashSet oldSectors = _objectToSubSector.get(obj);
 
-        subSector.remove(obj);
-        _objectToSubSector.remove(obj);
+        Iterator<HashSet<GameWorldObject>> oldIter = oldSectors.iterator();
+
+        while(oldIter.hasNext())
+        {
+            HashSet oldSet = oldIter.next();
+            oldSet.remove(obj);
+        }
 
         _totalObjectCount--;
     }
@@ -142,7 +177,7 @@ public class SectorMap extends BoundedObject
         _xUnits = p.x+1;
         _yUnits = p.y+1;
 
-        _map = new HashSet[_xUnits][_yUnits];
+        _map = new IdHashSet[_xUnits][_yUnits];
         _objectToSubSector = new HashMap<>();
     }
 }
