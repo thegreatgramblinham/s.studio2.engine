@@ -37,11 +37,6 @@ public class SectorMap extends BoundedObject
         return _totalObjectCount;
     }
 
-    public Object[] GetObjectCollection()
-    {
-        return _objectToSubSector.keySet().toArray();
-    }
-
     public Iterator<GameWorldObject> GetAllObjectIterator()
     {
         return _objectToSubSector.keySet().iterator();
@@ -149,6 +144,28 @@ public class SectorMap extends BoundedObject
         _totalObjectCount--;
     }
 
+    public Iterator<GameWorldObject> GetObjectsAtSubSector(Point point)
+    {
+        Point p = SectorMapHelper.CoordinateToGridPosition(point.x,
+                point.y, _gridUnitSize);
+
+        HashSet objSet = _map[p.x][p.y];
+
+        if(objSet == null)
+        {
+            return null;
+        }
+        else
+        {
+            return objSet.iterator();
+        }
+    }
+
+    public Iterator<GameWorldObject> GetObjectsAtSubSector(int x, int y)
+    {
+        return GetObjectsAtSubSector(new Point(x,y));
+    }
+
     public Iterator<GameWorldObject> GetObjectsAtSubSectors(Rectangle rect)
     {
         HashSet<Point> gPoints
@@ -170,28 +187,6 @@ public class SectorMap extends BoundedObject
         }
 
         return totalObjSet.iterator();
-    }
-
-    public Iterator<GameWorldObject> GetObjectsAtSubSector(Point point)
-    {
-        Point p = SectorMapHelper.CoordinateToGridPosition(point.x,
-                point.y, _gridUnitSize);
-
-        HashSet objSet = _map[p.x][p.y];
-
-        if(objSet == null)
-        {
-            return null;
-        }
-        else
-        {
-            return objSet.iterator();
-        }
-    }
-
-    public Iterator<GameWorldObject> GetObjectsAtSubSector(int x, int y)
-    {
-        return GetObjectsAtSubSector(new Point(x,y));
     }
 
     //Private Methods

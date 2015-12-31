@@ -30,13 +30,13 @@ public class CollisionManager
         HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions
                 = new HashMap<>();
 
-        Object[] objArr = _map.GetObjectCollection();
+        Iterator<GameWorldObject> allObjIter = _map.GetAllObjectIterator();
 
-        if(objArr == null || objArr.length == 0) return collisions;
+        if(allObjIter == null || !allObjIter.hasNext()) return collisions;
 
-        for(int i = 0; i< objArr.length; i++)
+        while(allObjIter.hasNext())
         {
-            GameWorldObject gameObj = (GameWorldObject)objArr[i];
+            GameWorldObject gameObj = allObjIter.next();
 
             //check for collisions within each object in the same subsector(s)
             Iterator<GameWorldObject> sectorObjs
