@@ -38,20 +38,13 @@ public class CollisionManager
         {
             GameWorldObject gameObj = (GameWorldObject)objArr[i];
 
-            //check for collisions within each object in the same subsector
-            // todo this needs to be for entire area.
-            //Object[] sectorObjArr =
-            //        _map.GetObjectsAtSubSector(gameObj.x, gameObj.y);
-
+            //check for collisions within each object in the same subsector(s)
             Iterator<GameWorldObject> sectorObjs
                     = _map.GetObjectsAtSubSectors(gameObj.GetHitBox());
+
             while (sectorObjs.hasNext())
             {
                 GameWorldObject sectorGameObj = sectorObjs.next();
-
-            //for(int j = 0; j< sectorObjArr.length; j++)
-            //{
-            //    GameWorldObject sectorGameObj = (GameWorldObject)sectorObjArr[j];
 
                 //No need to collide with self
                 if(sectorGameObj == gameObj) continue;
@@ -80,8 +73,21 @@ public class CollisionManager
     public void HandleCollision(GameWorldObject obj,
                                 HashSet<GameWorldObject> collidingObjs)
     {
+        StringBuilder sb = new StringBuilder();
+
+        Iterator<GameWorldObject> objIter = collidingObjs.iterator();
+
+        sb.append("[");
+        while (objIter.hasNext())
+        {
+            GameWorldObject collObj = objIter.next();
+
+            sb.append(collObj.GetAlias()+"&");
+        }
+        sb.append("]");
+
         //simple case, start with one object
-        System.out.println("COLLISION");
+        System.out.println("COLLISION! - <"+obj.GetAlias()+" : "+sb.toString()+">");
         //todo collision with multiple objects
     }
 

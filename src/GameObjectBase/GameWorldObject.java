@@ -11,15 +11,23 @@ public abstract class GameWorldObject extends GameObject
     private HitBox _hitBox;
 
     //Properties
-    private VelocityVector Velocity;
+    private VelocityVector _velocity;
+    private String _alias;
 
-    //Constructor
+    //Constructors
     public GameWorldObject(Rectangle size)
     {
         super(size);
-        Velocity = new VelocityVector(0, 0);
+        Init();
         _hitBox = new HitBox(size);
+    }
 
+    public GameWorldObject(Rectangle size, String alias)
+    {
+        super(size);
+        Init();
+        _alias = alias;
+        _hitBox = new HitBox(size);
     }
 
     //GetMethods
@@ -30,13 +38,23 @@ public abstract class GameWorldObject extends GameObject
 
     public VelocityVector GetVelocity()
     {
-        return Velocity;
+        return _velocity;
+    }
+
+    public String GetAlias()
+    {
+        return _alias;
     }
 
     //SetMethods
     public void SetVelocity(VelocityVector velocity)
     {
-        Velocity = velocity;
+        _velocity = velocity;
+    }
+
+    public void SetAlias(String alias)
+    {
+        _alias = alias;
     }
 
     public void SetLocation(Point p)
@@ -45,6 +63,12 @@ public abstract class GameWorldObject extends GameObject
         this.y = p.y;
         _hitBox.x = p.x;
         _hitBox.y = p.y;
+    }
+
+    //Private Methods
+    private void Init()
+    {
+        _velocity = new VelocityVector(0,0);
     }
 
 }
