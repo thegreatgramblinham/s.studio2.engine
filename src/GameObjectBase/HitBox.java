@@ -1,4 +1,4 @@
-package PhysicsBase;
+package GameObjectBase;
 
 import GameObjectBase.BoundedObject;
 

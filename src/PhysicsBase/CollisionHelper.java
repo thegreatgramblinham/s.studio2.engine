@@ -1,6 +1,7 @@
 package PhysicsBase;
 
 import GameObjectBase.GameWorldObject;
+import GameObjectBase.HitBox;
 import GeneralHelpers.PointHelper;
 
 final class CollisionHelper

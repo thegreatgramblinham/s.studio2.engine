@@ -1,6 +1,5 @@
 package GameObjectBase;
 
-import PhysicsBase.HitBox;
 import PhysicsBase.Vectors.VelocityVector;
 
 import java.awt.*;
