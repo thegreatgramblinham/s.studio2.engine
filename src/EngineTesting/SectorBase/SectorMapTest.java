@@ -28,17 +28,17 @@ public class SectorMapTest
     @Test
     public void testGetAllObjectIterator() throws Exception
     {
-
+        throw new Exception("UNIMPLEMENTED");
     }
 
-    @org.junit.Test
+    @Test
     public void testInsertObject() throws Exception
     {
         _map.InsertObject(_testObject);
         Assert.assertTrue(_map.GetObjectCount() == 1);
     }
 
-    @org.junit.Test
+    @Test
     public void testUpdateObjectLocation() throws Exception
     {
         //Check origin location
@@ -65,7 +65,7 @@ public class SectorMapTest
         Assert.assertTrue(!objIter.hasNext());
     }
 
-    @org.junit.Test
+    @Test
     public void testRemoveObject() throws Exception
     {
         //Insertion
@@ -84,7 +84,7 @@ public class SectorMapTest
         Assert.assertTrue(!objIter.hasNext());
     }
 
-    @org.junit.Test
+    @Test
     public void testGetObjectsAtSubSector() throws Exception
     {
         _map.InsertObject(_testObject);
@@ -108,6 +108,7 @@ public class SectorMapTest
     @Test
     public void testGetObjectsAtSubSectors() throws Exception
     {
-
+        throw new Exception("UNIMPLEMENTED");
     }
+
 }

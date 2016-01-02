@@ -99,4 +99,12 @@ public class CollisionManagerTest
         Assert.assertTrue(collisions.get(obj2).size() == 1);
         Assert.assertTrue(collisions.get(obj2).contains(obj1));
     }
+
+    //todo this is going to be a tough one to design,
+    //multiple cases - perhaps even own test class
+    @Test
+    public void testHandleCollision() throws Exception
+    {
+        throw new Exception("UNIMPLEMENTED");
+    }
 }

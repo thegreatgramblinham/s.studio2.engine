@@ -3,7 +3,7 @@ package PhysicsBase;
 import GameObjectBase.GameWorldObject;
 import GeneralHelpers.PointHelper;
 
-public final class CollisionHelper
+final class CollisionHelper
 {
     //Properties
     private CollisionHelper(){}
