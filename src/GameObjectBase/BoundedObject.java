@@ -5,8 +5,8 @@ import java.awt.*;
 public abstract class BoundedObject extends Rectangle
 {
     //Private Variables
-    protected double _x;
-    protected double _y;
+    protected double _dx;
+    protected double _dy;
 
     //Properties
 
@@ -14,16 +14,19 @@ public abstract class BoundedObject extends Rectangle
     public BoundedObject(Rectangle rect)
     {
         super(rect);
+        Init();
     }
 
     public BoundedObject(int x, int y, int width, int height)
     {
         super(x,y,width,height);
+        Init();
     }
 
     public BoundedObject(int width, int height)
     {
         super(width, height);
+        Init();
     }
 
     //Get Methods
@@ -57,26 +60,38 @@ public abstract class BoundedObject extends Rectangle
         return (this.height/2.0);
     }
 
-    public int GetX()
+    public double GetDX()
     {
-        return (int)Math.ceil(_x);
+        return _dx;
     }
 
-    public int GetY()
+    public double GetDY()
     {
-        return (int)Math.ceil(_y);
+        return _dy;
+    }
+
+    @Override
+    public double getX()
+    {
+        return Math.round(_dx);
+    }
+
+    @Override
+    public double getY()
+    {
+        return Math.round(_dy);
     }
 
     //Set Methods
-    public void SetX(double x)
+    public void SetDX(double x)
     {
-        _x = x;
-        this.x = (int)Math.ceil(_x);
+        _dx = x;
+        this.x = (int)Math.ceil(_dx);
     }
 
-    public void SetY(double y)
+    public void SetDY(double y)
     {
-        _y = y;
+        _dy = y;
         this.y = (int)Math.ceil(y);
     }
 
@@ -89,20 +104,18 @@ public abstract class BoundedObject extends Rectangle
     public void DSetLocation(double x, double y)
     {
         this.x = (int)Math.ceil(x);
-        _x = x;
+        SetDX(x);
 
         this.y = (int)Math.ceil(y);
-        _y = y;
+        SetDY(y);
     }
 
     public void NSetLocation(Point p)
     {
         if(p == null) return;
-        x = p.x;
-        _x = p.x;
 
-        y = p.y;
-        _y = p.y;
+        SetDX(p.x);
+        SetDY(p.y);
     }
 
     public Point NGetLocation()
@@ -111,4 +124,9 @@ public abstract class BoundedObject extends Rectangle
     }
 
     //Private Methods
+    private void Init()
+    {
+        _dx = x;
+        _dy = y;
+    }
 }

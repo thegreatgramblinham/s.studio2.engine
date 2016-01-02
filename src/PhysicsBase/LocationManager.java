@@ -6,7 +6,6 @@ import PhysicsBase.Vectors.DistanceVector;
 import PhysicsBase.Vectors.VelocityVector;
 import SectorBase.SectorMap;
 
-import java.awt.*;
 import java.util.Iterator;
 
 public class LocationManager
@@ -41,12 +40,15 @@ public class LocationManager
 
             //todo apply gravity
 
-            Point p1 = gObj.NGetLocation();
+            double x1 = gObj.GetDX();
+            double y1 = gObj.GetDY();
 
-            Point p2 = PointHelper.NTranslatePoint(p1,
+            double x2 = PointHelper.TranslateX(x1,
+                    new DistanceVector(v.GetRadianRotation(), v.GetSpeed()));
+            double y2 = PointHelper.TranslateY(y1,
                     new DistanceVector(v.GetRadianRotation(), v.GetSpeed()));
 
-            gObj.NSetLocation(p2);
+            gObj.DSetLocation(x2,y2);
         }
     }
 

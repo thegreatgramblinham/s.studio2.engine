@@ -60,7 +60,6 @@ public abstract class GameWorldObject extends GameObject
     public void DSetLocation(double x, double y)
     {
         super.DSetLocation(x,y);
-
         _hitBox.DSetLocation(x,y);
     }
 
@@ -70,8 +69,7 @@ public abstract class GameWorldObject extends GameObject
         if(p == null) return;
 
         super.NSetLocation(p);
-        _hitBox.x = p.x;
-        _hitBox.y = p.y;
+        _hitBox.NSetLocation(p);
     }
 
     //Private Methods
