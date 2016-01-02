@@ -18,7 +18,7 @@ public class SectorMapTest
 
     @org.junit.Before
     public void setUp() throws Exception
-    {
+    { 
         _map = new SectorMap(500, 500, 20);
         _testPoint = new Point(90, 90);
         _testObject = new DummyGameObject(new Rectangle(200, 200, 50, 50));
@@ -28,7 +28,30 @@ public class SectorMapTest
     @Test
     public void testGetAllObjectIterator() throws Exception
     {
-        throw new Exception("UNIMPLEMENTED");
+        DummyGameObject testObject2
+                = new DummyGameObject(new Rectangle(20, 20, 40, 40));
+        DummyGameObject testObject3
+                = new DummyGameObject(new Rectangle(120, 120, 40, 40));
+
+        _map.InsertObject(_testObject);
+        _map.InsertObject(testObject2);
+        _map.InsertObject(testObject3);
+
+        Iterator<GameWorldObject> objIter = _map.GetAllObjectIterator();
+
+        int cnt = 0;
+        while(objIter.hasNext())
+        {
+            GameWorldObject obj = objIter.next();
+
+            Assert.assertTrue(obj == _testObject
+                || obj == testObject2
+                || obj == testObject3);
+
+            cnt++;
+        }
+
+        Assert.assertTrue(cnt == 3);
     }
 
     @Test
@@ -108,7 +131,27 @@ public class SectorMapTest
     @Test
     public void testGetObjectsAtSubSectors() throws Exception
     {
-        throw new Exception("UNIMPLEMENTED");
+        DummyGameObject testObject2 = new DummyGameObject(new Rectangle(60, 60, 20, 20));
+
+        _map.InsertObject(_testObject);
+        _map.InsertObject(testObject2);
+
+        //Rect covering sectors where both test objects should be located
+        //at least partially within.
+        Iterator<GameWorldObject> objIter
+                = _map.GetObjectsAtSubSectors(new Rectangle(20, 20, 150, 150));
+
+        int cnt = 0;
+        while(objIter.hasNext())
+        {
+            GameWorldObject obj = objIter.next();
+
+            Assert.assertTrue(obj.equals(_testObject) || obj.equals(testObject2));
+
+            cnt++;
+        }
+
+        Assert.assertTrue(cnt == 2);
     }
 
 }

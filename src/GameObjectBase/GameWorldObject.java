@@ -57,6 +57,7 @@ public abstract class GameWorldObject extends GameObject
         _alias = alias;
     }
 
+    @Override
     public void SetLocation(Point p)
     {
         this.x = p.x;
