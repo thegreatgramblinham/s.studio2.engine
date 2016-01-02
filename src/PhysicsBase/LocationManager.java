@@ -38,8 +38,6 @@ public class LocationManager
 
             if(v == null || v.GetSpeed() == 0.0) continue;
 
-            //todo apply gravity
-
             double x1 = gObj.GetDX();
             double y1 = gObj.GetDY();
 
@@ -49,6 +47,9 @@ public class LocationManager
                     new DistanceVector(v.GetRadianRotation(), v.GetSpeed()));
 
             gObj.DSetLocation(x2,y2);
+
+            //todo apply gravity
+            gObj.SetVelocity(new VelocityVector(v.GetRadianRotation(), v.GetSpeed()*.97));
         }
     }
 
