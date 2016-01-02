@@ -22,7 +22,7 @@ public class SectorMapTest
         _map = new SectorMap(500, 500, 20);
         _testPoint = new Point(90, 90);
         _testObject = new DummyGameObject(new Rectangle(200, 200, 50, 50));
-        _testObject.SetLocation(_testPoint);
+        _testObject.NSetLocation(_testPoint);
     }
 
     @Test
@@ -74,7 +74,7 @@ public class SectorMapTest
 
         //Change location
         Point newLoc = new Point(50,25);
-        _testObject.SetLocation(newLoc);
+        _testObject.NSetLocation(newLoc);
 
         _map.UpdateObjectLocation(_testObject);
 

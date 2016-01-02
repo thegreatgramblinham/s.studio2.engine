@@ -45,11 +45,6 @@ public abstract class GameWorldObject extends GameObject
         return _alias;
     }
 
-    public Point GetLocation()
-    {
-        return new Point(x,y);
-    }
-
     //SetMethods
     public void SetVelocity(VelocityVector velocity)
     {
@@ -62,10 +57,19 @@ public abstract class GameWorldObject extends GameObject
     }
 
     @Override
-    public void SetLocation(Point p)
+    public void DSetLocation(double x, double y)
     {
-        this.x = p.x;
-        this.y = p.y;
+        super.DSetLocation(x,y);
+
+        _hitBox.DSetLocation(x,y);
+    }
+
+    @Override
+    public void NSetLocation(Point p)
+    {
+        if(p == null) return;
+
+        super.NSetLocation(p);
         _hitBox.x = p.x;
         _hitBox.y = p.y;
     }

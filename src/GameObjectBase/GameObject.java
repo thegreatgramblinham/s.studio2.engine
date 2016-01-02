@@ -34,13 +34,6 @@ abstract class GameObject extends BoundedObject
     }
 
     //Public Methods
-    public void SetLocation(Point p)
-    {
-        if(p == null) return;
-        x = p.x;
-        y =p.y;
-    }
-
     @Override
     public boolean equals(Object obj)
     {

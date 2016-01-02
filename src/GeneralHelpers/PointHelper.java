@@ -40,20 +40,33 @@ public final class PointHelper
         return Math.abs(p2.y - p1.y);
     }
 
-    public static Point TranslatePoint(Point p, DistanceVector v)
+    public static Point NTranslatePoint(Point p, DistanceVector v)
     {
-        int x1 = p.x;
+        double x2 = TranslateX(p.x, v);
 
-        double xScale = Math.cos(v.GetRadianRotation());
-        double xDis = xScale * v.GetLength();
-        double x2 = x1 + xDis;
-
-        int y1 = p.y;
-
-        double yScale = Math.sin(v.GetRadianRotation());
-        double yDis = yScale * v.GetLength();
-        double y2 = y1 + yDis;
+        double y2 = TranslateY(p.y, v);
 
         return new Point((int)Math.ceil(x2),(int)Math.ceil(y2));
     }
+
+    public static double TranslateX(double x, DistanceVector v)
+    {
+        double xScale = Math.cos(v.GetRadianRotation());
+        double xDis = xScale * v.GetLength();
+        double x2 = x + xDis;
+
+        return x2;
+    }
+
+    public static double TranslateY(double y, DistanceVector v)
+    {
+        double yScale = Math.sin(v.GetRadianRotation());
+        double yDis = yScale * v.GetLength();
+        double y2 = y + yDis;
+
+
+        return y2;
+    }
+
+
 }

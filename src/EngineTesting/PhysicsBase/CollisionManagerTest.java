@@ -39,10 +39,10 @@ public class CollisionManagerTest
     @Test
     public void testCheckCollisionsFirstMove() throws Exception
     {
-        obj1.SetLocation(new Point(10, 10));
+        obj1.NSetLocation(new Point(10, 10));
         _map.UpdateObjectLocation(obj1);
 
-        obj2.SetLocation(new Point(15, 15));
+        obj2.NSetLocation(new Point(15, 15));
         _map.UpdateObjectLocation(obj2);
 
         Assert.assertTrue(_manager.CheckCollisions().isEmpty());
@@ -52,10 +52,10 @@ public class CollisionManagerTest
     public void testCheckCollisionsSecondMove() throws Exception
     {
         //Objects are bounds touching.
-        obj1.SetLocation(new Point(11, 11));
+        obj1.NSetLocation(new Point(11, 11));
         _map.UpdateObjectLocation(obj1);
 
-        obj2.SetLocation(new Point(14, 14));
+        obj2.NSetLocation(new Point(14, 14));
         _map.UpdateObjectLocation(obj2);
 
         HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions
@@ -78,10 +78,10 @@ public class CollisionManagerTest
     public void testCheckInitCollisionsThirdMove() throws Exception
     {
         //Objects are inside each other.
-        obj1.SetLocation(new Point(12, 12));
+        obj1.NSetLocation(new Point(12, 12));
         _map.UpdateObjectLocation(obj1);
 
-        obj2.SetLocation(new Point(13, 13));
+        obj2.NSetLocation(new Point(13, 13));
         _map.UpdateObjectLocation(obj2);
 
         HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions

@@ -41,12 +41,12 @@ public class LocationManager
 
             //todo apply gravity
 
-            Point p1 = gObj.GetLocation();
+            Point p1 = gObj.NGetLocation();
 
-            Point p2 = PointHelper.TranslatePoint(p1,
+            Point p2 = PointHelper.NTranslatePoint(p1,
                     new DistanceVector(v.GetRadianRotation(), v.GetSpeed()));
 
-            gObj.SetLocation(p2);
+            gObj.NSetLocation(p2);
         }
     }
 
