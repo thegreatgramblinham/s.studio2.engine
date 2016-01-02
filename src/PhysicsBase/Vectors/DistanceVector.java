@@ -3,24 +3,24 @@ package PhysicsBase.Vectors;
 public class DistanceVector extends VectorBase
 {
     //Properties
-    private int Length;
+    private double _length;
 
     //Constructor
-    public DistanceVector(double radianRotation, int length)
+    public DistanceVector(double radianRotation, double length)
     {
         super(radianRotation);
-        Length = length;
+        _length = length;
     }
 
     //GetMethods
     public double GetLength()
     {
-        return Length;
+        return _length;
     }
 
     //SetMethods
     public void SetLength(int length)
     {
-        Length = length;
+        _length = length;
     }
 }

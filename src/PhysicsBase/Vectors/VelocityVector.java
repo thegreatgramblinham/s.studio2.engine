@@ -3,24 +3,24 @@ package PhysicsBase.Vectors;
 public class VelocityVector extends VectorBase
 {
     //Properties
-    private int Speed;
+    private double _speed;
 
     //Constructor
-    public VelocityVector(double radianRotation, int speed)
+    public VelocityVector(double radianRotation, double speed)
     {
         super(radianRotation);
-        Speed = speed;
+        _speed = speed;
     }
 
     //GetMethods
-    public int GetSpeed()
+    public double GetSpeed()
     {
-        return Speed;
+        return _speed;
     }
 
     //SetMethods
     public void SetSpeed(int speed)
     {
-        Speed = speed;
+        _speed = speed;
     }
 }

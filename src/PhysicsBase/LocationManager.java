@@ -37,6 +37,8 @@ public class LocationManager
 
             VelocityVector v = gObj.GetVelocity();
 
+            if(v == null || v.GetSpeed() == 0.0) continue;
+
             //todo apply gravity
 
             Point p1 = gObj.GetLocation();
