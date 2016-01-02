@@ -1,5 +1,7 @@
 package GeneralHelpers;
 
+import PhysicsBase.Vectors.DistanceVector;
+
 import java.awt.*;
 
 public final class PointHelper
@@ -36,5 +38,22 @@ public final class PointHelper
     public static double VerticalDistanceBetween(Point p1, Point p2)
     {
         return Math.abs(p2.y - p1.y);
+    }
+
+    public static Point TranslatePoint(Point p, DistanceVector v)
+    {
+        int x1 = p.x;
+
+        double xScale = Math.cos(v.GetRadianRotation());
+        double xDis = xScale * v.GetLength();
+        double x2 = x1 + xDis;
+
+        int y1 = p.y;
+
+        double yScale = Math.sin(v.GetRadianRotation());
+        double yDis = yScale * v.GetLength();
+        double y2 = y1 + yDis;
+
+        return new Point((int)Math.ceil(x2),(int)Math.ceil(y2));
     }
 }

@@ -3,6 +3,7 @@ package SectorBase;
 import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
 import PhysicsBase.CollisionManager;
+import PhysicsBase.LocationManager;
 import SectorBase.enums.Direction;
 
 import java.util.HashMap;
@@ -13,6 +14,7 @@ public class Sector extends BoundedObject
 {
     //Private Fields
     private CollisionManager _collisionManager;
+    private LocationManager _vectorManager;
     private SectorMap _map;
 
     protected Sector _up;
@@ -59,7 +61,7 @@ public class Sector extends BoundedObject
 
     public void UpdateVectors()
     {
-
+        _vectorManager.AdvancePositions();
     }
 
     public void AddObject(GameWorldObject obj)
@@ -100,5 +102,6 @@ public class Sector extends BoundedObject
     {
         _map = new SectorMap(width, height, gridUnitSize);
         _collisionManager = new CollisionManager(_map);
+        _vectorManager = new LocationManager(_map);
     }
 }

@@ -45,6 +45,11 @@ public abstract class GameWorldObject extends GameObject
         return _alias;
     }
 
+    public Point GetLocation()
+    {
+        return new Point(x,y);
+    }
+
     //SetMethods
     public void SetVelocity(VelocityVector velocity)
     {
