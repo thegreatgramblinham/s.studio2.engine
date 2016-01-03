@@ -49,7 +49,7 @@ public class LocationManager
             gObj.DSetLocation(x2,y2);
 
             //todo apply gravity
-            gObj.SetVelocity(new VelocityVector(v.GetRadianRotation(), v.GetSpeed()*.99));
+            gObj.SetVelocity(new VelocityVector(v.GetRadianRotation(), v.GetSpeed()*.991));
         }
     }
 
