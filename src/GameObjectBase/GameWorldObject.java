@@ -72,6 +72,25 @@ public abstract class GameWorldObject extends GameObject
         _hitBox.NSetLocation(p);
     }
 
+    //Public Methods
+    public void AccelerateBy(VelocityVector v)
+    {
+        if(_velocity == null
+                || _velocity.GetSpeed() <= 0.0)
+        {
+            _velocity = v;
+        }
+        else if (_velocity.GetRadianRotation()
+                != v.GetRadianRotation())
+        {
+            _velocity = v;
+        }
+        else
+        {
+            _velocity.SetSpeed(_velocity.GetSpeed() + v.GetSpeed());
+        }
+    }
+
     //Private Methods
     private void Init()
     {

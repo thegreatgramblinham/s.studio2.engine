@@ -19,7 +19,7 @@ public class VelocityVector extends VectorBase
     }
 
     //SetMethods
-    public void SetSpeed(int speed)
+    public void SetSpeed(double speed)
     {
         _speed = speed;
     }
