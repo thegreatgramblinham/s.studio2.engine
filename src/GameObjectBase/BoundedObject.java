@@ -1,5 +1,7 @@
 package GameObjectBase;
 
+import org.w3c.dom.css.Rect;
+
 import java.awt.*;
 
 public abstract class BoundedObject extends Rectangle
@@ -30,26 +32,6 @@ public abstract class BoundedObject extends Rectangle
     }
 
     //Get Methods
-    public int GetTop()
-    {
-        return y + height;
-    }
-
-    public int GetRight()
-    {
-        return x + width;
-    }
-
-    public int GetBottom()
-    {
-        return y;
-    }
-
-    public int GetLeft()
-    {
-        return x;
-    }
-
     public double GetHalfWidth()
     {
         return (this.width/2.0);
@@ -86,13 +68,13 @@ public abstract class BoundedObject extends Rectangle
     public void SetDX(double x)
     {
         _dx = x;
-        this.x = (int)Math.ceil(_dx);
+        this.x = (int)Math.round(_dx);
     }
 
     public void SetDY(double y)
     {
         _dy = y;
-        this.y = (int)Math.ceil(y);
+        this.y = (int)Math.round(y);
     }
 
     //Public Methods
@@ -103,10 +85,10 @@ public abstract class BoundedObject extends Rectangle
 
     public void DSetLocation(double x, double y)
     {
-        this.x = (int)Math.ceil(x);
+        this.x = (int)Math.round(x);
         SetDX(x);
 
-        this.y = (int)Math.ceil(y);
+        this.y = (int)Math.round(y);
         SetDY(y);
     }
 
@@ -123,10 +105,31 @@ public abstract class BoundedObject extends Rectangle
         return new Point(x,y);
     }
 
+    public boolean BoundsEquals(Rectangle other)
+    {
+        return this.x == other.x &&
+                this.y == other.y &&
+                this.width == other.width &&
+                this.height == other.height;
+    }
+
     //Private Methods
     private void Init()
     {
         _dx = x;
         _dy = y;
+    }
+
+    //Override Handling
+    @Override
+    public void setLocation(Point p)
+    {
+        this.NSetLocation(p);
+    }
+
+    @Override
+    public void setLocation(int x, int y)
+    {
+        this.NSetLocation(new Point(x,y));
     }
 }

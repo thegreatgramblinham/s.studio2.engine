@@ -12,6 +12,7 @@ public abstract class GameWorldObject extends GameObject
     //Properties
     private VelocityVector _velocity;
     private String _alias;
+    private boolean _isImmobile;
 
     //Constructors
     public GameWorldObject(Rectangle size)
@@ -45,9 +46,16 @@ public abstract class GameWorldObject extends GameObject
         return _alias;
     }
 
+    public boolean GetIsImmobile()
+    {
+        return _isImmobile;
+    }
+
     //SetMethods
     public void SetVelocity(VelocityVector velocity)
     {
+        if(_isImmobile) return;
+
         _velocity = velocity;
     }
 
@@ -56,9 +64,16 @@ public abstract class GameWorldObject extends GameObject
         _alias = alias;
     }
 
+    public void SetIsImmobile(boolean immobile)
+    {
+        _isImmobile = immobile;
+    }
+
     @Override
     public void DSetLocation(double x, double y)
     {
+        if(_isImmobile) return;
+
         super.DSetLocation(x,y);
         _hitBox.DSetLocation(x,y);
     }
@@ -67,6 +82,7 @@ public abstract class GameWorldObject extends GameObject
     public void NSetLocation(Point p)
     {
         if(p == null) return;
+        if(_isImmobile) return;
 
         super.NSetLocation(p);
         _hitBox.NSetLocation(p);
@@ -75,10 +91,12 @@ public abstract class GameWorldObject extends GameObject
     //Public Methods
     public void AccelerateBy(VelocityVector v)
     {
+        if(_isImmobile) return;
+
         if(_velocity == null
                 || _velocity.GetSpeed() <= 0.0)
         {
-            _velocity = v;
+            _velocity = new VelocityVector(v.GetRadianRotation(), v.GetSpeed());
         }
         else if (_velocity.GetRadianRotation()
                 != v.GetRadianRotation())
@@ -91,10 +109,28 @@ public abstract class GameWorldObject extends GameObject
         }
     }
 
+    public void ClearVelocity()
+    {
+        _velocity = null;
+    }
+
     //Private Methods
     private void Init()
     {
-        _velocity = new VelocityVector(0,0);
+        _velocity = null;
+        _isImmobile = false;
     }
 
+    //Override Handling
+    @Override
+    public void setLocation(Point p)
+    {
+        this.NSetLocation(p);
+    }
+
+    @Override
+    public void setLocation(int x, int y)
+    {
+        this.NSetLocation(new Point(x,y));
+    }
 }
