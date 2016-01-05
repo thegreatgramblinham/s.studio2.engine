@@ -8,21 +8,29 @@ import java.util.HashSet;
 public class GameEngine
 {
     //Private Variables
-    private double _frameRate;
     private HashSet<Sector> _sectorSet;
 
     private Sector _activeSector;
-
     private PhysicsManager _physicsManager;
 
+    private boolean _isRunning;
+
     //Constructor
-    public GameEngine(double frameRate)
+    public GameEngine()
     {
         Init();
-        _frameRate = frameRate;
     }
 
     //GetMethods
+    public int GetSectorCount()
+    {
+        return _sectorSet.size();
+    }
+
+    public Sector GetActiveSector()
+    {
+        return _activeSector;
+    }
 
     //SetMethods
     public void SetActiveSector(Sector activeSector)
@@ -36,6 +44,11 @@ public class GameEngine
     }
 
     //Public Methods
+    public boolean IsRunning()
+    {
+        return _isRunning;
+    }
+
     public void CycleEngine()
     {
         _physicsManager.CyclePhysicsFrame();
@@ -43,12 +56,16 @@ public class GameEngine
 
     public void Start()
     {
+        if(_activeSector == null) return;
+
         _physicsManager = new PhysicsManager(_activeSector);
+        _isRunning = true;
     }
 
     public void Stop()
     {
         _physicsManager = null;
+        _isRunning = false;
     }
 
     public Sector CreateSector(int width, int height, int gridUnitSize)
