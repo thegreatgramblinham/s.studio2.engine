@@ -1,7 +1,5 @@
 package GameObjectBase;
 
-import org.w3c.dom.css.Rect;
-
 import java.awt.*;
 
 public abstract class BoundedObject extends Rectangle
