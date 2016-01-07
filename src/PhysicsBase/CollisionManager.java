@@ -38,6 +38,8 @@ public class CollisionManager
         {
             GameWorldObject gameObj = allObjIter.next();
 
+            if(gameObj.GetIsImmobile()) continue;
+
             //check for collisions within each object in the same subsector(s)
             Iterator<GameWorldObject> sectorObjs
                     = _map.GetObjectsAtSubSectors(gameObj.GetHitBox());

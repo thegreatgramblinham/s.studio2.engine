@@ -23,8 +23,8 @@ public class CollisionManagerTest
         _map = new SectorMap(500, 500, 20);
         _manager = new CollisionManager(_map);
 
-        obj1 = new DummyGameObject(new Rectangle(5, 5, 3, 3));
-        obj2 = new DummyGameObject(new Rectangle(25, 25, 3, 3));
+        obj1 = new DummyGameObject(new Rectangle(5, 5, 3, 3), false);
+        obj2 = new DummyGameObject(new Rectangle(25, 25, 3, 3), false);
 
         _map.InsertObject(obj1);
         _map.InsertObject(obj2);

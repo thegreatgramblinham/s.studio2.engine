@@ -7,8 +7,8 @@ import java.awt.*;
 public class DummyGameObject extends GameWorldObject
 {
     //Properties
-    public DummyGameObject(Rectangle size)
+    public DummyGameObject(Rectangle size, boolean isImmobile)
     {
-        super(size);
+        super(size, isImmobile);
     }
 }

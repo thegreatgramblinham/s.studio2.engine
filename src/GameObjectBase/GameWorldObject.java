@@ -15,19 +15,21 @@ public abstract class GameWorldObject extends GameObject
     private boolean _isImmobile;
 
     //Constructors
-    public GameWorldObject(Rectangle size)
+    public GameWorldObject(Rectangle size, boolean isImmobile)
     {
         super(size);
         Init();
         _hitBox = new HitBox(size);
+        _isImmobile = isImmobile;
     }
 
-    public GameWorldObject(Rectangle size, String alias)
+    public GameWorldObject(Rectangle size, boolean isImmobile, String alias)
     {
         super(size);
         Init();
         _alias = alias;
         _hitBox = new HitBox(size);
+        _isImmobile = isImmobile;
     }
 
     //GetMethods
