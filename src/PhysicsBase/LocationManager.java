@@ -2,6 +2,7 @@ package PhysicsBase;
 
 import GameObjectBase.GameWorldObject;
 import GeneralHelpers.PointHelper;
+import Global.DPoint;
 import PhysicsBase.Vectors.DistanceVector;
 import PhysicsBase.Vectors.VelocityVector;
 import SectorBase.SectorMap;
@@ -38,12 +39,11 @@ public class LocationManager
 
             if(v == null || v.GetSpeed() == 0.0) continue;
 
-            double x1 = gObj.GetDX();
-            double y1 = gObj.GetDY();
+            DPoint p = gObj.DGetLocation();
 
-            double x2 = PointHelper.TranslateX(x1,
+            double x2 = PointHelper.TranslateX(p.GetX(),
                     new DistanceVector(v.GetRadianRotation(), v.GetSpeed()));
-            double y2 = PointHelper.TranslateY(y1,
+            double y2 = PointHelper.TranslateY(p.GetY(),
                     new DistanceVector(v.GetRadianRotation(), v.GetSpeed()));
 
             gObj.DSetLocation(x2,y2);
