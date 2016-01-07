@@ -1,5 +1,7 @@
 package GameObjectBase;
 
+import Global.DPoint;
+
 import java.awt.*;
 
 public abstract class BoundedObject extends Rectangle
@@ -78,7 +80,8 @@ public abstract class BoundedObject extends Rectangle
     //Public Methods
     public Point GetCenterPoint()
     {
-        return new Point((int)this.getCenterX(), (int)this.getCenterY());
+        return new Point((int)Math.round(getCenterX()),
+                (int)Math.round(getCenterY()));
     }
 
     public void DSetLocation(double x, double y)
@@ -88,6 +91,11 @@ public abstract class BoundedObject extends Rectangle
 
         this.y = (int)Math.round(y);
         SetDY(y);
+    }
+
+    public DPoint DGetLocation()
+    {
+        return new DPoint(GetDX(), GetDY());
     }
 
     public void NSetLocation(Point p)
