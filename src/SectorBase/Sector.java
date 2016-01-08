@@ -2,6 +2,7 @@ package SectorBase;
 
 import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
+import PhysicsBase.CollisionEvent;
 import PhysicsBase.CollisionManager;
 import PhysicsBase.LocationManager;
 import SectorBase.enums.Direction;
@@ -40,22 +41,19 @@ public class Sector extends BoundedObject
     //Public Methods
     public void HandleCollisions()
     {
-        HashMap<GameWorldObject,HashSet<GameWorldObject>> collisons
+        HashSet<CollisionEvent> collisons
                 = _collisionManager.CheckCollisions();
 
         if(collisons.isEmpty()) return;
 
-        Iterator<GameWorldObject> objs = collisons.keySet().iterator();
+        Iterator<CollisionEvent> objs = collisons.iterator();
 
-        GameWorldObject currObj;
-        HashSet<GameWorldObject> collidingWith;
+        CollisionEvent currEvent;
 
         while(objs.hasNext())
         {
-            currObj = objs.next();
-            collidingWith = collisons.get(currObj);
-
-            _collisionManager.HandleCollision(currObj, collidingWith);
+            currEvent = objs.next();
+            _collisionManager.HandleCollision(currEvent);
         }
     }
 

@@ -2,6 +2,8 @@ package PhysicsBase;
 
 import GameObjectBase.GameWorldObject;
 import SectorBase.SectorMap;
+import SectorBase.enums.Direction;
+
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -25,10 +27,12 @@ public class CollisionManager
     //SetMethods
 
     //Public Methods
-    public HashMap<GameWorldObject, HashSet<GameWorldObject>> CheckCollisions()
+    public HashSet<CollisionEvent> CheckCollisions()
     {
-        HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions
-                = new HashMap<>();
+        //HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions
+        //        = new HashMap<>();
+
+        HashSet<CollisionEvent> collisions = new HashSet<>();
 
         Iterator<GameWorldObject> allObjIter = _map.GetAllObjectIterator();
 
@@ -44,6 +48,8 @@ public class CollisionManager
             Iterator<GameWorldObject> sectorObjs
                     = _map.GetObjectsAtSubSectors(gameObj.GetHitBox());
 
+            CollisionEvent e = null;
+
             while (sectorObjs.hasNext())
             {
                 GameWorldObject sectorGameObj = sectorObjs.next();
@@ -56,28 +62,31 @@ public class CollisionManager
 
                 if(!collisionEvent) continue;
 
-                if(!collisions.containsKey(gameObj))
+                if(e == null)
                 {
-                    collisions.put(gameObj,
-                            new HashSet<GameWorldObject>(){{add(sectorGameObj);}});
+                    HashMap<GameWorldObject, Direction> collideWith
+                            = new HashMap<>();
+                    collideWith.put(sectorGameObj, Direction.Up);
+
+                    e = new CollisionEvent(gameObj, collideWith);
                 }
                 else
                 {
-                    //This object is colliding with multiple objects.
-                    collisions.get(gameObj).add(sectorGameObj);
+                    e.collidesWith.put(sectorGameObj, Direction.Up);
                 }
             }
+
+            if(e != null) collisions.add(e);
         }
 
         return collisions;
     }
 
-    public void HandleCollision(GameWorldObject obj,
-                                HashSet<GameWorldObject> collidingObjs)
+    public void HandleCollision(CollisionEvent e)
     {
         StringBuilder sb = new StringBuilder();
 
-        Iterator<GameWorldObject> objIter = collidingObjs.iterator();
+        Iterator<GameWorldObject> objIter = e.collidesWith.keySet().iterator();
 
         sb.append("[");
         while (objIter.hasNext())
@@ -89,7 +98,7 @@ public class CollisionManager
         sb.append("]");
 
         //simple case, start with one object
-        System.out.println("COLLISION! - <"+obj.GetAlias()+" : "+sb.toString()+">");
+        System.out.println("COLLISION! - <"+e.collider.GetAlias()+" : "+sb.toString()+">");
         //todo collision with multiple objects
     }
 

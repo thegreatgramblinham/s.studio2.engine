@@ -2,13 +2,16 @@ package EngineTesting.PhysicsBase;
 
 import EngineTesting.GameObjectBase.DummyGameObject;
 import GameObjectBase.GameWorldObject;
+import PhysicsBase.CollisionEvent;
 import PhysicsBase.CollisionManager;
 import SectorBase.SectorMap;
+import SectorBase.enums.Direction;
 import org.junit.Assert;
 import org.junit.Test;
 import java.awt.*;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 
 public class CollisionManagerTest
 {
@@ -58,20 +61,22 @@ public class CollisionManagerTest
         obj2.NSetLocation(new Point(14, 14));
         _map.UpdateObjectLocation(obj2);
 
-        HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions
-                = _manager.CheckCollisions();
+        HashSet<CollisionEvent> collisions = _manager.CheckCollisions();
 
         Assert.assertTrue(!collisions.isEmpty());
         Assert.assertTrue(collisions.size() == 2);
 
-        Assert.assertTrue(collisions.containsKey(obj1));
-        Assert.assertTrue(collisions.containsKey(obj2));
+        Iterator<CollisionEvent> collIter = collisions.iterator();
 
-        Assert.assertTrue(collisions.get(obj1).size() == 1);
-        Assert.assertTrue(collisions.get(obj1).contains(obj2));
+        CollisionEvent e = collIter.next();
+        Assert.assertTrue(e.collider.equals(obj1));
+        Assert.assertTrue(e.collidesWith.size() == 1);
+        Assert.assertTrue(e.collidesWith.get(obj2) == Direction.Up);
 
-        Assert.assertTrue(collisions.get(obj2).size() == 1);
-        Assert.assertTrue(collisions.get(obj2).contains(obj1));
+        e = collIter.next();
+        Assert.assertTrue(e.collider.equals(obj2));
+        Assert.assertTrue(e.collidesWith.size() == 1);
+        Assert.assertTrue(e.collidesWith.get(obj1) == Direction.Up);
     }
 
     @Test
@@ -84,20 +89,22 @@ public class CollisionManagerTest
         obj2.NSetLocation(new Point(13, 13));
         _map.UpdateObjectLocation(obj2);
 
-        HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions
-                = _manager.CheckCollisions();
+        HashSet<CollisionEvent> collisions = _manager.CheckCollisions();
 
         Assert.assertTrue(!collisions.isEmpty());
         Assert.assertTrue(collisions.size() == 2);
 
-        Assert.assertTrue(collisions.containsKey(obj1));
-        Assert.assertTrue(collisions.containsKey(obj2));
+        Iterator<CollisionEvent> collIter = collisions.iterator();
 
-        Assert.assertTrue(collisions.get(obj1).size() == 1);
-        Assert.assertTrue(collisions.get(obj1).contains(obj2));
+        CollisionEvent e = collIter.next();
+        Assert.assertTrue(e.collider.equals(obj1));
+        Assert.assertTrue(e.collidesWith.size() == 1);
+        Assert.assertTrue(e.collidesWith.get(obj2) == Direction.Up);
 
-        Assert.assertTrue(collisions.get(obj2).size() == 1);
-        Assert.assertTrue(collisions.get(obj2).contains(obj1));
+        e = collIter.next();
+        Assert.assertTrue(e.collider.equals(obj2));
+        Assert.assertTrue(e.collidesWith.size() == 1);
+        Assert.assertTrue(e.collidesWith.get(obj1) == Direction.Up);
     }
 
     //todo this is going to be a tough one to design,
