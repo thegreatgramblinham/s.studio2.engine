@@ -11,7 +11,6 @@ import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
-//todo support for varying speeds - vector collision
 public class CollisionManager
 {
     //Private Variables

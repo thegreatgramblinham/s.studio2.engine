@@ -179,6 +179,9 @@ public class SectorMap extends BoundedObject
         {
             Point p = pIter.next();
 
+            if(p.x >= _xUnits || p.y >= _yUnits) continue;
+            if(p.x < 0 || p.y < 0) continue;
+
             HashSet objSet = _map[p.x][p.y];
 
             if(objSet == null || objSet.isEmpty()) continue;
