@@ -1,9 +1,12 @@
 package PhysicsBase;
 
 import GameObjectBase.GameWorldObject;
+import GeneralHelpers.ConversionHelper;
+import PhysicsBase.Vectors.VelocityVector;
 import SectorBase.SectorMap;
 import SectorBase.enums.Direction;
 
+import java.awt.*;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
@@ -29,9 +32,6 @@ public class CollisionManager
     //Public Methods
     public HashSet<CollisionEvent> CheckCollisions()
     {
-        //HashMap<GameWorldObject, HashSet<GameWorldObject>> collisions
-        //        = new HashMap<>();
-
         HashSet<CollisionEvent> collisions = new HashSet<>();
 
         Iterator<GameWorldObject> allObjIter = _map.GetAllObjectIterator();
@@ -66,13 +66,15 @@ public class CollisionManager
                 {
                     HashMap<GameWorldObject, Direction> collideWith
                             = new HashMap<>();
-                    collideWith.put(sectorGameObj, Direction.Up);
+                    collideWith.put(sectorGameObj,
+                            DetermineCollisionDirection(gameObj,sectorGameObj));
 
                     e = new CollisionEvent(gameObj, collideWith);
                 }
                 else
                 {
-                    e.collidesWith.put(sectorGameObj, Direction.Up);
+                    e.collidesWith.put(sectorGameObj,
+                            DetermineCollisionDirection(gameObj,sectorGameObj));
                 }
             }
 
@@ -93,14 +95,54 @@ public class CollisionManager
         {
             GameWorldObject collObj = objIter.next();
 
-            sb.append(collObj.GetAlias()+"&");
+            sb.append(collObj.GetAlias()+" from "+e.collidesWith.get(collObj)+" &");
         }
         sb.append("]");
 
         //simple case, start with one object
+        GameWorldObject firstCollideWith = e.collidesWith.keySet().iterator().next();
+
+        //todo new position setting
+        switch(e.collidesWith.get(firstCollideWith))
+        {
+
+            case Up:
+                e.collider.NSetLocation(
+                        new Point(
+                                e.collider.x,
+                                (int)(firstCollideWith.getY()
+                                        + firstCollideWith.height + 1)));
+                break;
+            case Down:
+                e.collider.NSetLocation(
+                        new Point(
+                                e.collider.x,
+                                (int)(firstCollideWith.getY() - e.collider.height - 1)));
+                break;
+            case Left:
+                e.collider.NSetLocation(
+                        new Point(firstCollideWith.x + firstCollideWith.width + 1,
+                                e.collider.y));
+                break;
+            case Right:
+                e.collider.NSetLocation(
+                        new Point(firstCollideWith.x - e.collider.width - 1,
+                                e.collider.y));
+                break;
+            default:
+                break;
+        }
+        e.collider.SetVelocity(new VelocityVector(0,0));
+
         System.out.println("COLLISION! - <"+e.collider.GetAlias()+" : "+sb.toString()+">");
         //todo collision with multiple objects
     }
 
     //Private Methods
+    private Direction DetermineCollisionDirection(GameWorldObject collider,
+                                             GameWorldObject collidesWith)
+    {
+          return ConversionHelper.GetRadianToCollisionDirection(
+                  collider.GetVelocity().GetRadianRotation());
+    }
 }

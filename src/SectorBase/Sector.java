@@ -7,7 +7,6 @@ import PhysicsBase.CollisionManager;
 import PhysicsBase.LocationManager;
 import SectorBase.enums.Direction;
 
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
