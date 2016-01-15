@@ -68,15 +68,25 @@ public class CollisionManagerTest
 
         Iterator<CollisionEvent> collIter = collisions.iterator();
 
-        CollisionEvent e = collIter.next();
-        Assert.assertTrue(e.collider.equals(obj1));
-        Assert.assertTrue(e.collidesWith.size() == 1);
-        Assert.assertTrue(e.collidesWith.get(obj2) == Direction.Up);
+        while(collIter.hasNext())
+        {
+            CollisionEvent e = collIter.next();
 
-        e = collIter.next();
-        Assert.assertTrue(e.collider.equals(obj2));
-        Assert.assertTrue(e.collidesWith.size() == 1);
-        Assert.assertTrue(e.collidesWith.get(obj1) == Direction.Up);
+            if(e.collider == obj1)
+            {
+                Assert.assertTrue(e.collidesWith.size() == 1);
+                Assert.assertTrue(e.collidesWith.get(obj2) == null);
+            }
+            else if(e.collider == obj2)
+            {
+                Assert.assertTrue(e.collidesWith.size() == 1);
+                Assert.assertTrue(e.collidesWith.get(obj1) == null);
+            }
+            else
+            {
+                throw new Exception("Unexpected Object");
+            }
+        }
     }
 
     @Test
@@ -96,15 +106,25 @@ public class CollisionManagerTest
 
         Iterator<CollisionEvent> collIter = collisions.iterator();
 
-        CollisionEvent e = collIter.next();
-        Assert.assertTrue(e.collider.equals(obj1));
-        Assert.assertTrue(e.collidesWith.size() == 1);
-        Assert.assertTrue(e.collidesWith.get(obj2) == Direction.Up);
+        while(collIter.hasNext())
+        {
+            CollisionEvent e = collIter.next();
 
-        e = collIter.next();
-        Assert.assertTrue(e.collider.equals(obj2));
-        Assert.assertTrue(e.collidesWith.size() == 1);
-        Assert.assertTrue(e.collidesWith.get(obj1) == Direction.Up);
+            if(e.collider == obj1)
+            {
+                Assert.assertTrue(e.collidesWith.size() == 1);
+                Assert.assertTrue(e.collidesWith.get(obj2) == null);
+            }
+            else if(e.collider == obj2)
+            {
+                Assert.assertTrue(e.collidesWith.size() == 1);
+                Assert.assertTrue(e.collidesWith.get(obj1) == null);
+            }
+            else
+            {
+                throw new Exception("Unexpected Object");
+            }
+        }
     }
 
     //todo this is going to be a tough one to design,

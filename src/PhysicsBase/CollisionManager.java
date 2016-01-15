@@ -141,7 +141,9 @@ public class CollisionManager
     private Direction DetermineCollisionDirection(GameWorldObject collider,
                                              GameWorldObject collidesWith)
     {
-          return ConversionHelper.GetRadianToCollisionDirection(
+        if(collider.GetVelocity() == null) return null;
+
+        return ConversionHelper.GetRadianToCollisionDirection(
                   collider.GetVelocity().GetRadianRotation());
     }
 }
