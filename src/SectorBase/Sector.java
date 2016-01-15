@@ -7,6 +7,7 @@ import PhysicsBase.CollisionManager;
 import PhysicsBase.LocationManager;
 import SectorBase.enums.Direction;
 
+import java.awt.*;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -69,6 +70,11 @@ public class Sector extends BoundedObject
     public void RemoveObj(GameWorldObject obj)
     {
         _map.RemoveObject(obj);
+    }
+
+    public Iterator<GameWorldObject> GetObjectsAtPoint(Point p)
+    {
+        return _map.GetObjectsAtSubSector(p);
     }
 
     public void LinkToSide(Sector other, Direction d)

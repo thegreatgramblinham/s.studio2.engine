@@ -47,6 +47,7 @@ public class LocationManager
                     new DistanceVector(v.GetRadianRotation(), v.GetSpeed()));
 
             gObj.DSetLocation(x2,y2);
+            _map.UpdateObjectLocation(gObj);
 
             //todo apply gravity
             gObj.SetVelocity(new VelocityVector(v.GetRadianRotation(), v.GetSpeed()*.991));
