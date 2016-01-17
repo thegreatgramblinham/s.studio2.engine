@@ -5,9 +5,6 @@ import SectorBase.Sector;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
-import sun.util.resources.cldr.ee.CalendarData_ee_GH;
-
-import static org.junit.Assert.*;
 
 public class GameEngineTest
 {
