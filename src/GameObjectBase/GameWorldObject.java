@@ -12,6 +12,7 @@ public abstract class GameWorldObject extends GameObject
     //Properties
     private VelocityVector _velocity;
     private String _alias;
+    private float _mass;
     private boolean _isImmobile;
 
     //Constructors
@@ -53,6 +54,11 @@ public abstract class GameWorldObject extends GameObject
         return _isImmobile;
     }
 
+    public float GetMass()
+    {
+        return _mass;
+    }
+
     //SetMethods
     public void SetVelocity(VelocityVector velocity)
     {
@@ -69,6 +75,11 @@ public abstract class GameWorldObject extends GameObject
     public void SetIsImmobile(boolean immobile)
     {
         _isImmobile = immobile;
+    }
+
+    public void SetMass(float mass)
+    {
+        _mass = mass;
     }
 
     @Override
