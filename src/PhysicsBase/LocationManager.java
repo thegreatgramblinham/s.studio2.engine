@@ -6,6 +6,7 @@ import Global.DPoint;
 import PhysicsBase.Vectors.DistanceVector;
 import PhysicsBase.Vectors.VelocityVector;
 import SectorBase.SectorMap;
+import SectorBase.enums.GravityApplication;
 
 import java.util.Iterator;
 
@@ -13,13 +14,18 @@ public class LocationManager
 {
     //Private Variables
     private SectorMap _map;
+    private float _gravity;
+    private GravityApplication _gravityApp;
 
     //Properties
 
     //Constructor
-    public LocationManager(SectorMap map)
+    public LocationManager(SectorMap map, float gravity,
+                           GravityApplication gravityApp)
     {
         _map = map;
+        _gravity = gravity;
+        _gravityApp = gravityApp;
     }
 
     //GetMethods

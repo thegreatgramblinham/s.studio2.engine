@@ -6,6 +6,7 @@ import PhysicsBase.CollisionEvent;
 import PhysicsBase.CollisionManager;
 import PhysicsBase.LocationManager;
 import SectorBase.enums.Direction;
+import SectorBase.enums.GravityApplication;
 
 import java.awt.*;
 import java.util.HashSet;
@@ -17,6 +18,8 @@ public class Sector extends BoundedObject
     private CollisionManager _collisionManager;
     private LocationManager _vectorManager;
     private SectorMap _map;
+    private float _gravity;
+    private GravityApplication _gravityApp;
 
     protected Sector _up;
     protected Sector _down;
@@ -24,10 +27,11 @@ public class Sector extends BoundedObject
     protected Sector _right;
 
     //Constructor
-    public Sector(int width, int height, int gridUnitSize)
+    public Sector(int width, int height, int gridUnitSize,
+                  float gravity, GravityApplication gravityApp)
     {
         super(width, height);
-        Init(gridUnitSize);
+        Init(gridUnitSize, gravity, gravityApp);
     }
 
     //GetMethods
@@ -101,10 +105,14 @@ public class Sector extends BoundedObject
     }
 
     //Private Methods
-    private void Init(int gridUnitSize)
+    private void Init(int gridUnitSize,
+                      float gravity,
+                      GravityApplication gravityApp)
     {
         _map = new SectorMap(width, height, gridUnitSize);
         _collisionManager = new CollisionManager(_map);
-        _vectorManager = new LocationManager(_map);
+        _gravity = gravity;
+        _gravityApp = gravityApp;
+        _vectorManager = new LocationManager(_map,_gravity,_gravityApp);
     }
 }

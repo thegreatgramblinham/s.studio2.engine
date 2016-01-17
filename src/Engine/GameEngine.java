@@ -1,6 +1,7 @@
 package Engine;
 
 import SectorBase.Sector;
+import SectorBase.enums.GravityApplication;
 
 import java.util.HashSet;
 
@@ -68,9 +69,10 @@ public class GameEngine
         _isRunning = false;
     }
 
-    public Sector CreateSector(int width, int height, int gridUnitSize)
+    public Sector CreateSector(int width, int height, int gridUnitSize,
+                               float gravity, GravityApplication gravityApp)
     {
-        Sector sec = new Sector(width, height, gridUnitSize);
+        Sector sec = new Sector(width, height, gridUnitSize, gravity, gravityApp);
         _sectorSet.add(sec);
 
         if(_activeSector == null) _activeSector = sec;
