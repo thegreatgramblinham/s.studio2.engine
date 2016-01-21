@@ -21,7 +21,7 @@ public class SectorMapTest
     { 
         _map = new SectorMap(500, 500, 20);
         _testPoint = new Point(90, 90);
-        _testObject = new DummyGameObject(new Rectangle(200, 200, 50, 50), false);
+        _testObject = new DummyGameObject(new Rectangle(200, 200, 50, 50), false, 1);
         _testObject.NSetLocation(_testPoint);
     }
 
@@ -29,9 +29,9 @@ public class SectorMapTest
     public void testGetAllObjectIterator() throws Exception
     {
         DummyGameObject testObject2
-                = new DummyGameObject(new Rectangle(20, 20, 40, 40), false);
+                = new DummyGameObject(new Rectangle(20, 20, 40, 40), false, 1);
         DummyGameObject testObject3
-                = new DummyGameObject(new Rectangle(120, 120, 40, 40), false);
+                = new DummyGameObject(new Rectangle(120, 120, 40, 40), false, 1);
 
         _map.InsertObject(_testObject);
         _map.InsertObject(testObject2);
@@ -131,7 +131,7 @@ public class SectorMapTest
     @Test
     public void testGetObjectsAtSubSectors() throws Exception
     {
-        DummyGameObject testObject2 = new DummyGameObject(new Rectangle(60, 60, 20, 20), false);
+        DummyGameObject testObject2 = new DummyGameObject(new Rectangle(60, 60, 20, 20), false, 1);
 
         _map.InsertObject(_testObject);
         _map.InsertObject(testObject2);

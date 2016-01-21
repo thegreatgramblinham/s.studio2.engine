@@ -43,22 +43,49 @@ public class LocationManager
 
             VelocityVector v = gObj.GetVelocity();
 
-            if(v == null || v.GetSpeed() == 0.0) continue;
+            //If we don't have a location to update, just move on.
+            if(v == null || gObj.GetIsImmobile()) continue;
+            if(v.GetSpeed() == 0.0)
+            {
+                gObj.SetVelocity(new VelocityVector(0.0, 0.0));
+                continue;
+            }
 
             DPoint p = gObj.DGetLocation();
 
             double x2 = PointHelper.TranslateX(p.GetX(),
-                    new DistanceVector(v.GetRadianRotation(), v.GetSpeed()));
+                    new DistanceVector(v.GetRadianRotation(), v.GetSpeed()*(1-(_gravity * gObj.GetMass()))));
             double y2 = PointHelper.TranslateY(p.GetY(),
-                    new DistanceVector(v.GetRadianRotation(), v.GetSpeed()));
+                    new DistanceVector(v.GetRadianRotation(), v.GetSpeed()*(1-(_gravity * gObj.GetMass()))));
 
             gObj.DSetLocation(x2,y2);
             _map.UpdateObjectLocation(gObj);
 
             //todo apply gravity
-            gObj.SetVelocity(new VelocityVector(v.GetRadianRotation(), v.GetSpeed()*.991));
+            //gObj.SetVelocity(new VelocityVector(v.GetRadianRotation(), v.GetSpeed()*.991));
+            ApplyGravityToObject(gObj);
         }
     }
 
     //Private Methods
+    public void ApplyGravityToObject(GameWorldObject obj)
+    {
+        VelocityVector v = obj.GetVelocity();
+        switch (_gravityApp)
+        {
+            case Area:
+                obj.SetVelocity(new VelocityVector(v.GetRadianRotation(), v.GetSpeed()*(1-(_gravity * obj.GetMass()))));
+                //obj.SetVelocity(new VelocityVector(v.GetRadianRotation(), v.GetSpeed()*(1 - (obj.GetMass()+_gravity)/2)));
+                break;
+            case Up:
+                break;
+            case Down:
+                break;
+            case Left:
+                break;
+            case Right:
+                break;
+        }
+
+    }
 }

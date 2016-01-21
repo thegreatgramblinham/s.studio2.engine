@@ -16,18 +16,18 @@ public abstract class GameWorldObject extends GameObject
     private boolean _isImmobile;
 
     //Constructors
-    public GameWorldObject(Rectangle size, boolean isImmobile)
+    public GameWorldObject(Rectangle size, boolean isImmobile, float mass)
     {
         super(size);
-        Init();
+        Init(mass);
         _hitBox = new HitBox(size);
         _isImmobile = isImmobile;
     }
 
-    public GameWorldObject(Rectangle size, boolean isImmobile, String alias)
+    public GameWorldObject(Rectangle size, boolean isImmobile, String alias, float mass)
     {
         super(size);
-        Init();
+        Init(mass);
         _alias = alias;
         _hitBox = new HitBox(size);
         _isImmobile = isImmobile;
@@ -128,10 +128,11 @@ public abstract class GameWorldObject extends GameObject
     }
 
     //Private Methods
-    private void Init()
+    private void Init(float mass)
     {
         _velocity = null;
         _isImmobile = false;
+        this.SetMass(mass);
     }
 
     //Override Handling

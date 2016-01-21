@@ -19,7 +19,7 @@ public class GameWorldObjectTest
     @Before
     public void setUp() throws Exception
     {
-        _dummyObj = new DummyGameObject(new Rectangle(0,0,20,20), false);
+        _dummyObj = new DummyGameObject(new Rectangle(0,0,20,20), false, 1);
     }
 
     //Tests
