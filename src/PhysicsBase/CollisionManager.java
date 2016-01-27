@@ -42,6 +42,8 @@ public class CollisionManager
             GameWorldObject gameObj = allObjIter.next();
 
             if(gameObj.GetIsImmobile()) continue;
+            if(gameObj.GetVelocity() == null) continue;
+            if(gameObj.GetVelocity().GetSpeed() == 0.0) continue;
 
             //check for collisions within each object in the same subsector(s)
             Iterator<GameWorldObject> sectorObjs
@@ -89,6 +91,7 @@ public class CollisionManager
 
         Iterator<GameWorldObject> objIter = e.collidesWith.keySet().iterator();
 
+        //logging the collision
         sb.append("[");
         while (objIter.hasNext())
         {
@@ -101,10 +104,9 @@ public class CollisionManager
         //simple case, start with one object
         GameWorldObject firstCollideWith = e.collidesWith.keySet().iterator().next();
 
-        //todo new position setting
+        //todo if collidesWith is not immobile, then it's location needs to be updated as well.
         switch(e.collidesWith.get(firstCollideWith))
         {
-
             case Up:
                 e.collider.NSetLocation(
                         new Point(
@@ -131,7 +133,14 @@ public class CollisionManager
             default:
                 break;
         }
+
+        VelocityVector prevSpeed = e.collider.GetVelocity();
         e.collider.SetVelocity(new VelocityVector(0,0));
+
+        if(!firstCollideWith.GetIsImmobile())
+        {
+            firstCollideWith.SetVelocity(prevSpeed);
+        }
 
         System.out.println("COLLISION! - <"+e.collider.GetAlias()+" : "+sb.toString()+">");
         //todo collision with multiple objects

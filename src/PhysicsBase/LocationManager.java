@@ -51,19 +51,18 @@ public class LocationManager
                 continue;
             }
 
+            //Apply gravity
+            ApplyGravityToObject(gObj);
+
             DPoint p = gObj.DGetLocation();
 
             double x2 = PointHelper.TranslateX(p.GetX(),
-                    new DistanceVector(v.GetRadianRotation(), v.GetSpeed()*(1-(_gravity * gObj.GetMass()))));
+                    new DistanceVector(v.GetRadianRotation(), v.GetSpeed()));
             double y2 = PointHelper.TranslateY(p.GetY(),
-                    new DistanceVector(v.GetRadianRotation(), v.GetSpeed()*(1-(_gravity * gObj.GetMass()))));
+                    new DistanceVector(v.GetRadianRotation(), v.GetSpeed()));
 
             gObj.DSetLocation(x2,y2);
             _map.UpdateObjectLocation(gObj);
-
-            //todo apply gravity
-            //gObj.SetVelocity(new VelocityVector(v.GetRadianRotation(), v.GetSpeed()*.991));
-            ApplyGravityToObject(gObj);
         }
     }
 
@@ -74,8 +73,8 @@ public class LocationManager
         switch (_gravityApp)
         {
             case Area:
-                obj.SetVelocity(new VelocityVector(v.GetRadianRotation(), v.GetSpeed()*(1-(_gravity * obj.GetMass()))));
-                //obj.SetVelocity(new VelocityVector(v.GetRadianRotation(), v.GetSpeed()*(1 - (obj.GetMass()+_gravity)/2)));
+                obj.SetVelocity(new VelocityVector(v.GetRadianRotation(),
+                        v.GetSpeed()*(1-(_gravity * obj.GetMass()))));
                 break;
             case Up:
                 break;
