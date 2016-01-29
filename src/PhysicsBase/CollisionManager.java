@@ -42,8 +42,6 @@ public class CollisionManager
             GameWorldObject gameObj = allObjIter.next();
 
             if(gameObj.GetIsImmobile()) continue;
-            if(gameObj.GetVelocity() == null) continue;
-            if(gameObj.GetVelocity().GetSpeed() == 0.0) continue;
 
             //check for collisions within each object in the same subsector(s)
             Iterator<GameWorldObject> sectorObjs
