@@ -45,7 +45,7 @@ public class LocationManager
 
             //If we don't have a location to update, just move on.
             if(v == null || gObj.GetIsImmobile()) continue;
-            if(v.GetSpeed() == 0.0)
+            if(v.GetSpeed() <= 0.001)
             {
                 gObj.SetVelocity(new VelocityVector(0.0, 0.0));
                 continue;

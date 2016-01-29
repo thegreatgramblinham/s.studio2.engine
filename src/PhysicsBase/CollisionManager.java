@@ -139,7 +139,7 @@ public class CollisionManager
 
         if(!firstCollideWith.GetIsImmobile())
         {
-            firstCollideWith.SetVelocity(prevSpeed);
+            firstCollideWith.AccelerateBy(prevSpeed);
         }
 
         System.out.println("COLLISION! - <"+e.collider.GetAlias()+" : "+sb.toString()+">");
