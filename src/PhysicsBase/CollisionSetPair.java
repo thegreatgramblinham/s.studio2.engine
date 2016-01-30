@@ -5,7 +5,7 @@ import GameObjectBase.enums.Side;
 
 import java.util.UUID;
 
-class CollisionSetPair
+public class CollisionSetPair
 {
     //Public Variables
     public GameWorldObject object1;
@@ -13,6 +13,8 @@ class CollisionSetPair
 
     public Side object1CollisionSide;
     public Side object2CollisionSide;
+
+    public boolean activelyColliding;
 
     //Constructor
     public CollisionSetPair(GameWorldObject obj1, GameWorldObject obj2,
@@ -22,12 +24,31 @@ class CollisionSetPair
         object2 = obj2;
         object1CollisionSide = obj1CollisionSide;
         object2CollisionSide = obj2CollisionSide;
+        activelyColliding = true;
     }
 
     //Public Methods
     public boolean ContainsId(UUID id)
     {
         return object1.GetID() == id || object2.GetID() == id;
+    }
+
+    public boolean AreBothObjectsAtRest()
+    {
+        return (object1.GetVelocity() == null || object1.GetVelocity().GetSpeed() == 0.0D) &&
+                (object2.GetVelocity() == null || object2.GetVelocity().GetSpeed() == 0.0D);
+    }
+
+    public boolean IsOneObjectAtRest()
+    {
+        if((object1.GetVelocity() == null || object1.GetVelocity().GetSpeed() == 0.0D)
+            && (object2.GetVelocity() != null || object2.GetVelocity().GetSpeed() > 0.0D))
+            return true;
+        if((object2.GetVelocity() == null || object2.GetVelocity().GetSpeed() == 0.0D)
+                && (object1.GetVelocity() != null || object1.GetVelocity().GetSpeed() > 0.0D))
+            return true;
+
+        return false;
     }
 
     @Override

@@ -1,5 +1,6 @@
 package GeneralHelpers;
 
+import GameObjectBase.enums.Side;
 import SectorBase.enums.Direction;
 
 public final class ConversionHelper
@@ -8,17 +9,33 @@ public final class ConversionHelper
     private ConversionHelper(){}
 
     //Public Methods
-    public static Direction GetRadianToCollisionDirection(double radians)
+    public static Side GetRadianToCollisionSide(double radians)
     {
         if(radians == 0.0D)
-            return Direction.Right;
+            return Side.Right;
         if(radians == Math.PI)
-            return Direction.Left;
+            return Side.Left;
         if(radians == Math.PI/2)
-            return Direction.Down;
+            return Side.Bottom;
         if(radians == (3*Math.PI)/2)
-            return Direction.Up;
+            return Side.Top;
 
+        return null;
+    }
+
+    public static Side GetOppositeSide(Side s)
+    {
+        switch (s)
+        {
+            case Top:
+                return Side.Bottom;
+            case Bottom:
+                return Side.Top;
+            case Left:
+                return Side.Right;
+            case Right:
+                return Side.Left;
+        }
         return null;
     }
 

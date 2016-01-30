@@ -30,9 +30,9 @@ public class CollisionManager
     //SetMethods
 
     //Public Methods
-    public HashSet<CollisionEvent> CheckCollisions()
+    public HashSet<CollisionSetPair> CheckCollisions()
     {
-        HashSet<CollisionEvent> collisions = new HashSet<>();
+        HashSet<CollisionSetPair> collisions = new HashSet<>();
 
         Iterator<GameWorldObject> allObjIter = _map.GetAllObjectIterator();
 
@@ -50,7 +50,7 @@ public class CollisionManager
             Iterator<GameWorldObject> sectorObjs
                     = _map.GetObjectsAtSubSectors(gameObj.GetHitBox());
 
-            CollisionEvent e = null;
+            CollisionSetPair e = null;
 
             while (sectorObjs.hasNext())
             {
@@ -59,125 +59,129 @@ public class CollisionManager
                 //No need to collide with self
                 if(sectorGameObj == gameObj) continue;
 
-                boolean collisionEvent = CollisionHelper.Collision(gameObj,
-                        sectorGameObj);
+                boolean collisionEvent = CollisionHelper.Collision(gameObj, sectorGameObj);
 
                 if(!collisionEvent) continue;
 
-                if(e == null)
-                {
-                    HashMap<GameWorldObject, Direction> collideWith
-                            = new HashMap<>();
-                    collideWith.put(sectorGameObj,
-                            DetermineCollisionDirection(gameObj,sectorGameObj));
+                e = new CollisionSetPair(gameObj, sectorGameObj, null, null);
+                DetermineCollisionDirection(e);
 
-                    e = new CollisionEvent(gameObj, collideWith);
-                }
-                else
-                {
-                    e.collidesWith.put(sectorGameObj,
-                            DetermineCollisionDirection(gameObj,sectorGameObj));
-                }
+                if(!collisions.contains(e))
+                    collisions.add(e);
             }
 
-            if(e != null) collisions.add(e);
         }
 
         return collisions;
     }
 
-    public void HandleCollision(CollisionEvent e)
+    public void HandleCollision(CollisionSetPair e)
     {
         StringBuilder sb = new StringBuilder();
 
-        Iterator<GameWorldObject> objIter = e.collidesWith.keySet().iterator();
-
         //logging the collision
         sb.append("[");
-        while (objIter.hasNext())
-        {
-            GameWorldObject collObj = objIter.next();
-
-            sb.append(collObj.GetAlias()+" from "+e.collidesWith.get(collObj)+" &");
-        }
+        sb.append(e.object1.GetAlias()+" from "+e.object1CollisionSide+" &");
+        sb.append(e.object2.GetAlias()+" from "+e.object2CollisionSide);
         sb.append("]");
 
-        //simple case, start with one object
-        GameWorldObject firstCollideWith = e.collidesWith.keySet().iterator().next();
+        if(e.object1CollisionSide == null && e.object2CollisionSide == null) return;
 
-        //todo if collidesWith is not immobile, then it's location needs to be updated as well.
-        switch(e.collidesWith.get(firstCollideWith))
+        if(e.activelyColliding)
         {
-            case Up:
-                e.collider.NSetLocation(
-                        new Point(
-                                e.collider.x,
-                                (int)(firstCollideWith.getY()
-                                        + firstCollideWith.height + 1)));
-                break;
-            case Down:
-                e.collider.NSetLocation(
-                        new Point(
-                                e.collider.x,
-                                (int)(firstCollideWith.getY() - e.collider.height - 1)));
-                break;
-            case Left:
-                e.collider.NSetLocation(
-                        new Point(firstCollideWith.x + firstCollideWith.width + 1,
-                                e.collider.y));
-                break;
-            case Right:
-                e.collider.NSetLocation(
-                        new Point(firstCollideWith.x - e.collider.width - 1,
-                                e.collider.y));
-                break;
-            default:
-                break;
+            //currently using object 2 as the relative object.
+            switch (e.object1CollisionSide)
+            {
+                case Top:
+                    e.object1.NSetLocation(new Point(e.object1.x, e.object2.GetBottom() + 1));
+                    //e.object2.NSetLocation(new Point(e.object2.x, e.object1.GetTop() - (int)e.object1.getHeight() - 1));
+                    break;
+                case Bottom:
+                    e.object1.NSetLocation(new Point(e.object1.x, e.object2.GetTop() - (int)e.object1.getHeight() - 1));
+                    //e.object2.NSetLocation(new Point(e.object2.x, e.object1.GetBottom() + 1));
+                    break;
+                case Left:
+                    e.object1.NSetLocation(new Point(e.object2.GetRight() + 1, e.object1.y));
+                    //e.object2.NSetLocation(new Point(e.object1.GetLeft() - (int)e.object1.getWidth()- 1, e.object2.y));
+                    break;
+                case Right:
+                    e.object1.NSetLocation(new Point(e.object2.GetLeft() - (int)e.object1.getWidth() - 1, e.object1.y));
+                    //e.object2.NSetLocation(new Point(e.object1.GetRight() + 1, e.object2.y));
+                    break;
+            }
+
+            _map.UpdateObjectLocation(e.object1);
+            _map.UpdateObjectLocation(e.object2);
         }
 
-        VelocityVector prevSpeed = e.collider.GetVelocity();
-        e.collider.SetVelocity(new VelocityVector(0,0));
-
-        if(!firstCollideWith.GetIsImmobile())
+        if(e.IsOneObjectAtRest())
         {
-            firstCollideWith.AccelerateBy(prevSpeed);
+            VelocityVector v1 = e.object1.GetVelocity();
+            VelocityVector v2 = e.object2.GetVelocity();
+
+            e.object1.SetVelocity(v2);
+            e.object2.SetVelocity(v1);
         }
 
-        System.out.println("COLLISION! - <"+e.collider.GetAlias()+" : "+sb.toString()+">");
+        System.out.println("COLLISION! - <"+sb.toString()+">");
         //todo collision with multiple objects
     }
 
     //Private Methods
-    private Direction DetermineCollisionDirection(GameWorldObject collider,
-                                             GameWorldObject collidesWith)
-    {
-        if(collider.GetVelocity() == null) return null;
-
-        return ConversionHelper.GetRadianToCollisionDirection(
-                  collider.GetVelocity().GetRadianRotation());
-    }
-
     private void DetermineCollisionDirection(CollisionSetPair pair)
     {
-        if(pair.object1.IsRightAlignedTo(pair.object2.GetLeft(), 2))
+        if(pair.AreBothObjectsAtRest())
+            return;
+
+        if(pair.IsOneObjectAtRest())
+        {
+            DetermineCollisionWithRestingObject(pair);
+            return;
+        }
+
+        if(pair.object1.IsRightAlignedTo(pair.object2.GetLeft(), 10))
         {
             pair.object1CollisionSide = Side.Right;
             pair.object2CollisionSide = Side.Left;
         }
-        else if(pair.object1.IsLeftAlignedTo(pair.object2.GetRight(), 2))
+        else if(pair.object1.IsLeftAlignedTo(pair.object2.GetRight(), 10))
         {
             pair.object1CollisionSide = Side.Left;
             pair.object2CollisionSide = Side.Right;
         }
-        else if(pair.object1.IsTopAlignedTo(pair.object2.GetBottom(), 2))
+        else if(pair.object1.IsTopAlignedTo(pair.object2.GetBottom(), 10))
         {
             pair.object1CollisionSide = Side.Top;
             pair.object2CollisionSide = Side.Bottom;
         }
-        else if(pair.object1.IsBottomAlignedTo(pair.object2.GetTop(), 2))
+        else if(pair.object1.IsBottomAlignedTo(pair.object2.GetTop(), 10))
         {
             pair.object1CollisionSide = Side.Bottom;
             pair.object2CollisionSide = Side.Top;
+        }
+
+        if(pair.object1CollisionSide == null || pair.object2CollisionSide == null)
+            pair.activelyColliding = false;
+    }
+
+    private void DetermineCollisionWithRestingObject(CollisionSetPair pair)
+    {
+        VelocityVector v1 = pair.object1.GetVelocity();
+        VelocityVector v2 = pair.object2.GetVelocity();
+
+        if(v1 == null || v1.GetSpeed() == 0.0D)
+        {
+            pair.object2CollisionSide = ConversionHelper.GetRadianToCollisionSide(
+                    v2.GetRadianRotation());
+            pair.object1CollisionSide = ConversionHelper.GetOppositeSide(
+                    pair.object2CollisionSide);
+        }
+        else
+        {
+            pair.object1CollisionSide = ConversionHelper.GetRadianToCollisionSide(
+                    v1.GetRadianRotation());
+            pair.object2CollisionSide = ConversionHelper.GetOppositeSide(
+                    pair.object1CollisionSide);
         }
     }
 }

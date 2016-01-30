@@ -4,6 +4,7 @@ import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
 import PhysicsBase.CollisionEvent;
 import PhysicsBase.CollisionManager;
+import PhysicsBase.CollisionSetPair;
 import PhysicsBase.LocationManager;
 import SectorBase.enums.Direction;
 import SectorBase.enums.GravityApplication;
@@ -45,18 +46,13 @@ public class Sector extends BoundedObject
     //Public Methods
     public void HandleCollisions()
     {
-        HashSet<CollisionEvent> collisons
+        HashSet<CollisionSetPair> collisons
                 = _collisionManager.CheckCollisions();
 
         if(collisons.isEmpty()) return;
 
-        Iterator<CollisionEvent> objs = collisons.iterator();
-
-        CollisionEvent currEvent;
-
-        while(objs.hasNext())
+        for (CollisionSetPair currEvent : collisons )
         {
-            currEvent = objs.next();
             _collisionManager.HandleCollision(currEvent);
         }
     }

@@ -1,15 +1,12 @@
 package EngineTesting.PhysicsBase;
 
 import EngineTesting.GameObjectBase.DummyGameObject;
-import GameObjectBase.GameWorldObject;
-import PhysicsBase.CollisionEvent;
 import PhysicsBase.CollisionManager;
+import PhysicsBase.CollisionSetPair;
 import SectorBase.SectorMap;
-import SectorBase.enums.Direction;
 import org.junit.Assert;
 import org.junit.Test;
 import java.awt.*;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -61,26 +58,26 @@ public class CollisionManagerTest
         obj2.NSetLocation(new Point(14, 14));
         _map.UpdateObjectLocation(obj2);
 
-        HashSet<CollisionEvent> collisions = _manager.CheckCollisions();
+        HashSet<CollisionSetPair> collisions = _manager.CheckCollisions();
 
         Assert.assertTrue(!collisions.isEmpty());
-        Assert.assertTrue(collisions.size() == 2);
+        Assert.assertTrue(collisions.size() == 1);
 
-        Iterator<CollisionEvent> collIter = collisions.iterator();
+        Iterator<CollisionSetPair> collIter = collisions.iterator();
 
         while(collIter.hasNext())
         {
-            CollisionEvent e = collIter.next();
+            CollisionSetPair e = collIter.next();
 
-            if(e.collider == obj1)
+            if(e.object1 == obj1)
             {
-                Assert.assertTrue(e.collidesWith.size() == 1);
-                Assert.assertTrue(e.collidesWith.get(obj2) == null);
+                Assert.assertTrue(e.object2 == obj2);
+                Assert.assertTrue(e.activelyColliding = true);
             }
-            else if(e.collider == obj2)
+            else if(e.object1 == obj2)
             {
-                Assert.assertTrue(e.collidesWith.size() == 1);
-                Assert.assertTrue(e.collidesWith.get(obj1) == null);
+                Assert.assertTrue(e.object2 == obj1);
+                Assert.assertTrue(e.activelyColliding = true);
             }
             else
             {
@@ -99,26 +96,26 @@ public class CollisionManagerTest
         obj2.NSetLocation(new Point(13, 13));
         _map.UpdateObjectLocation(obj2);
 
-        HashSet<CollisionEvent> collisions = _manager.CheckCollisions();
+        HashSet<CollisionSetPair> collisions = _manager.CheckCollisions();
 
         Assert.assertTrue(!collisions.isEmpty());
-        Assert.assertTrue(collisions.size() == 2);
+        Assert.assertTrue(collisions.size() == 1);
 
-        Iterator<CollisionEvent> collIter = collisions.iterator();
+        Iterator<CollisionSetPair> collIter = collisions.iterator();
 
         while(collIter.hasNext())
         {
-            CollisionEvent e = collIter.next();
+            CollisionSetPair e = collIter.next();
 
-            if(e.collider == obj1)
+            if(e.object1 == obj1)
             {
-                Assert.assertTrue(e.collidesWith.size() == 1);
-                Assert.assertTrue(e.collidesWith.get(obj2) == null);
+                Assert.assertTrue(e.object2 == obj2);
+                Assert.assertTrue(e.activelyColliding = true);
             }
-            else if(e.collider == obj2)
+            else if(e.object1 == obj2)
             {
-                Assert.assertTrue(e.collidesWith.size() == 1);
-                Assert.assertTrue(e.collidesWith.get(obj1) == null);
+                Assert.assertTrue(e.object2 == obj1);
+                Assert.assertTrue(e.activelyColliding = true);
             }
             else
             {
