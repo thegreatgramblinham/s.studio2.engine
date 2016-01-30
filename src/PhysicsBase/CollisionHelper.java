@@ -3,6 +3,7 @@ package PhysicsBase;
 import GameObjectBase.GameWorldObject;
 import GameObjectBase.HitBox;
 import GeneralHelpers.PointHelper;
+import PhysicsBase.Lines.LineHelper;
 import PhysicsBase.Lines.NLine;
 import PhysicsBase.Vectors.DistanceVector;
 import PhysicsBase.Vectors.VelocityVector;
@@ -63,8 +64,25 @@ final class CollisionHelper
                         new DistanceVector(v2.GetRadianRotation(), v2.GetSpeed()))));
 
 
-        return false;
+        boolean willCollide = false;
+        for (NLine line1 : o1Lines)
+        {
+            for (NLine line2 : o2Lines)
+            {
+                if(LineHelper.Intersect(line1, line2))
+                {
+                    willCollide = true;
+                    break;
+                }
+            }
+            if(willCollide) break;
+        }
 
+        if(!willCollide) return false;
+
+        //todo creating event part for handling in another module?
+
+        return true;
     }
 
     //Private Methods
