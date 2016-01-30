@@ -40,7 +40,7 @@ public final class PointHelper
         return Math.abs(p2.y - p1.y);
     }
 
-    public static Point NTranslatePoint(Point p, DistanceVector v)
+    public static Point NTranslateNewPoint(Point p, DistanceVector v)
     {
         double x2 = TranslateX(p.x, v);
 
@@ -67,6 +67,5 @@ public final class PointHelper
 
         return y2;
     }
-
 
 }

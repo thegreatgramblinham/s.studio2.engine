@@ -72,6 +72,36 @@ public abstract class BoundedObject extends Rectangle
         return _dy;
     }
 
+    public DPoint DGetLocation()
+    {
+        return new DPoint(GetDX(), GetDY());
+    }
+
+    public Point NGetLocation()
+    {
+        return new Point(x,y);
+    }
+
+    public Point GetUpperLeft()
+    {
+        return new Point(this.GetLeft(), this.GetTop());
+    }
+
+    public Point GetUpperRight()
+    {
+        return new Point(this.GetRight(), this.GetTop());
+    }
+
+    public Point GetLowerLeft()
+    {
+        return new Point(this.GetLeft(), this.GetBottom());
+    }
+
+    public Point GetLowerRight()
+    {
+        return new Point(this.GetRight(), this.GetBottom());
+    }
+
     @Override
     public double getX()
     {
@@ -97,13 +127,6 @@ public abstract class BoundedObject extends Rectangle
         this.y = (int)Math.round(y);
     }
 
-    //Public Methods
-    public Point GetCenterPoint()
-    {
-        return new Point((int)Math.round(getCenterX()),
-                (int)Math.round(getCenterY()));
-    }
-
     public void DSetLocation(double x, double y)
     {
         this.x = (int)Math.round(x);
@@ -111,11 +134,6 @@ public abstract class BoundedObject extends Rectangle
 
         this.y = (int)Math.round(y);
         SetDY(y);
-    }
-
-    public DPoint DGetLocation()
-    {
-        return new DPoint(GetDX(), GetDY());
     }
 
     public void NSetLocation(Point p)
@@ -126,10 +144,13 @@ public abstract class BoundedObject extends Rectangle
         SetDY(p.y);
     }
 
-    public Point NGetLocation()
+    //Public Methods
+    public Point GetCenterPoint()
     {
-        return new Point(x,y);
+        return new Point((int)Math.round(getCenterX()),
+                (int)Math.round(getCenterY()));
     }
+
 
     public boolean BoundsEquals(Rectangle other)
     {

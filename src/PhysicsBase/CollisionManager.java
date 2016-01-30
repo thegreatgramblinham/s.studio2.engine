@@ -37,6 +37,8 @@ public class CollisionManager
 
         if(allObjIter == null || !allObjIter.hasNext()) return collisions;
 
+        //TODO IMPLEMENT WILL COLLIDE - THIS IS THE NEXT BIG FEATURE AND IS CRITICAL
+
         while(allObjIter.hasNext())
         {
             GameWorldObject gameObj = allObjIter.next();
