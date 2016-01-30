@@ -151,13 +151,32 @@ public abstract class BoundedObject extends Rectangle
                 (int)Math.round(getCenterY()));
     }
 
-
     public boolean BoundsEquals(Rectangle other)
     {
         return this.x == other.x &&
                 this.y == other.y &&
                 this.width == other.width &&
                 this.height == other.height;
+    }
+
+    public boolean IsLeftAlignedTo(double x, double tolerance)
+    {
+        return Math.abs(this.GetLeft() - x) <= tolerance;
+    }
+
+    public boolean IsRightAlignedTo(double x, double tolerance)
+    {
+        return Math.abs(this.GetRight() - x) <= tolerance;
+    }
+
+    public boolean IsTopAlignedTo(double y, double tolerance)
+    {
+        return Math.abs(this.GetTop() - y) <= tolerance;
+    }
+
+    public boolean IsBottomAlignedTo(double y, double tolerance)
+    {
+        return Math.abs(this.GetBottom() - y) <= tolerance;
     }
 
     //Private Methods

@@ -1,6 +1,7 @@
 package PhysicsBase;
 
 import GameObjectBase.GameWorldObject;
+import GameObjectBase.enums.Side;
 import GeneralHelpers.ConversionHelper;
 import PhysicsBase.Vectors.VelocityVector;
 import SectorBase.SectorMap;
@@ -154,5 +155,29 @@ public class CollisionManager
 
         return ConversionHelper.GetRadianToCollisionDirection(
                   collider.GetVelocity().GetRadianRotation());
+    }
+
+    private void DetermineCollisionDirection(CollisionSetPair pair)
+    {
+        if(pair.object1.IsRightAlignedTo(pair.object2.GetLeft(), 2))
+        {
+            pair.object1CollisionSide = Side.Right;
+            pair.object2CollisionSide = Side.Left;
+        }
+        else if(pair.object1.IsLeftAlignedTo(pair.object2.GetRight(), 2))
+        {
+            pair.object1CollisionSide = Side.Left;
+            pair.object2CollisionSide = Side.Right;
+        }
+        else if(pair.object1.IsTopAlignedTo(pair.object2.GetBottom(), 2))
+        {
+            pair.object1CollisionSide = Side.Top;
+            pair.object2CollisionSide = Side.Bottom;
+        }
+        else if(pair.object1.IsBottomAlignedTo(pair.object2.GetTop(), 2))
+        {
+            pair.object1CollisionSide = Side.Bottom;
+            pair.object2CollisionSide = Side.Top;
+        }
     }
 }
