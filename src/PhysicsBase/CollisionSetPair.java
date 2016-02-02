@@ -41,6 +41,9 @@ public class CollisionSetPair
 
     public boolean IsOneObjectAtRest()
     {
+        if(object1 == null || object2 == null) return false;
+        if(object1.GetVelocity() == null && object2.GetVelocity() == null) return false;
+
         if((object1.GetVelocity() == null || object1.GetVelocity().GetSpeed() == 0.0D)
             && (object2.GetVelocity() != null || object2.GetVelocity().GetSpeed() > 0.0D))
             return true;
