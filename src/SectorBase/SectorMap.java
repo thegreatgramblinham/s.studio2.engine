@@ -141,6 +141,8 @@ public class SectorMap extends BoundedObject
             oldSet.remove(obj);
         }
 
+        _objectToSubSector.remove(obj);
+
         _totalObjectCount--;
     }
 
