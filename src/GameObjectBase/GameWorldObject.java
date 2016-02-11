@@ -11,9 +11,11 @@ public abstract class GameWorldObject extends GameObject
 
     //Properties
     private VelocityVector _velocity;
+    private VelocityVector _acceleration;
     private String _alias;
     private float _mass;
     private boolean _isImmobile;
+    private boolean _isAccelerating = false;
 
     //Constructors
     public GameWorldObject(Rectangle size, boolean isImmobile, float mass)
@@ -44,6 +46,8 @@ public abstract class GameWorldObject extends GameObject
         return _velocity;
     }
 
+    public VelocityVector GetAcceleration(){ return _acceleration; }
+
     public String GetAlias()
     {
         return _alias;
@@ -57,6 +61,11 @@ public abstract class GameWorldObject extends GameObject
     public float GetMass()
     {
         return _mass;
+    }
+
+    public boolean GetIsAccelerating()
+    {
+        return _isAccelerating;
     }
 
     //SetMethods
@@ -106,6 +115,8 @@ public abstract class GameWorldObject extends GameObject
     {
         if(_isImmobile) return;
 
+        if(_acceleration != v) _acceleration = v;
+
         if(_velocity == null
                 || _velocity.GetSpeed() <= 0.0)
         {
@@ -120,6 +131,13 @@ public abstract class GameWorldObject extends GameObject
         {
             _velocity.SetSpeed(_velocity.GetSpeed() + v.GetSpeed());
         }
+
+        _isAccelerating = true;
+    }
+
+    public void StopAcceleration()
+    {
+        _isAccelerating = false;
     }
 
     public void ClearVelocity()
