@@ -110,6 +110,9 @@ public class CollisionManager
                     break;
             }
 
+            e.object1.StopAcceleration();
+            e.object2.StopAcceleration();
+
             _map.UpdateObjectLocation(e.object1);
             _map.UpdateObjectLocation(e.object2);
         }

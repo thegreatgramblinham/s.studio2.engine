@@ -55,6 +55,11 @@ public class GameEngine
         _physicsManager.CyclePhysicsFrame();
     }
 
+    public void CycleCollision()
+    {
+        _physicsManager.CycleCollisionFrame();
+    }
+
     public void Start()
     {
         if(_activeSector == null) return;

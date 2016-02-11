@@ -27,5 +27,10 @@ class PhysicsManager
         _sector.UpdateVectors();
     }
 
+    public void CycleCollisionFrame()
+    {
+        _sector.HandleCollisions();
+    }
+
     //Private Methods
 }
