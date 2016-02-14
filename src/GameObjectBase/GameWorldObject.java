@@ -1,6 +1,7 @@
 package GameObjectBase;
 
 import PhysicsBase.Vectors.VelocityVector;
+import javafx.scene.image.Image;
 
 import java.awt.*;
 
@@ -10,6 +11,7 @@ public abstract class GameWorldObject extends GameObject
     private HitBox _hitBox;
 
     //Properties
+    private Image _sprite;
     private VelocityVector _velocity;
     private VelocityVector _acceleration;
     private String _alias;
@@ -68,6 +70,11 @@ public abstract class GameWorldObject extends GameObject
         return _isAccelerating;
     }
 
+    public Image GetSprite()
+    {
+        return _sprite;
+    }
+
     //SetMethods
     public void SetVelocity(VelocityVector velocity)
     {
@@ -108,6 +115,11 @@ public abstract class GameWorldObject extends GameObject
 
         super.NSetLocation(p);
         _hitBox.NSetLocation(p);
+    }
+
+    public void SetSprite(Image sprite)
+    {
+        _sprite = sprite;
     }
 
     //Public Methods
