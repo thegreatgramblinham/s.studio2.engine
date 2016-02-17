@@ -18,6 +18,7 @@ public abstract class GameWorldObject extends GameObject
     private float _mass;
     private boolean _isImmobile;
     private boolean _isAccelerating = false;
+    private boolean _canCollide = true;
 
     //Constructors
     public GameWorldObject(Rectangle size, boolean isImmobile, float mass)
@@ -25,6 +26,8 @@ public abstract class GameWorldObject extends GameObject
         super(size);
         Init(mass);
         _hitBox = new HitBox(size);
+
+        NSetLocation(size.getLocation());
         _isImmobile = isImmobile;
     }
 
@@ -34,6 +37,8 @@ public abstract class GameWorldObject extends GameObject
         Init(mass);
         _alias = alias;
         _hitBox = new HitBox(size);
+
+        NSetLocation(size.getLocation());
         _isImmobile = isImmobile;
     }
 
@@ -75,6 +80,11 @@ public abstract class GameWorldObject extends GameObject
         return _sprite;
     }
 
+    public boolean GetCanCollide()
+    {
+        return _canCollide;
+    }
+
     //SetMethods
     public void SetVelocity(VelocityVector velocity)
     {
@@ -96,6 +106,11 @@ public abstract class GameWorldObject extends GameObject
     public void SetMass(float mass)
     {
         _mass = mass;
+    }
+
+    public void SetCanCollide(boolean canCollide)
+    {
+        _canCollide = canCollide;
     }
 
     @Override
