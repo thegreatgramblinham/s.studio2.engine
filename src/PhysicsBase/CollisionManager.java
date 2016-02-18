@@ -117,6 +117,10 @@ public class CollisionManager
 
             _map.UpdateObjectLocation(e.object1);
             _map.UpdateObjectLocation(e.object2);
+
+            //Call for any special collision effects from overriding objects.
+            e.object1.OnCollide(e.object2);
+            e.object2.OnCollide(e.object1);
         }
 
         if(e.IsOneObjectAtRest())

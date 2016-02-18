@@ -172,6 +172,8 @@ public abstract class GameWorldObject extends GameObject
         _velocity = null;
     }
 
+    public void OnCollide(GameWorldObject other){}
+
     //Private Methods
     private void Init(float mass)
     {
