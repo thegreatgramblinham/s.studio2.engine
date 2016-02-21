@@ -56,7 +56,7 @@ public class SpriteAnimation
     public boolean DrawSpriteFrame(GraphicsContext gc, Point drawLocation,
                                    AnimationOrientation orientation)
     {
-        if(_animationCounter == _animationReset && !_loopAnimation)
+        if(_animationCounter >= _animationReset && !_loopAnimation)
             return false;
 
         if(_animationCounter < _animationReset)
@@ -106,9 +106,12 @@ public class SpriteAnimation
         if(newfps == 0 || oldfps == 0)
             fpsShift = 0;
         else
-            fpsShift = (newfps/oldfps);
+            fpsShift = (oldfps/newfps);
+
+        if(fpsShift == 0) return;
 
         _animationCounter *= fpsShift;
+        _animationCounter += _animationDeviation;
         _animationReset = _frameQuantity * _animationDeviation;
     }
 
