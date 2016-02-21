@@ -174,6 +174,11 @@ public abstract class GameWorldObject extends GameObject
 
     public void OnCollide(GameWorldObject other){}
 
+    public boolean IsMoving()
+    {
+        return GetVelocity() != null && GetVelocity().GetSpeed() != 0.0D;
+    }
+
     //Private Methods
     private void Init(float mass)
     {
