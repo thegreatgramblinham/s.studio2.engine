@@ -13,6 +13,7 @@ public class SpriteAnimation
     private static Image _spriteSheet;
     private static int _tileWidth;
     private static int _tileHeight;
+    private static int _frameQuantity;
 
     private static int _animationDeviation;
     private static int _animationReset;
@@ -28,7 +29,7 @@ public class SpriteAnimation
         this.loadSprite(file);
         _tileWidth = tileWidth;
         _tileHeight = tileHeight;
-        _animationDeviation = animationFps/engineFps;
+        _animationDeviation = Math.max(engineFps/animationFps, 1);
         _loopAnimation = loop;
 
         InitAnimationCounter();
@@ -67,12 +68,23 @@ public class SpriteAnimation
         return true;
     }
 
+    public boolean DrawFrameAtIndex(GraphicsContext gc, Point drawLocation, int i)
+    {
+        if(i >= _frameQuantity) return false;
+
+        gc.drawImage(_spriteSheet, 0,
+                _tileHeight * i,
+                _tileWidth, _tileHeight, drawLocation.x, drawLocation.y,
+                _tileWidth, _tileHeight);
+        return true;
+    }
+
     //Private Methods
     private void InitAnimationCounter()
     {
         _animationCounter = 0;
-        int numberOfFrames = (int)Math.ceil(_spriteSheet.getHeight()/_tileHeight);
+        _frameQuantity = (int)Math.ceil(_spriteSheet.getHeight()/_tileHeight);
 
-        _animationReset = numberOfFrames*_animationDeviation;
+        _animationReset = _frameQuantity*_animationDeviation;
     }
 }
