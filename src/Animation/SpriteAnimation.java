@@ -1,5 +1,6 @@
 package Animation;
 
+import Animation.enums.AnimationOrientation;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
 
@@ -47,7 +48,8 @@ public class SpriteAnimation
         return _spriteSheet;
     }
 
-    public boolean DrawSpriteFrame(GraphicsContext gc, Point drawLocation)
+    public boolean DrawSpriteFrame(GraphicsContext gc, Point drawLocation,
+                                   AnimationOrientation orientation)
     {
         if(_animationCounter == _animationReset && !_loopAnimation) return false;
 
@@ -60,22 +62,18 @@ public class SpriteAnimation
             _animationCounter = 0;
         }
 
-        gc.drawImage(_spriteSheet, 0,
-                _tileHeight*(_animationCounter/_animationDeviation),
-                _tileWidth, _tileHeight, drawLocation.x, drawLocation.y,
-                _tileWidth, _tileHeight);
+        this.DrawSpriteOrientation(gc, drawLocation,
+                (_animationCounter/_animationDeviation), orientation);
 
         return true;
     }
 
-    public boolean DrawFrameAtIndex(GraphicsContext gc, Point drawLocation, int i)
+    public boolean DrawFrameAtIndex(GraphicsContext gc, Point drawLocation, int i,
+                                    AnimationOrientation orientation)
     {
         if(i >= _frameQuantity) return false;
 
-        gc.drawImage(_spriteSheet, 0,
-                _tileHeight * i,
-                _tileWidth, _tileHeight, drawLocation.x, drawLocation.y,
-                _tileWidth, _tileHeight);
+        this.DrawSpriteOrientation(gc, drawLocation, i, orientation);
         return true;
     }
 
@@ -86,5 +84,38 @@ public class SpriteAnimation
         _frameQuantity = (int)Math.ceil(_spriteSheet.getHeight()/_tileHeight);
 
         _animationReset = _frameQuantity*_animationDeviation;
+    }
+
+    private void DrawSpriteOrientation(GraphicsContext gc, Point drawLocation,
+                                       int tileIndex,
+                                       AnimationOrientation orientation)
+    {
+        switch(orientation)
+        {
+            case Default:
+                gc.drawImage(_spriteSheet, 0,
+                        _tileHeight*tileIndex, _tileWidth, _tileHeight,
+                        drawLocation.x, drawLocation.y, _tileWidth, _tileHeight);
+                break;
+            case MirrorXAxis:
+                gc.drawImage(_spriteSheet, 0,
+                        _tileHeight*tileIndex, _tileWidth, _tileHeight,
+                        drawLocation.x + _tileWidth, drawLocation.y,
+                        -_tileWidth, _tileHeight);
+                break;
+            case MirrorYAxis:
+                gc.drawImage(_spriteSheet, 0,
+                        _tileHeight*tileIndex, _tileWidth, _tileHeight,
+                        drawLocation.x, drawLocation.y + _tileHeight,
+                        _tileWidth, -_tileHeight);
+                break;
+            case MirrorBothAxis:
+                gc.drawImage(_spriteSheet, 0,
+                        _tileHeight*tileIndex, _tileWidth, _tileHeight,
+                        drawLocation.x + _tileWidth,
+                        drawLocation.y + _tileHeight,
+                        -_tileWidth, -_tileHeight);
+                break;
+        }
     }
 }
