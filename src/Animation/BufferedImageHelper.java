@@ -31,7 +31,6 @@ public class BufferedImageHelper
         }
 
         spriteSheetView.setViewport(new Rectangle2D(xGrid * TILE_SIZE, yGrid * TILE_SIZE, TILE_SIZE, TILE_SIZE));
-        spriteSheetView.
         return spriteSheetView;
     }
 }
