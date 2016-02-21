@@ -10,6 +10,7 @@ import SectorBase.enums.Direction;
 import SectorBase.enums.GravityApplication;
 
 import java.awt.*;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -21,6 +22,8 @@ public class Sector extends BoundedObject
     private SectorMap _map;
     private float _gravity;
     private GravityApplication _gravityApp;
+
+    private ArrayList<HashSet<GameWorldObject>> _renderGroups;
 
     protected Sector _up;
     protected Sector _down;
@@ -39,6 +42,24 @@ public class Sector extends BoundedObject
     public Iterator<GameWorldObject> GetObjectsInSector()
     {
         return _map.GetAllObjectIterator();
+    }
+
+    public HashSet<GameWorldObject> GetRenderGroup(int group)
+    {
+        if(group >= _renderGroups.size()
+                || _renderGroups.get(group) == null)
+        {
+            return null;
+        }
+        else
+        {
+            return _renderGroups.get(group);
+        }
+    }
+
+    public int GetRenderGroupCount()
+    {
+        return _renderGroups.size();
     }
 
     //SetMethods
@@ -62,14 +83,38 @@ public class Sector extends BoundedObject
         _vectorManager.AdvancePositions();
     }
 
-    public void AddObject(GameWorldObject obj)
+    public void AddObject(GameWorldObject obj, int renderGroup)
     {
         _map.InsertObject(obj);
+
+        if(_renderGroups.size() <= renderGroup
+                || _renderGroups.get(renderGroup) == null)
+        {
+            //Add null padding until our next group index
+            for(int i = _renderGroups.size();
+                i <= renderGroup;
+                i++)
+            {
+                _renderGroups.add(i, null);
+            }
+            _renderGroups.add(renderGroup, new HashSet<GameWorldObject>());
+            _renderGroups.get(renderGroup).add(obj);
+        }
+        else
+        {
+            _renderGroups.get(renderGroup).add(obj);
+        }
     }
 
     public void RemoveObj(GameWorldObject obj)
     {
         _map.RemoveObject(obj);
+
+        for (HashSet<GameWorldObject> renderGroup : _renderGroups)
+        {
+            if(renderGroup.contains(obj))
+                renderGroup.remove(obj);
+        }
     }
 
     public Iterator<GameWorldObject> GetObjectsAtPoint(Point p)
@@ -110,5 +155,6 @@ public class Sector extends BoundedObject
         _gravity = gravity;
         _gravityApp = gravityApp;
         _vectorManager = new LocationManager(_map,_gravity,_gravityApp);
+        _renderGroups = new ArrayList<>();
     }
 }
