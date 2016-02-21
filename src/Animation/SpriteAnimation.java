@@ -68,8 +68,9 @@ public class SpriteAnimation
             _animationCounter = 0;
         }
 
-        this.DrawSpriteOrientation(gc, drawLocation,
-                (_animationCounter/_animationDeviation), orientation);
+        int index = Math.min((_animationCounter/_animationDeviation), _frameQuantity-1);
+
+        this.DrawSpriteOrientation(gc, drawLocation,index, orientation);
 
         return true;
     }
@@ -111,7 +112,6 @@ public class SpriteAnimation
         if(fpsShift == 0) return;
 
         _animationCounter *= fpsShift;
-        _animationCounter += _animationDeviation;
         _animationReset = _frameQuantity * _animationDeviation;
     }
 
