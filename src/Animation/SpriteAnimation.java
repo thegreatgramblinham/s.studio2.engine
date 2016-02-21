@@ -15,13 +15,16 @@ public class SpriteAnimation
     private static int _tileWidth;
     private static int _tileHeight;
     private static int _frameQuantity;
+    private static int _engineFps;
 
-    private static int _animationDeviation;
-    private static int _animationReset;
-
+    private int _animationDeviation;
+    private int _animationReset;
     private int _animationCounter;
 
     private boolean _loopAnimation;
+
+    //Properties
+    private int _animationFps;
 
     //Constructor
     public SpriteAnimation(String file, int tileWidth, int tileHeight,
@@ -30,10 +33,12 @@ public class SpriteAnimation
         this.loadSprite(file);
         _tileWidth = tileWidth;
         _tileHeight = tileHeight;
-        _animationDeviation = Math.max(engineFps/animationFps, 1);
+        _engineFps = engineFps;
+        _frameQuantity = (int)Math.ceil(_spriteSheet.getHeight()/_tileHeight);
+        this.SetAnimationFps(animationFps);
         _loopAnimation = loop;
 
-        InitAnimationCounter();
+        InitAnimationCounter(animationFps,0);
     }
 
     //Public Methods
@@ -51,7 +56,8 @@ public class SpriteAnimation
     public boolean DrawSpriteFrame(GraphicsContext gc, Point drawLocation,
                                    AnimationOrientation orientation)
     {
-        if(_animationCounter == _animationReset && !_loopAnimation) return false;
+        if(_animationCounter == _animationReset && !_loopAnimation)
+            return false;
 
         if(_animationCounter < _animationReset)
         {
@@ -77,13 +83,33 @@ public class SpriteAnimation
         return true;
     }
 
-    //Private Methods
-    private void InitAnimationCounter()
+    //Set Methods
+    public void SetAnimationFps(int animationFps)
     {
-        _animationCounter = 0;
-        _frameQuantity = (int)Math.ceil(_spriteSheet.getHeight()/_tileHeight);
+        int oldfps = _animationFps;
+        _animationFps = animationFps;
+        _animationDeviation = Math.max(_engineFps/_animationFps, 1);
 
-        _animationReset = _frameQuantity*_animationDeviation;
+        InitAnimationCounter(oldfps, _animationFps);
+    }
+
+    //Get Methods
+    public int GetAnimationFps()
+    {
+        return _animationFps;
+    }
+
+    //Private Methods
+    private void InitAnimationCounter(int oldfps, int newfps)
+    {
+        int fpsShift;
+        if(newfps == 0 || oldfps == 0)
+            fpsShift = 0;
+        else
+            fpsShift = (newfps/oldfps);
+
+        _animationCounter *= fpsShift;
+        _animationReset = _frameQuantity * _animationDeviation;
     }
 
     private void DrawSpriteOrientation(GraphicsContext gc, Point drawLocation,
