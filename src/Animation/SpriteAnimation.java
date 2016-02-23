@@ -11,11 +11,11 @@ public class SpriteAnimation
 {
 
     //Private Variables
-    private static Image _spriteSheet;
-    private static int _tileWidth;
-    private static int _tileHeight;
-    private static int _frameQuantity;
-    private static int _engineFps;
+    private Image _spriteSheet;
+    private int _tileWidth;
+    private int _tileHeight;
+    private int _frameQuantity;
+    private int _engineFps;
 
     private int _animationDeviation;
     private int _animationReset;
