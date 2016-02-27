@@ -185,6 +185,8 @@ public abstract class GameWorldObject extends GameObject
 
     public void OnCollide(GameWorldObject other){}
 
+    public void OnRemoval(){}
+
     public boolean IsMoving()
     {
         return GetVelocity() != null && GetVelocity().GetSpeed() != 0.0D;

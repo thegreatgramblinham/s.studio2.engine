@@ -112,6 +112,7 @@ public class GameEngine
 
         for(GameWorldObject gObj : needsDeletion)
         {
+            gObj.OnRemoval();
             _activeSector.RemoveObject(gObj);
         }
     }
