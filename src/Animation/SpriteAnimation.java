@@ -109,8 +109,6 @@ public class SpriteAnimation
         else
             fpsShift = (oldfps/newfps);
 
-        if(fpsShift == 0) return;
-
         _animationCounter *= fpsShift;
         _animationReset = _frameQuantity * _animationDeviation;
     }
