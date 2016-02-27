@@ -19,6 +19,7 @@ public abstract class GameWorldObject extends GameObject
     private boolean _isImmobile;
     private boolean _isAccelerating = false;
     private boolean _canCollide = true;
+    private boolean _needsDeletion = false;
 
     //Constructors
     public GameWorldObject(Rectangle size, boolean isImmobile, float mass)
@@ -85,6 +86,11 @@ public abstract class GameWorldObject extends GameObject
         return _canCollide;
     }
 
+    public boolean GetNeedsDeletion()
+    {
+        return _needsDeletion;
+    }
+
     //SetMethods
     public void SetVelocity(VelocityVector velocity)
     {
@@ -135,6 +141,11 @@ public abstract class GameWorldObject extends GameObject
     public void SetSprite(Image sprite)
     {
         _sprite = sprite;
+    }
+
+    public void SetNeedsDeletion(boolean needsDeletion)
+    {
+        _needsDeletion = needsDeletion;
     }
 
     //Public Methods

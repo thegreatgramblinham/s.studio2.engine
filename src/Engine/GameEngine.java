@@ -1,9 +1,11 @@
 package Engine;
 
+import GameObjectBase.GameWorldObject;
 import SectorBase.Sector;
 import SectorBase.enums.GravityApplication;
 
 import java.util.HashSet;
+import java.util.Iterator;
 
 
 public class GameEngine
@@ -53,6 +55,7 @@ public class GameEngine
     public void CycleEngine()
     {
         _physicsManager.CyclePhysicsFrame();
+        ActiveSectorGarbageCollection();
     }
 
     public void CycleCollision()
@@ -89,5 +92,19 @@ public class GameEngine
     private void Init()
     {
         _sectorSet = new HashSet<>();
+    }
+
+    private void ActiveSectorGarbageCollection()
+    {
+        Iterator<GameWorldObject> iter
+                = _activeSector.GetObjectsInSector();
+
+        while(iter.hasNext())
+        {
+            GameWorldObject gObj = iter.next();
+
+            if(gObj.GetNeedsDeletion())
+                _activeSector.RemoveObject(gObj);
+        }
     }
 }

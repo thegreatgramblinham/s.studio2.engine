@@ -106,12 +106,14 @@ public class Sector extends BoundedObject
         }
     }
 
-    public void RemoveObj(GameWorldObject obj)
+    public void RemoveObject(GameWorldObject obj)
     {
         _map.RemoveObject(obj);
 
         for (HashSet<GameWorldObject> renderGroup : _renderGroups)
         {
+            if(renderGroup == null) continue;
+
             if(renderGroup.contains(obj))
                 renderGroup.remove(obj);
         }
