@@ -96,15 +96,23 @@ public class GameEngine
 
     private void ActiveSectorGarbageCollection()
     {
+        //todo set a flag from another loop to see if this is needed.
         Iterator<GameWorldObject> iter
                 = _activeSector.GetObjectsInSector();
+
+        HashSet<GameWorldObject> needsDeletion = new HashSet<>();
 
         while(iter.hasNext())
         {
             GameWorldObject gObj = iter.next();
 
             if(gObj.GetNeedsDeletion())
-                _activeSector.RemoveObject(gObj);
+                needsDeletion.add(gObj);
+        }
+
+        for(GameWorldObject gObj : needsDeletion)
+        {
+            _activeSector.RemoveObject(gObj);
         }
     }
 }
