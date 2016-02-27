@@ -185,7 +185,10 @@ public abstract class GameWorldObject extends GameObject
 
     public void OnCollide(GameWorldObject other){}
 
-    public void OnRemoval(){}
+    public void OnRemoval()
+    {
+        System.out.println("DELETION! - <["+GetAlias()+" removed from sector]>");
+    }
 
     public boolean IsMoving()
     {

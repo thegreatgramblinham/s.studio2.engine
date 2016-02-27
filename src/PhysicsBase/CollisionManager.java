@@ -83,7 +83,7 @@ public class CollisionManager
 
         //logging the collision
         sb.append("[");
-        sb.append(e.object1.GetAlias()+" from "+e.object1CollisionSide+" &");
+        sb.append(e.object1.GetAlias()+" from "+e.object1CollisionSide+" & ");
         sb.append(e.object2.GetAlias()+" from "+e.object2CollisionSide);
         sb.append("]");
 
