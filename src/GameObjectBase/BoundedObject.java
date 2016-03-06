@@ -102,6 +102,11 @@ public abstract class BoundedObject extends Rectangle
         return new Point(this.GetRight(), this.GetBottom());
     }
 
+    public Rectangle GetBounds()
+    {
+        return new Rectangle(this);
+    }
+
     @Override
     public double getX()
     {
