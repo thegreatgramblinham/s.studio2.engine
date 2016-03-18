@@ -44,11 +44,12 @@ public class CollisionSetPair
         if(object1 == null || object2 == null) return false;
         if(object1.GetVelocity() == null && object2.GetVelocity() == null) return false;
 
+
         if((object1.GetVelocity() == null || object1.GetVelocity().GetSpeed() == 0.0D)
-            && (object2.GetVelocity() != null || object2.GetVelocity().GetSpeed() > 0.0D))
+            && (object2.GetVelocity() != null && object2.GetVelocity().GetSpeed() > 0.0D))
             return true;
         if((object2.GetVelocity() == null || object2.GetVelocity().GetSpeed() == 0.0D)
-                && (object1.GetVelocity() != null || object1.GetVelocity().GetSpeed() > 0.0D))
+                && (object1.GetVelocity() != null && object1.GetVelocity().GetSpeed() > 0.0D))
             return true;
 
         return false;

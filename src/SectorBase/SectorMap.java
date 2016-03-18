@@ -53,13 +53,19 @@ public class SectorMap extends BoundedObject
                 obj.GetHitBox().getBounds(),
                 _gridUnitSize);
 
+        int failedPlacement = 0;
         Iterator<Point> pIter = points.iterator();
-
         HashSet<IdHashSet<GameWorldObject>> subSectors = new HashSet<>();
 
         while(pIter.hasNext())
         {
             Point p = pIter.next();
+
+            if(!IsInBounds(p))
+            {
+                failedPlacement++;
+                continue;
+            }
 
             IdHashSet subSector = _map[p.x][p.y];
 
@@ -76,8 +82,15 @@ public class SectorMap extends BoundedObject
             subSectors.add(subSector);
         }
 
-        _objectToSubSector.put(obj, subSectors);
-        _totalObjectCount++;
+        if(failedPlacement == points.size())
+        {
+            obj.SetNeedsDeletion(true);
+        }
+        else
+        {
+            _objectToSubSector.put(obj, subSectors);
+            _totalObjectCount++;
+        }
     }
 
     public void UpdateObjectLocation(GameWorldObject obj)
@@ -100,12 +113,19 @@ public class SectorMap extends BoundedObject
             oldSet.remove(obj);
         }
 
+        int failedPlacement = 0;
         Iterator<Point> pIter = points.iterator();
         HashSet<IdHashSet<GameWorldObject>> subSectors = new HashSet<>();
 
         while(pIter.hasNext())
         {
             Point p = pIter.next();
+
+            if(!IsInBounds(p))
+            {
+                failedPlacement++;
+                continue;
+            }
 
             //add to new location
             IdHashSet newSector = _map[p.x][p.y];
@@ -123,7 +143,15 @@ public class SectorMap extends BoundedObject
             subSectors.add(newSector);
         }
 
-        _objectToSubSector.put(obj, subSectors);
+        if(failedPlacement == points.size())
+        {
+            obj.SetNeedsDeletion(true);
+        }
+        else
+        {
+            _objectToSubSector.put(obj, subSectors);
+        }
+
     }
 
     public void RemoveObject(GameWorldObject obj)
@@ -204,5 +232,10 @@ public class SectorMap extends BoundedObject
 
         _map = new IdHashSet[_xUnits][_yUnits];
         _objectToSubSector = new HashMap<>();
+    }
+
+    private boolean IsInBounds(Point p)
+    {
+        return p.x < _xUnits && p.y < _yUnits && p.x > -1 && p.y > -1;
     }
 }
