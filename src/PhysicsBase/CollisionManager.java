@@ -177,11 +177,11 @@ public class CollisionManager
 //        if(pair.AreBothObjectsAtRest())
 //            return;
 
-        if(pair.IsOneObjectAtRest())
-        {
-            DetermineCollisionWithRestingObject(pair);
-            return;
-        }
+//        if(pair.IsOneObjectAtRest())
+//        {
+//            DetermineCollisionWithRestingObject(pair);
+//            return;
+//        }
 
         //todo instead of using alignment here we can just compare the locations of
         //two objects center points
@@ -192,13 +192,40 @@ public class CollisionManager
         int run = PointHelper.SlopeRunOf(pair.object1.GetCenterPoint(),
                 pair.object2.GetCenterPoint());
 
-        if(rise == run)
+        if(pair.object1.GetCenterPoint().x > pair.object2.GetLeft()
+                && pair.object1.GetCenterPoint().x < pair.object2.GetRight())
         {
-            //special condition where we inspect center point can contain
+            //y collision
+            if (rise > 0)
+            {
+                pair.object1CollisionSide = Side.Bottom;
+                pair.object2CollisionSide = Side.Top;
+            } else
+            {
+                pair.object1CollisionSide = Side.Top;
+                pair.object2CollisionSide = Side.Bottom;
+            }
+        }
+        else if(pair.object1.GetCenterPoint().y < pair.object2.GetBottom()
+                && pair.object1.GetCenterPoint().y > pair.object2.GetTop())
+        {
+            //x collision
+            if (run > 0)
+            {
+                pair.object1CollisionSide = Side.Right;
+                pair.object2CollisionSide = Side.Left;
+            } else
+            {
+                pair.object1CollisionSide = Side.Left;
+                pair.object2CollisionSide = Side.Right;
+            }
         }
         else
         {
-            if (run > rise)
+            double adjustedRun = (Math.abs(run)- pair.object1.GetHalfWidth() - pair.object2.GetHalfWidth());
+            double adjustedRise = (Math.abs(rise) - pair.object1.GetHalfHeight() - pair.object2.GetHalfHeight());
+
+            if (Math.abs(adjustedRun) < Math.abs(adjustedRise))
             {
                 //collision on the x axis
                 if (run > 0)
