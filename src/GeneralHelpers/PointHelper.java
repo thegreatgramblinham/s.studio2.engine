@@ -22,12 +22,24 @@ public final class PointHelper
 
     public static double SlopeOf(Point p1, Point p2)
     {
-        int a = p2.x - p1.x;
-        int b = p2.y - p2.y;
+        int a = SlopeRunOf(p1,p2);
+        int b = SlopeRiseOf(p1,p2);
 
         double slp = (double)b / (double)a;
 
         return slp;
+    }
+
+    public static int SlopeRiseOf(Point p1, Point p2)
+    {
+        int b = p2.y - p1.y;
+        return b;
+    }
+
+    public static int SlopeRunOf(Point p1, Point p2)
+    {
+        int a = p2.x - p1.x;
+        return a;
     }
 
     public static double HorizontalDistanceBetween(Point p1, Point p2)
