@@ -40,8 +40,6 @@ public class CollisionManager
 
         if(allObjIter == null || !allObjIter.hasNext()) return collisions;
 
-        //TODO IMPLEMENT WILL COLLIDE - THIS IS THE NEXT BIG FEATURE AND IS CRITICAL
-
         while(allObjIter.hasNext())
         {
             GameWorldObject gameObj = allObjIter.next();
@@ -115,35 +113,15 @@ public class CollisionManager
 
         if(e.activelyColliding)
         {
-
-            VelocityVector v1 = e.object1.GetVelocity();
-            VelocityVector v2 = e.object2.GetVelocity();
-            //currently using object 2 as the relative object.
-//            switch (e.object1CollisionSide)
-//            {
-//                case Top:
-//                    e.object1.NSetLocation(new Point(e.object1.x, e.object2.GetBottom() + 1));
-//                    //e.object2.NSetLocation(new Point(e.object2.x, e.object1.GetTop() - (int)e.object1.getHeight() - 1));
-//                    break;
-//                case Bottom:
-//                    e.object1.NSetLocation(new Point(e.object1.x, e.object2.GetTop() - (int)e.object1.getHeight() - 1));
-//                    //e.object2.NSetLocation(new Point(e.object2.x, e.object1.GetBottom() + 1));
-//                    break;
-//                case Left:
-//                    e.object1.NSetLocation(new Point(e.object2.GetRight() + 1, e.object1.y));
-//                    //e.object2.NSetLocation(new Point(e.object1.GetLeft() - (int)e.object1.getWidth()- 1, e.object2.y));
-//                    break;
-//                case Right:
-//                    e.object1.NSetLocation(new Point(e.object2.GetLeft() - (int)e.object1.getWidth() - 1, e.object1.y));
-//                    //e.object2.NSetLocation(new Point(e.object1.GetRight() + 1, e.object2.y));
-//                    break;
-//            }
+//            VelocityVector v1 = e.object1.GetVelocity();
+//            VelocityVector v2 = e.object2.GetVelocity();
 //
+//            //currently using object 2 as the relative object.
+//            //todo transfer of motion with two moving objects
 //            e.object1.StopAcceleration();
 //            e.object2.StopAcceleration();
 //            if(v1 != null && v2 != null)
 //            {
-//
 //                VelocityVector test = VectorHelper.AddVectors(v1,v2);
 //                test.SetRadianRotation(test.GetRadianRotation() + Math.PI);
 //
@@ -174,18 +152,6 @@ public class CollisionManager
     //Private Methods
     private void DetermineCollisionDirection(CollisionSetPair pair)
     {
-//        if(pair.AreBothObjectsAtRest())
-//            return;
-
-//        if(pair.IsOneObjectAtRest())
-//        {
-//            DetermineCollisionWithRestingObject(pair);
-//            return;
-//        }
-
-        //todo instead of using alignment here we can just compare the locations of
-        //two objects center points
-
         //With respect to object 2's center point
         int rise = PointHelper.SlopeRiseOf(pair.object1.GetCenterPoint(),
                 pair.object2.GetCenterPoint());
@@ -195,30 +161,12 @@ public class CollisionManager
         if(pair.object1.GetCenterPoint().x > pair.object2.GetLeft()
                 && pair.object1.GetCenterPoint().x < pair.object2.GetRight())
         {
-            //y collision
-            if (rise > 0)
-            {
-                pair.object1CollisionSide = Side.Bottom;
-                pair.object2CollisionSide = Side.Top;
-            } else
-            {
-                pair.object1CollisionSide = Side.Top;
-                pair.object2CollisionSide = Side.Bottom;
-            }
+            CollisionOnYAxis(pair, rise);
         }
         else if(pair.object1.GetCenterPoint().y < pair.object2.GetBottom()
                 && pair.object1.GetCenterPoint().y > pair.object2.GetTop())
         {
-            //x collision
-            if (run > 0)
-            {
-                pair.object1CollisionSide = Side.Right;
-                pair.object2CollisionSide = Side.Left;
-            } else
-            {
-                pair.object1CollisionSide = Side.Left;
-                pair.object2CollisionSide = Side.Right;
-            }
+            CollisionOnXAxis(pair, run);
         }
         else
         {
@@ -227,73 +175,42 @@ public class CollisionManager
 
             if (Math.abs(adjustedRun) < Math.abs(adjustedRise))
             {
-                //collision on the x axis
-                if (run > 0)
-                {
-                    pair.object1CollisionSide = Side.Right;
-                    pair.object2CollisionSide = Side.Left;
-                } else
-                {
-                    pair.object1CollisionSide = Side.Left;
-                    pair.object2CollisionSide = Side.Right;
-                }
+                CollisionOnXAxis(pair, run);
             } else //rise > run
             {
-                //collision on the y axis
-                if (rise > 0)
-                {
-                    pair.object1CollisionSide = Side.Bottom;
-                    pair.object2CollisionSide = Side.Top;
-                } else
-                {
-                    pair.object1CollisionSide = Side.Top;
-                    pair.object2CollisionSide = Side.Bottom;
-                }
+                CollisionOnYAxis(pair, rise);
             }
         }
-//        if(pair.object1.IsRightAlignedTo(pair.object2.GetLeft(), 10))
-//        {
-//            pair.object1CollisionSide = Side.Right;
-//            pair.object2CollisionSide = Side.Left;
-//        }
-//        else if(pair.object1.IsLeftAlignedTo(pair.object2.GetRight(), 10))
-//        {
-//            pair.object1CollisionSide = Side.Left;
-//            pair.object2CollisionSide = Side.Right;
-//        }
-//        else if(pair.object1.IsTopAlignedTo(pair.object2.GetBottom(), 10))
-//        {
-//            pair.object1CollisionSide = Side.Top;
-//            pair.object2CollisionSide = Side.Bottom;
-//        }
-//        else if(pair.object1.IsBottomAlignedTo(pair.object2.GetTop(), 10))
-//        {
-//            pair.object1CollisionSide = Side.Bottom;
-//            pair.object2CollisionSide = Side.Top;
-//        }
 
         if(pair.object1CollisionSide == null || pair.object2CollisionSide == null)
             pair.activelyColliding = false;
     }
 
-    private void DetermineCollisionWithRestingObject(CollisionSetPair pair)
+    private void CollisionOnXAxis(CollisionSetPair pair, double run)
     {
-        VelocityVector v1 = pair.object1.GetVelocity();
-        VelocityVector v2 = pair.object2.GetVelocity();
-
-        if(v1 == null || v1.GetSpeed() == 0.0D)
+        //collision on the x axis
+        if (run > 0)
         {
-            pair.object2CollisionSide = ConversionHelper.GetRadianToCollisionSide(
-                    v2.GetRadianRotation());
-            pair.object1CollisionSide = ConversionHelper.GetOppositeSide(
-                    pair.object2CollisionSide);
+            pair.object1CollisionSide = Side.Right;
+            pair.object2CollisionSide = Side.Left;
+        } else
+        {
+            pair.object1CollisionSide = Side.Left;
+            pair.object2CollisionSide = Side.Right;
         }
-        else
+    }
+
+    private void CollisionOnYAxis(CollisionSetPair pair, double rise)
+    {
+        //collision on the y axis
+        if (rise > 0)
         {
-            pair.object1CollisionSide = ConversionHelper.GetRadianToCollisionSide(
-                    v1.GetRadianRotation());
-            pair.object2CollisionSide = ConversionHelper.GetOppositeSide(
-                    pair.object1CollisionSide);
+            pair.object1CollisionSide = Side.Bottom;
+            pair.object2CollisionSide = Side.Top;
+        } else
+        {
+            pair.object1CollisionSide = Side.Top;
+            pair.object2CollisionSide = Side.Bottom;
         }
     }
 }
