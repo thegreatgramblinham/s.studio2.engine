@@ -2,9 +2,8 @@ package SectorBase;
 
 import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
-import PhysicsBase.CollisionEvent;
 import PhysicsBase.CollisionManager;
-import PhysicsBase.CollisionSetPair;
+import PhysicsBase.CollisionCollections.CollisionSetPair;
 import PhysicsBase.LocationManager;
 import SectorBase.enums.Direction;
 import SectorBase.enums.GravityApplication;

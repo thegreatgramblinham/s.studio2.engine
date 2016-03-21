@@ -2,15 +2,12 @@ package PhysicsBase;
 
 import GameObjectBase.GameWorldObject;
 import GameObjectBase.enums.Side;
-import GeneralHelpers.ConversionHelper;
 import GeneralHelpers.PointHelper;
-import GeneralHelpers.VectorHelper;
+import PhysicsBase.CollisionCollections.CollisionSetPair;
 import PhysicsBase.Vectors.VelocityVector;
 import SectorBase.SectorMap;
-import SectorBase.enums.Direction;
 
 import java.awt.*;
-import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 

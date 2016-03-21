@@ -1,4 +1,4 @@
-package PhysicsBase;
+package PhysicsBase.CollisionCollections;
 
 import GameObjectBase.GameWorldObject;
 import GameObjectBase.enums.Side;

@@ -2,7 +2,7 @@ package EngineTesting.PhysicsBase;
 
 import EngineTesting.GameObjectBase.DummyGameObject;
 import PhysicsBase.CollisionManager;
-import PhysicsBase.CollisionSetPair;
+import PhysicsBase.CollisionCollections.CollisionSetPair;
 import SectorBase.SectorMap;
 import org.junit.Assert;
 import org.junit.Test;
