@@ -2,7 +2,7 @@ package EngineTesting.PhysicsBase;
 
 import EngineTesting.GameObjectBase.DummyGameObject;
 import PhysicsBase.CollisionManager;
-import PhysicsBase.CollisionCollections.CollisionSetPair;
+import PhysicsBase.CollisionCollections.ObjectCollisionPair;
 import SectorBase.SectorMap;
 import org.junit.Assert;
 import org.junit.Test;
@@ -58,16 +58,16 @@ public class CollisionManagerTest
         obj2.NSetLocation(new Point(14, 14));
         _map.UpdateObjectLocation(obj2);
 
-        HashSet<CollisionSetPair> collisions = _manager.CheckCollisions();
+        HashSet<ObjectCollisionPair> collisions = _manager.CheckCollisions();
 
         Assert.assertTrue(!collisions.isEmpty());
         Assert.assertTrue(collisions.size() == 1);
 
-        Iterator<CollisionSetPair> collIter = collisions.iterator();
+        Iterator<ObjectCollisionPair> collIter = collisions.iterator();
 
         while(collIter.hasNext())
         {
-            CollisionSetPair e = collIter.next();
+            ObjectCollisionPair e = collIter.next();
 
             if(e.object1 == obj1)
             {
@@ -96,16 +96,16 @@ public class CollisionManagerTest
         obj2.NSetLocation(new Point(13, 13));
         _map.UpdateObjectLocation(obj2);
 
-        HashSet<CollisionSetPair> collisions = _manager.CheckCollisions();
+        HashSet<ObjectCollisionPair> collisions = _manager.CheckCollisions();
 
         Assert.assertTrue(!collisions.isEmpty());
         Assert.assertTrue(collisions.size() == 1);
 
-        Iterator<CollisionSetPair> collIter = collisions.iterator();
+        Iterator<ObjectCollisionPair> collIter = collisions.iterator();
 
         while(collIter.hasNext())
         {
-            CollisionSetPair e = collIter.next();
+            ObjectCollisionPair e = collIter.next();
 
             if(e.object1 == obj1)
             {

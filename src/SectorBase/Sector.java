@@ -3,7 +3,7 @@ package SectorBase;
 import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
 import PhysicsBase.CollisionManager;
-import PhysicsBase.CollisionCollections.CollisionSetPair;
+import PhysicsBase.CollisionCollections.ObjectCollisionPair;
 import PhysicsBase.LocationManager;
 import SectorBase.enums.Direction;
 import SectorBase.enums.GravityApplication;
@@ -66,12 +66,12 @@ public class Sector extends BoundedObject
     //Public Methods
     public void HandleCollisions()
     {
-        HashSet<CollisionSetPair> collisons
+        HashSet<ObjectCollisionPair> collisons
                 = _collisionManager.CheckCollisions();
 
         if(collisons.isEmpty()) return;
 
-        for (CollisionSetPair currEvent : collisons )
+        for (ObjectCollisionPair currEvent : collisons )
         {
             _collisionManager.HandleCollision(currEvent);
         }

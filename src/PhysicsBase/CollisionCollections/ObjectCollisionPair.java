@@ -5,7 +5,7 @@ import GameObjectBase.enums.Side;
 
 import java.util.UUID;
 
-public class CollisionSetPair
+public class ObjectCollisionPair
 {
     //Public Variables
     public GameWorldObject object1;
@@ -17,8 +17,8 @@ public class CollisionSetPair
     public boolean activelyColliding;
 
     //Constructor
-    public CollisionSetPair(GameWorldObject obj1, GameWorldObject obj2,
-                            Side obj1CollisionSide, Side obj2CollisionSide)
+    public ObjectCollisionPair(GameWorldObject obj1, GameWorldObject obj2,
+                               Side obj1CollisionSide, Side obj2CollisionSide)
     {
         object1 = obj1;
         object2 = obj2;
@@ -61,7 +61,7 @@ public class CollisionSetPair
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
-        CollisionSetPair that = (CollisionSetPair) o;
+        ObjectCollisionPair that = (ObjectCollisionPair) o;
 
         if(this.object1 == that.object1 && this.object2 == that.object2) return true;
         if(this.object2 == that.object1 && this.object1 == that.object2) return true;

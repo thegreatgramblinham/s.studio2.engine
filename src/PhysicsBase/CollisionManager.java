@@ -3,7 +3,7 @@ package PhysicsBase;
 import GameObjectBase.GameWorldObject;
 import GameObjectBase.enums.Side;
 import GeneralHelpers.PointHelper;
-import PhysicsBase.CollisionCollections.CollisionSetPair;
+import PhysicsBase.CollisionCollections.ObjectCollisionPair;
 import PhysicsBase.Vectors.VelocityVector;
 import SectorBase.SectorMap;
 
@@ -29,9 +29,9 @@ public class CollisionManager
     //SetMethods
 
     //Public Methods
-    public HashSet<CollisionSetPair> CheckCollisions()
+    public HashSet<ObjectCollisionPair> CheckCollisions()
     {
-        HashSet<CollisionSetPair> collisions = new HashSet<>();
+        HashSet<ObjectCollisionPair> collisions = new HashSet<>();
 
         Iterator<GameWorldObject> allObjIter = _map.GetAllObjectIterator();
 
@@ -48,7 +48,7 @@ public class CollisionManager
             Iterator<GameWorldObject> sectorObjs
                     = _map.GetObjectsAtSubSectors(gameObj.GetHitBox());
 
-            CollisionSetPair e = null;
+            ObjectCollisionPair e = null;
 
             while (sectorObjs.hasNext())
             {
@@ -62,7 +62,7 @@ public class CollisionManager
 
                 if(!collisionEvent) continue;
 
-                e = new CollisionSetPair(gameObj, sectorGameObj, null, null);
+                e = new ObjectCollisionPair(gameObj, sectorGameObj, null, null);
                 DetermineCollisionDirection(e);
 
                 if(!collisions.contains(e))
@@ -74,7 +74,7 @@ public class CollisionManager
         return collisions;
     }
 
-    public void HandleCollision(CollisionSetPair e)
+    public void HandleCollision(ObjectCollisionPair e)
     {
         StringBuilder sb = new StringBuilder();
 
@@ -147,7 +147,7 @@ public class CollisionManager
     }
 
     //Private Methods
-    private void DetermineCollisionDirection(CollisionSetPair pair)
+    private void DetermineCollisionDirection(ObjectCollisionPair pair)
     {
         //With respect to object 2's center point
         int rise = PointHelper.SlopeRiseOf(pair.object1.GetCenterPoint(),
@@ -167,23 +167,22 @@ public class CollisionManager
         }
         else
         {
-            double adjustedRun = (Math.abs(run)- pair.object1.GetHalfWidth() - pair.object2.GetHalfWidth());
-            double adjustedRise = (Math.abs(rise) - pair.object1.GetHalfHeight() - pair.object2.GetHalfHeight());
+            double adjustedRun = (Math.abs(run) - pair.object1.GetHalfWidth()
+                    - pair.object2.GetHalfWidth());
+            double adjustedRise = (Math.abs(rise) - pair.object1.GetHalfHeight()
+                    - pair.object2.GetHalfHeight());
 
             if (Math.abs(adjustedRun) < Math.abs(adjustedRise))
-            {
                 CollisionOnXAxis(pair, run);
-            } else //rise > run
-            {
+            else //rise > run
                 CollisionOnYAxis(pair, rise);
-            }
         }
 
         if(pair.object1CollisionSide == null || pair.object2CollisionSide == null)
             pair.activelyColliding = false;
     }
 
-    private void CollisionOnXAxis(CollisionSetPair pair, double run)
+    private void CollisionOnXAxis(ObjectCollisionPair pair, double run)
     {
         //collision on the x axis
         if (run > 0)
@@ -197,7 +196,7 @@ public class CollisionManager
         }
     }
 
-    private void CollisionOnYAxis(CollisionSetPair pair, double rise)
+    private void CollisionOnYAxis(ObjectCollisionPair pair, double rise)
     {
         //collision on the y axis
         if (rise > 0)
