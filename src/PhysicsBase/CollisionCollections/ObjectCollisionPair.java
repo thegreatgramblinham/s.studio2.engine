@@ -63,9 +63,10 @@ public class ObjectCollisionPair
 
         ObjectCollisionPair that = (ObjectCollisionPair) o;
 
+        //As long as the object contains the same two groups they're equal.
+        //They can be assigned to either variable.
         if(this.object1 == that.object1 && this.object2 == that.object2) return true;
         if(this.object2 == that.object1 && this.object1 == that.object2) return true;
-        if(this.object1 == that.object2 && this.object2 == that.object1) return true;
 
         return false;
     }

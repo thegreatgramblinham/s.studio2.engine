@@ -23,6 +23,23 @@ public class CollisionGroup
         return _id;
     }
 
+    //Public Methods
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        CollisionGroup that = (CollisionGroup) o;
+
+        return _id.equals(that._id);
+
+    }
+
+    @Override
+    public int hashCode() {
+        return _id.hashCode();
+    }
+
     //Private Methods
     private void Init()
     {
