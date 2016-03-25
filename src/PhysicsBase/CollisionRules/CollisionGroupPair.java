@@ -10,8 +10,7 @@ public class CollisionGroupPair
     public CollisionGroup group2;
 
     //Constructor
-    public CollisionGroupPair(CollisionGroup grp1, CollisionGroup grp2,
-                              CollisionRule rule)
+    public CollisionGroupPair(CollisionGroup grp1, CollisionGroup grp2)
     {
         group1 = grp1;
         group2 = grp2;

@@ -23,6 +23,19 @@ public class CollisionRuleManager
     }
 
     //Get Methods
+    public CollisionRule GetRule(CollisionGroupPair pair)
+    {
+        return _groupToRules.containsKey(pair)
+                ? _groupToRules.get(pair)
+                : null;
+    }
+
+    public CollisionGroup GetGroup(GameWorldObject gObj)
+    {
+        return  _objectToGroup.containsKey(gObj)
+                ? _objectToGroup.get(gObj)
+                : null;
+    }
 
     //Set Methods
 
@@ -30,13 +43,6 @@ public class CollisionRuleManager
     public void AddRule(CollisionGroupPair pair, CollisionRule rule)
     {
         _groupToRules.put(pair, rule);
-    }
-
-    public CollisionRule GetRule(CollisionGroupPair pair)
-    {
-        return _groupToRules.containsKey(pair)
-                ? _groupToRules.get(pair)
-                : null;
     }
 
     public void AddObject(GameWorldObject gObj, String groupName)

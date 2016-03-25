@@ -4,7 +4,9 @@ import GameObjectBase.GameWorldObject;
 import GameObjectBase.enums.Side;
 import GeneralHelpers.PointHelper;
 import PhysicsBase.CollisionCollections.ObjectCollisionPair;
+import PhysicsBase.CollisionRules.CollisionGroupPair;
 import PhysicsBase.CollisionRules.CollisionRuleManager;
+import PhysicsBase.CollisionRules.enums.CollisionRule;
 import PhysicsBase.Vectors.VelocityVector;
 import SectorBase.SectorMap;
 
@@ -57,9 +59,7 @@ public class CollisionManager
             {
                 GameWorldObject sectorGameObj = sectorObjs.next();
 
-                //No need to collide with self
-                if(sectorGameObj == gameObj) continue;
-                if(sectorGameObj.GetCanCollide() == false) continue;
+                if(CheckAutoFailCollisionCases(gameObj, sectorGameObj)) continue;
 
                 boolean collisionEvent = CollisionHelper.Collision(gameObj, sectorGameObj);
 
@@ -211,5 +211,27 @@ public class CollisionManager
             pair.object1CollisionSide = Side.Top;
             pair.object2CollisionSide = Side.Bottom;
         }
+    }
+
+    private boolean CheckAutoFailCollisionCases(GameWorldObject gObj,
+                                                GameWorldObject sectorObj)
+    {
+        //No need to collide with self
+        if(sectorObj == gObj) return true;
+        if(sectorObj.GetCanCollide() == false) return true;
+
+        CollisionRule rule = _ruleManager.GetRule(
+                new CollisionGroupPair(
+                        _ruleManager.GetGroup(gObj),
+                        _ruleManager.GetGroup(sectorObj)));
+
+        if(rule != null)
+            switch(rule)
+            {
+                case CannotCollideWith:
+                   return true;
+            }
+
+        return false;
     }
 }
