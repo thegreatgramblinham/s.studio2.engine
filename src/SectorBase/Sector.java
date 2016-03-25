@@ -2,8 +2,10 @@ package SectorBase;
 
 import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
+import PhysicsBase.CollisionCollections.CollisionGroup;
 import PhysicsBase.CollisionManager;
 import PhysicsBase.CollisionCollections.ObjectCollisionPair;
+import PhysicsBase.CollisionRules.CollisionRuleManager;
 import PhysicsBase.LocationManager;
 import SectorBase.enums.Direction;
 import SectorBase.enums.GravityApplication;
@@ -18,6 +20,7 @@ public class Sector extends BoundedObject
     //Private Fields
     private CollisionManager _collisionManager;
     private LocationManager _vectorManager;
+    private CollisionRuleManager _collisionRuleManager;
     private SectorMap _map;
     private float _gravity;
     private GravityApplication _gravityApp;
@@ -82,7 +85,8 @@ public class Sector extends BoundedObject
         _vectorManager.AdvancePositions();
     }
 
-    public void AddObject(GameWorldObject obj, int renderGroup)
+    public void AddObject(GameWorldObject obj, int renderGroup,
+                          String collisionGroupName)
     {
         _map.InsertObject(obj);
 
@@ -103,6 +107,8 @@ public class Sector extends BoundedObject
         {
             _renderGroups.get(renderGroup).add(obj);
         }
+
+        _collisionRuleManager.AddObject(obj, collisionGroupName);
     }
 
     public void RemoveObject(GameWorldObject obj)
@@ -116,6 +122,8 @@ public class Sector extends BoundedObject
             if(renderGroup.contains(obj))
                 renderGroup.remove(obj);
         }
+
+        _collisionRuleManager.RemoveObject(obj);
     }
 
     public Iterator<GameWorldObject> GetObjectsAtPoint(Point p)
@@ -152,7 +160,8 @@ public class Sector extends BoundedObject
                       GravityApplication gravityApp)
     {
         _map = new SectorMap(width, height, gridUnitSize);
-        _collisionManager = new CollisionManager(_map);
+        _collisionRuleManager = new CollisionRuleManager();
+        _collisionManager = new CollisionManager(_map, _collisionRuleManager);
         _gravity = gravity;
         _gravityApp = gravityApp;
         _vectorManager = new LocationManager(_map,_gravity,_gravityApp);

@@ -4,6 +4,7 @@ import GameObjectBase.GameWorldObject;
 import GameObjectBase.enums.Side;
 import GeneralHelpers.PointHelper;
 import PhysicsBase.CollisionCollections.ObjectCollisionPair;
+import PhysicsBase.CollisionRules.CollisionRuleManager;
 import PhysicsBase.Vectors.VelocityVector;
 import SectorBase.SectorMap;
 
@@ -15,13 +16,15 @@ public class CollisionManager
 {
     //Private Variables
     private SectorMap _map;
+    private CollisionRuleManager _ruleManager;
 
     //Properties
 
     //Constructor
-    public CollisionManager(SectorMap map)
+    public CollisionManager(SectorMap map, CollisionRuleManager ruleManager)
     {
         _map = map;
+        _ruleManager = ruleManager;
     }
 
     //GetMethods

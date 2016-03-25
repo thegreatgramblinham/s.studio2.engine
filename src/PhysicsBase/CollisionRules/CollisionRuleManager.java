@@ -12,6 +12,7 @@ public class CollisionRuleManager
     //Private Fields
     private HashMap<CollisionGroupPair, CollisionRule> _groupToRules;
     private HashMap<GameWorldObject, CollisionGroup> _objectToGroup;
+    private HashMap<String, CollisionGroup> _groupNameToGroup;
 
     //Variables
 
@@ -38,9 +39,17 @@ public class CollisionRuleManager
                 : null;
     }
 
-    public void AddObject(GameWorldObject gObj, CollisionGroup group)
+    public void AddObject(GameWorldObject gObj, String groupName)
     {
+        CollisionGroup group;
+
+        if(_groupNameToGroup.containsKey(groupName))
+            group = _groupNameToGroup.get(groupName);
+        else
+            group = new CollisionGroup(groupName);
+
         group.Add(gObj);
+
         if(_objectToGroup.containsKey(gObj))
         {
             _objectToGroup.remove(gObj);
@@ -66,6 +75,7 @@ public class CollisionRuleManager
     {
         _groupToRules = new HashMap<>();
         _objectToGroup = new HashMap<>();
+        _groupNameToGroup = new HashMap<>();
     }
 
 }

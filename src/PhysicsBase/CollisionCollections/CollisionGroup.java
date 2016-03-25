@@ -25,6 +25,8 @@ public class CollisionGroup
         return _id;
     }
 
+    public String GetName(){ return _name; }
+
     //Public Methods
     public void Add(GameWorldObject gObj)
     {
@@ -42,17 +44,19 @@ public class CollisionGroup
     }
 
     @Override
-    public boolean equals(Object o) {
+    public boolean equals(Object o)
+    {
         if (this == o) return true;
         if (o == null || getClass() != o.getClass()) return false;
 
         CollisionGroup that = (CollisionGroup) o;
 
-        return _id.equals(that._id);
+        return _id.equals(that._id) && _name.equals(that._name);
     }
 
     @Override
-    public int hashCode() {
+    public int hashCode()
+    {
         return _id.hashCode();
     }
 

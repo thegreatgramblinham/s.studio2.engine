@@ -3,6 +3,7 @@ package EngineTesting.PhysicsBase;
 import EngineTesting.GameObjectBase.DummyGameObject;
 import PhysicsBase.CollisionManager;
 import PhysicsBase.CollisionCollections.ObjectCollisionPair;
+import PhysicsBase.CollisionRules.CollisionRuleManager;
 import SectorBase.SectorMap;
 import org.junit.Assert;
 import org.junit.Test;
@@ -21,7 +22,7 @@ public class CollisionManagerTest
     public void setUp() throws Exception
     {
         _map = new SectorMap(500, 500, 20);
-        _manager = new CollisionManager(_map);
+        _manager = new CollisionManager(_map, new CollisionRuleManager());
 
         obj1 = new DummyGameObject(new Rectangle(5, 5, 3, 3), false, 1);
         obj2 = new DummyGameObject(new Rectangle(25, 25, 3, 3), false, 1);
