@@ -41,7 +41,7 @@ public class CollisionGroupPair
     public int hashCode()
     {
         int result = group1 != null ? group1.hashCode() : 0;
-        result = 31 * result + (group2 != null ? group2.hashCode() : 0);
+        result = result + (group2 != null ? group2.hashCode() : 0);
         return result;
     }
 
