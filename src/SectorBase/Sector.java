@@ -5,13 +5,17 @@ import GameObjectBase.GameWorldObject;
 import PhysicsBase.CollisionCollections.CollisionGroup;
 import PhysicsBase.CollisionManager;
 import PhysicsBase.CollisionCollections.ObjectCollisionPair;
+import PhysicsBase.CollisionRules.CollisionGroupNamePair;
+import PhysicsBase.CollisionRules.CollisionGroupPair;
 import PhysicsBase.CollisionRules.CollisionRuleManager;
+import PhysicsBase.CollisionRules.enums.CollisionRule;
 import PhysicsBase.LocationManager;
 import SectorBase.enums.Direction;
 import SectorBase.enums.GravityApplication;
 
 import java.awt.*;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -34,10 +38,11 @@ public class Sector extends BoundedObject
 
     //Constructor
     public Sector(int width, int height, int gridUnitSize,
-                  float gravity, GravityApplication gravityApp)
+                  float gravity, GravityApplication gravityApp,
+                  HashMap<CollisionGroupNamePair, CollisionRule> collisionRules)
     {
         super(width, height);
-        Init(gridUnitSize, gravity, gravityApp);
+        Init(gridUnitSize, gravity, gravityApp, collisionRules);
     }
 
     //GetMethods
@@ -157,10 +162,11 @@ public class Sector extends BoundedObject
     //Private Methods
     private void Init(int gridUnitSize,
                       float gravity,
-                      GravityApplication gravityApp)
+                      GravityApplication gravityApp,
+                      HashMap<CollisionGroupNamePair, CollisionRule> collisionRules)
     {
         _map = new SectorMap(width, height, gridUnitSize);
-        _collisionRuleManager = new CollisionRuleManager();
+        _collisionRuleManager = new CollisionRuleManager(collisionRules);
         _collisionManager = new CollisionManager(_map, _collisionRuleManager);
         _gravity = gravity;
         _gravityApp = gravityApp;

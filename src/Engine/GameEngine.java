@@ -1,9 +1,13 @@
 package Engine;
 
 import GameObjectBase.GameWorldObject;
+import PhysicsBase.CollisionRules.CollisionGroupNamePair;
+import PhysicsBase.CollisionRules.CollisionGroupPair;
+import PhysicsBase.CollisionRules.enums.CollisionRule;
 import SectorBase.Sector;
 import SectorBase.enums.GravityApplication;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Iterator;
 
@@ -12,6 +16,8 @@ public class GameEngine
 {
     //Private Variables
     private HashSet<Sector> _sectorSet;
+
+    private HashMap<CollisionGroupNamePair, CollisionRule> _collisionRules;
 
     private Sector _activeSector;
     private PhysicsManager _physicsManager;
@@ -80,7 +86,8 @@ public class GameEngine
     public Sector CreateSector(int width, int height, int gridUnitSize,
                                float gravity, GravityApplication gravityApp)
     {
-        Sector sec = new Sector(width, height, gridUnitSize, gravity, gravityApp);
+        Sector sec = new Sector(width, height, gridUnitSize,
+                gravity, gravityApp, _collisionRules);
         _sectorSet.add(sec);
 
         if(_activeSector == null) _activeSector = sec;
@@ -88,10 +95,16 @@ public class GameEngine
         return sec;
     }
 
+    public void AddCollisionRule(CollisionGroupNamePair pair, CollisionRule rule)
+    {
+        _collisionRules.put(pair, rule);
+    }
+
     //Private Methods
     private void Init()
     {
         _sectorSet = new HashSet<>();
+        _collisionRules = new HashMap<>();
     }
 
     private void ActiveSectorGarbageCollection()

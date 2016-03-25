@@ -25,7 +25,7 @@ public class GameEngineTest
         _engine.Start();
         Assert.assertFalse(_engine.IsRunning());
 
-        Sector testSector = new Sector(0,0,0,0.0F,GravityApplication.Area);
+        Sector testSector = new Sector(0,0,0,0.0F,GravityApplication.Area,null);
         _engine.SetActiveSector(testSector);
 
         Assert.assertTrue(_engine.GetActiveSector() == testSector);
@@ -45,7 +45,7 @@ public class GameEngineTest
         _engine.Start();
         Assert.assertFalse(_engine.IsRunning());
 
-        _engine.SetActiveSector(new Sector(0,0,0,0.0F,GravityApplication.Area));
+        _engine.SetActiveSector(new Sector(0,0,0,0.0F,GravityApplication.Area, null));
 
         _engine.Start();
         Assert.assertTrue(_engine.IsRunning());
@@ -54,7 +54,7 @@ public class GameEngineTest
     @Test
     public void testStop() throws Exception
     {
-        _engine.SetActiveSector(new Sector(0,0,0,0.0F,GravityApplication.Area));
+        _engine.SetActiveSector(new Sector(0,0,0,0.0F,GravityApplication.Area, null));
 
         _engine.Start();
         Assert.assertTrue(_engine.IsRunning());

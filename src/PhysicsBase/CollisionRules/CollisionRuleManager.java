@@ -22,6 +22,24 @@ public class CollisionRuleManager
         Init();
     }
 
+    public CollisionRuleManager(
+            HashMap<CollisionGroupNamePair, CollisionRule> collisionRules)
+    {
+        Init();
+
+        if(collisionRules != null)
+            for(CollisionGroupNamePair pair : collisionRules.keySet())
+            {
+                _groupNameToGroup.put(pair.group1, new CollisionGroup(pair.group1));
+                _groupNameToGroup.put(pair.group2, new CollisionGroup(pair.group2));
+
+                AddRule(new CollisionGroupPair(
+                        _groupNameToGroup.get(pair.group1),
+                        _groupNameToGroup.get(pair.group2)
+                        ), collisionRules.get(pair));
+            }
+    }
+
     //Get Methods
     public CollisionRule GetRule(CollisionGroupPair pair)
     {
