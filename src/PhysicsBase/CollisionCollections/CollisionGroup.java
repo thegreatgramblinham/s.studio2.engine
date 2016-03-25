@@ -10,11 +10,13 @@ public class CollisionGroup
     //Private Fields
     private HashSet<GameWorldObject> _group;
     private UUID _id;
+    private String _name;
 
     //Constructor
-    public CollisionGroup()
+    public CollisionGroup(String name)
     {
         Init();
+        _name = name;
     }
 
     //Get Methods
@@ -24,6 +26,21 @@ public class CollisionGroup
     }
 
     //Public Methods
+    public void Add(GameWorldObject gObj)
+    {
+        _group.add(gObj);
+    }
+
+    public void Remove(GameWorldObject gObj)
+    {
+        _group.remove(gObj);
+    }
+
+    public boolean Contains(GameWorldObject gObj)
+    {
+        return _group.contains(gObj);
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -32,7 +49,6 @@ public class CollisionGroup
         CollisionGroup that = (CollisionGroup) o;
 
         return _id.equals(that._id);
-
     }
 
     @Override
