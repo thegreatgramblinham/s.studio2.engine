@@ -1,19 +1,16 @@
 package PhysicsBase.CollisionRules;
 
-import PhysicsBase.CollisionCollections.CollisionGroup;
-import PhysicsBase.CollisionRules.enums.CollisionRule;
-
 public class CollisionGroupNamePair
 {
     //Variables
-    public String group1;
-    public String group2;
+    public String groupName1;
+    public String groupName2;
 
     //Constructor
     public CollisionGroupNamePair(String grp1, String grp2)
     {
-        group1 = grp1;
-        group2 = grp2;
+        groupName1 = grp1;
+        groupName2 = grp2;
     }
 
     //Get Methods
@@ -31,8 +28,8 @@ public class CollisionGroupNamePair
 
         //As long as the object contains the same two groups they're equal.
         //They can be assigned to either variable.
-        if(this.group1 == that.group1 && this.group2 == that.group2) return true;
-        if(this.group2 == that.group1 && this.group1 == that.group2) return true;
+        if(this.groupName1 == that.groupName1 && this.groupName2 == that.groupName2) return true;
+        if(this.groupName2 == that.groupName1 && this.groupName1 == that.groupName2) return true;
 
         return false;
     }
@@ -40,8 +37,8 @@ public class CollisionGroupNamePair
     @Override
     public int hashCode()
     {
-        int result = group1 != null ? group1.hashCode() : 0;
-        result = result + (group2 != null ? group2.hashCode() : 0);
+        int result = groupName1 != null ? groupName1.hashCode() : 0;
+        result = result + (groupName2 != null ? groupName2.hashCode() : 0);
         return result;
     }
 

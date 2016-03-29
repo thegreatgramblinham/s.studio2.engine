@@ -5,7 +5,6 @@ import PhysicsBase.CollisionCollections.CollisionGroup;
 import PhysicsBase.CollisionRules.enums.CollisionRule;
 
 import java.util.HashMap;
-import java.util.HashSet;
 
 public class CollisionRuleManager
 {
@@ -30,12 +29,16 @@ public class CollisionRuleManager
         if(collisionRules != null)
             for(CollisionGroupNamePair pair : collisionRules.keySet())
             {
-                _groupNameToGroup.put(pair.group1, new CollisionGroup(pair.group1));
-                _groupNameToGroup.put(pair.group2, new CollisionGroup(pair.group2));
+                if(!_groupNameToGroup.containsKey(pair.groupName1))
+                    _groupNameToGroup.put(
+                            pair.groupName1, new CollisionGroup(pair.groupName1));
+                if(!_groupNameToGroup.containsKey(pair.groupName2))
+                    _groupNameToGroup.put(
+                            pair.groupName2, new CollisionGroup(pair.groupName2));
 
                 AddRule(new CollisionGroupPair(
-                        _groupNameToGroup.get(pair.group1),
-                        _groupNameToGroup.get(pair.group2)
+                        _groupNameToGroup.get(pair.groupName1),
+                        _groupNameToGroup.get(pair.groupName2)
                         ), collisionRules.get(pair));
             }
     }
