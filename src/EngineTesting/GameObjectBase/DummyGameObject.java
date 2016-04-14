@@ -9,6 +9,6 @@ public class DummyGameObject extends GameWorldObject
     //Properties
     public DummyGameObject(Rectangle size, boolean isImmobile, float mass)
     {
-        super(size, isImmobile, mass);
+        super(size, size, isImmobile, mass);
     }
 }
