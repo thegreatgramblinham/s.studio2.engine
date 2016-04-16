@@ -28,11 +28,6 @@ public class Sector extends BoundedObject
 
     private ArrayList<HashSet<GameWorldObject>> _renderGroups;
 
-    protected Sector _up;
-    protected Sector _down;
-    protected Sector _left;
-    protected Sector _right;
-
     //Constructor
     public Sector(int width, int height, int gridUnitSize,
                   float gravity, GravityApplication gravityApp,
@@ -131,29 +126,6 @@ public class Sector extends BoundedObject
     public Iterator<GameWorldObject> GetObjectsAtPoint(Point p)
     {
         return _map.GetObjectsAtSubSector(p);
-    }
-
-    public void LinkToSide(Sector other, Direction d)
-    {
-        switch (d)
-        {
-            case Up:
-                _up = other;
-                other._down = this;
-                break;
-            case Down:
-                _down = other;
-                other._up = this;
-                break;
-            case Left:
-                _left = other;
-                other._right = this;
-                break;
-            case Right:
-                _right = other;
-                other._left = this;
-                break;
-        }
     }
 
     @Override
