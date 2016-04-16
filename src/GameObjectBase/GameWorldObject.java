@@ -22,23 +22,13 @@ public abstract class GameWorldObject extends GameObject
     private boolean _needsDeletion = false;
 
     //Constructors
-    public GameWorldObject(Rectangle size, Rectangle hitbox, boolean isImmobile, float mass)
+    public GameWorldObject(Rectangle size, Rectangle hitBox,
+                           boolean isImmobile,
+                           float mass)
     {
         super(size);
         Init(mass);
-        _hitBox = new HitBox(hitbox);
-
-        NSetLocation(size.getLocation());
-        _isImmobile = isImmobile;
-    }
-
-    public GameWorldObject(Rectangle size, Rectangle hitbox, boolean isImmobile,
-                           String alias, float mass)
-    {
-        super(size);
-        Init(mass);
-        _alias = alias;
-        _hitBox = new HitBox(hitbox);
+        _hitBox = new HitBox(hitBox, this.NGetLocation());
 
         NSetLocation(size.getLocation());
         _isImmobile = isImmobile;
