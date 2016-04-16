@@ -50,6 +50,7 @@ public class GameEngine
             _sectorSet.add(activeSector);
 
         _activeSector = activeSector;
+        _physicsManager.SetSector(_activeSector);
     }
 
     //Public Methods
@@ -73,7 +74,7 @@ public class GameEngine
     {
         if(_activeSector == null) return;
 
-        _physicsManager = new PhysicsManager(_activeSector);
+        _physicsManager.SetSector(_activeSector);
         _isRunning = true;
     }
 
@@ -105,6 +106,7 @@ public class GameEngine
     {
         _sectorSet = new HashSet<>();
         _collisionRules = new HashMap<>();
+        _physicsManager = new PhysicsManager(null);
     }
 
     private void ActiveSectorGarbageCollection()

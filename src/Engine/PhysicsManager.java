@@ -18,6 +18,10 @@ class PhysicsManager
     //GetMethods
 
     //SetMethods
+    public void SetSector(Sector sector)
+    {
+        this._sector = sector;
+    }
 
     //Public Methods
     public void CyclePhysicsFrame()
