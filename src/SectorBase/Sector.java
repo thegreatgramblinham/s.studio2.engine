@@ -2,11 +2,9 @@ package SectorBase;
 
 import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
-import PhysicsBase.CollisionCollections.CollisionGroup;
 import PhysicsBase.CollisionManager;
 import PhysicsBase.CollisionCollections.ObjectCollisionPair;
 import PhysicsBase.CollisionRules.CollisionGroupNamePair;
-import PhysicsBase.CollisionRules.CollisionGroupPair;
 import PhysicsBase.CollisionRules.CollisionRuleManager;
 import PhysicsBase.CollisionRules.enums.CollisionRule;
 import PhysicsBase.LocationManager;
@@ -14,14 +12,13 @@ import SectorBase.enums.Direction;
 import SectorBase.enums.GravityApplication;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.HashSet;
-import java.util.Iterator;
+import java.util.*;
+
 
 public class Sector extends BoundedObject
 {
     //Private Fields
+    private UUID _id;
     private CollisionManager _collisionManager;
     private LocationManager _vectorManager;
     private CollisionRuleManager _collisionRuleManager;
@@ -159,12 +156,34 @@ public class Sector extends BoundedObject
         }
     }
 
+    @Override
+    public boolean equals(Object o)
+    {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        if (!super.equals(o)) return false;
+
+        Sector sector = (Sector) o;
+
+        return _id.equals(sector._id);
+
+    }
+
+    @Override
+    public int hashCode()
+    {
+        int result = super.hashCode();
+        result = 31 * result + _id.hashCode();
+        return result;
+    }
+
     //Private Methods
     private void Init(int gridUnitSize,
                       float gravity,
                       GravityApplication gravityApp,
                       HashMap<CollisionGroupNamePair, CollisionRule> collisionRules)
     {
+        _id = UUID.randomUUID();
         _map = new SectorMap(width, height, gridUnitSize);
         _collisionRuleManager = new CollisionRuleManager(collisionRules);
         _collisionManager = new CollisionManager(_map, _collisionRuleManager);
