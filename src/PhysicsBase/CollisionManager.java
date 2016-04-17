@@ -153,27 +153,27 @@ public class CollisionManager
     private void DetermineCollisionDirection(ObjectCollisionPair pair)
     {
         //With respect to object 2's center point
-        int rise = PointHelper.SlopeRiseOf(pair.object1.GetCenterPoint(),
-                pair.object2.GetCenterPoint());
-        int run = PointHelper.SlopeRunOf(pair.object1.GetCenterPoint(),
-                pair.object2.GetCenterPoint());
+        int rise = PointHelper.SlopeRiseOf(pair.GetHitBox1().GetCenterPoint(),
+                pair.GetHitBox2().GetCenterPoint());
+        int run = PointHelper.SlopeRunOf(pair.GetHitBox1().GetCenterPoint(),
+                pair.GetHitBox2().GetCenterPoint());
 
-        if(pair.object1.GetCenterPoint().x > pair.object2.GetLeft()
-                && pair.object1.GetCenterPoint().x < pair.object2.GetRight())
+        if(pair.GetHitBox1().GetCenterPoint().x > pair.GetHitBox2().GetLeft()
+                && pair.GetHitBox1().GetCenterPoint().x < pair.GetHitBox2().GetRight())
         {
             CollisionOnYAxis(pair, rise);
         }
-        else if(pair.object1.GetCenterPoint().y < pair.object2.GetBottom()
-                && pair.object1.GetCenterPoint().y > pair.object2.GetTop())
+        else if(pair.GetHitBox1().GetCenterPoint().y < pair.GetHitBox2().GetBottom()
+                && pair.GetHitBox1().GetCenterPoint().y > pair.GetHitBox2().GetTop())
         {
             CollisionOnXAxis(pair, run);
         }
         else
         {
-            double adjustedRun = (Math.abs(run) - pair.object1.GetHalfWidth()
-                    - pair.object2.GetHalfWidth());
-            double adjustedRise = (Math.abs(rise) - pair.object1.GetHalfHeight()
-                    - pair.object2.GetHalfHeight());
+            double adjustedRun = (Math.abs(run) - pair.GetHitBox1().GetHalfWidth()
+                    - pair.GetHitBox2().GetHalfWidth());
+            double adjustedRise = (Math.abs(rise) - pair.GetHitBox1().GetHalfHeight()
+                    - pair.GetHitBox2().GetHalfHeight());
 
             if (Math.abs(adjustedRun) < Math.abs(adjustedRise))
                 CollisionOnXAxis(pair, run);

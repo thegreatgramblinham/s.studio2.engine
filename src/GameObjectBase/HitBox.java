@@ -25,17 +25,17 @@ public class HitBox extends BoundedObject
 
     //Public Methods
     @Override
-    public void DSetLocation(double x, double y)
+    public void DSetLocation(double newX, double newY)
     {
-        super.DSetLocation(x - _hitBoxOffset.x,
-                y - _hitBoxOffset.y);
+        super.DSetLocation(newX - _hitBoxOffset.x,
+                newY - _hitBoxOffset.y);
     }
 
     @Override
     public void NSetLocation(Point p)
     {
-        super.NSetLocation(new Point(x - _hitBoxOffset.x,
-                y - _hitBoxOffset.y));
+        super.NSetLocation(new Point(p.x - _hitBoxOffset.x,
+                p.y - _hitBoxOffset.y));
     }
 
     //Private Methods

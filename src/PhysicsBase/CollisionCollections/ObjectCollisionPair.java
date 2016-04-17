@@ -1,6 +1,7 @@
 package PhysicsBase.CollisionCollections;
 
 import GameObjectBase.GameWorldObject;
+import GameObjectBase.HitBox;
 import GameObjectBase.enums.Side;
 
 import java.util.UUID;
@@ -25,6 +26,17 @@ public class ObjectCollisionPair
         object1CollisionSide = obj1CollisionSide;
         object2CollisionSide = obj2CollisionSide;
         activelyColliding = true;
+    }
+
+    //Get Methods
+    public HitBox GetHitBox1()
+    {
+        return object1.GetHitBox();
+    }
+
+    public HitBox GetHitBox2()
+    {
+        return object2.GetHitBox();
     }
 
     //Public Methods
