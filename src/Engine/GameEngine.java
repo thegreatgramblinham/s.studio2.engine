@@ -44,8 +44,6 @@ public class GameEngine
     //SetMethods
     public void SetActiveSector(Sector activeSector)
     {
-        if(activeSector == null) return;
-
         if(!_sectorSet.contains(activeSector))
             _sectorSet.add(activeSector);
 
@@ -94,6 +92,21 @@ public class GameEngine
         if(_activeSector == null) _activeSector = sec;
 
         return sec;
+    }
+
+    public boolean DeleteSector(Sector s)
+    {
+        boolean success = false;
+
+        if(_sectorSet.contains(s))
+        {
+            success = _sectorSet.remove(s);
+
+            if(_activeSector == s)
+                SetActiveSector(null);
+        }
+
+        return success;
     }
 
     public void AddCollisionRule(CollisionGroupNamePair pair, CollisionRule rule)
