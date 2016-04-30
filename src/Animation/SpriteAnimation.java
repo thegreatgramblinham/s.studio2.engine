@@ -53,6 +53,19 @@ public class SpriteAnimation
         return _spriteSheet;
     }
 
+    public boolean IsAnimationFinished()
+    {
+        if(_animationCounter >= _animationReset && !_loopAnimation)
+            return true;
+
+        return false;
+    }
+
+    public void ResetAnimation()
+    {
+        _animationCounter = 0;
+    }
+
     public boolean DrawSpriteFrame(GraphicsContext gc, Point drawLocation,
                                    AnimationOrientation orientation)
     {
