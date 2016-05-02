@@ -3,6 +3,7 @@ package Animation;
 import Animation.enums.AnimationOrientation;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.image.Image;
+import javafx.scene.image.WritableImage;
 
 import java.awt.*;
 import java.io.File;
@@ -130,31 +131,46 @@ public class SpriteAnimation
                                        int tileIndex,
                                        AnimationOrientation orientation)
     {
+        //crop the frame out, only render that portion.
+        WritableImage frameCrop = new WritableImage(
+                _spriteSheet.getPixelReader(),
+                0,
+                (_tileHeight*tileIndex),
+                _tileWidth,
+                _tileHeight);
+
+
         switch(orientation)
         {
             case Default:
-                gc.drawImage(_spriteSheet, 0,
-                        _tileHeight*tileIndex, _tileWidth, _tileHeight,
-                        drawLocation.x, drawLocation.y, _tileWidth, _tileHeight);
+                gc.drawImage(
+                        frameCrop,
+                        drawLocation.x,
+                        drawLocation.y);
                 break;
             case MirrorXAxis:
-                gc.drawImage(_spriteSheet, 0,
-                        _tileHeight*tileIndex, _tileWidth, _tileHeight,
-                        drawLocation.x + _tileWidth, drawLocation.y,
-                        -_tileWidth, _tileHeight);
+                gc.drawImage(
+                        frameCrop,
+                        drawLocation.x + _tileWidth,
+                        drawLocation.y,
+                        -_tileWidth,
+                        _tileHeight);
                 break;
             case MirrorYAxis:
-                gc.drawImage(_spriteSheet, 0,
-                        _tileHeight*tileIndex, _tileWidth, _tileHeight,
-                        drawLocation.x, drawLocation.y + _tileHeight,
-                        _tileWidth, -_tileHeight);
+                gc.drawImage(
+                        frameCrop,
+                        drawLocation.x,
+                        drawLocation.y + _tileHeight,
+                        _tileWidth,
+                        -_tileHeight);
                 break;
             case MirrorBothAxis:
-                gc.drawImage(_spriteSheet, 0,
-                        _tileHeight*tileIndex, _tileWidth, _tileHeight,
+                gc.drawImage(
+                        frameCrop,
                         drawLocation.x + _tileWidth,
                         drawLocation.y + _tileHeight,
-                        -_tileWidth, -_tileHeight);
+                        -_tileWidth,
+                        -_tileHeight);
                 break;
         }
     }
