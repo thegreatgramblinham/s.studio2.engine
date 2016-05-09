@@ -9,21 +9,46 @@ import javax.xml.parsers.DocumentBuilderFactory;
 import javax.xml.xpath.*;
 import java.io.File;
 
-public final class XMLParser
+public class XMLParser
 {
-    //TODO will need to be instanced if we do async loading here
-
     //Private Constants
-    private static DocumentBuilderFactory _dFactory = DocumentBuilderFactory.newInstance();
-    private static XPath _xPathParser = XPathFactory.newInstance().newXPath();
+    private DocumentBuilderFactory _dFactory = DocumentBuilderFactory.newInstance();
+    private XPath _xPathParser = XPathFactory.newInstance().newXPath();
 
-    private static NodeList _nodeListCache;
+    private Document _doc;
 
     //Constructor
-    private XMLParser() {}
+    public XMLParser(String filePath) throws Exception
+    {
+        _doc = CreateDocument(filePath);
+    }
 
     //Public Methods
-    public static Document CreateDocument(String filePath)
+    public NodeList OpenNodeList(String xPath) throws Exception
+    {
+        return EvaluateXPath(_doc, xPath);
+    }
+
+    //Public Static Methods
+    public static String ParseStringPathContents(NodeList list, int i)
+    {
+        return list.item(i).getTextContent();
+    }
+
+    public static int ParseIntPathContents(NodeList list, int i)
+    {
+        String text = list.item(i).getTextContent();
+        return Integer.parseInt(text);
+    }
+
+    public double ParseDoublePathContents(NodeList list, int i)
+    {
+        String text = list.item(i).getTextContent();
+        return Double.parseDouble(text);
+    }
+
+    //Private Methods
+    private Document CreateDocument(String filePath) throws Exception
     {
         try
         {
@@ -37,54 +62,11 @@ public final class XMLParser
         catch(Exception e)
         {
             LumberJack.LogException("Failed to initialize document.", e);
-            return null;
+            throw e;
         }
     }
 
-    public static String ParseStringPathContents(Document d, String xPath)
-    {
-        return ParseStringPathContents(d, 0, xPath);
-    }
-
-    public static String ParseStringPathContents(Document d, int i, String xPath)
-    {
-        NodeList node = EvaluateXPath(d, xPath);
-        return node.item(i).getTextContent();
-    }
-
-    public static int ParseIntPathContents(Document d, String xPath)
-    {
-        return ParseIntPathContents(d, 0, xPath);
-    }
-
-    public static int ParseIntPathContents(Document d, int i, String xPath)
-    {
-        NodeList node = EvaluateXPath(d, xPath);
-        String text = node.item(i).getTextContent();
-        return Integer.parseInt(text);
-    }
-
-    public static double ParseDoublePathContents(Document d, String xPath)
-    {
-        return ParseDoublePathContents(d, 0, xPath);
-    }
-
-    public static double ParseDoublePathContents(Document d, int i, String xPath)
-    {
-        NodeList node = EvaluateXPath(d, xPath);
-        String text = node.item(i).getTextContent();
-        return Double.parseDouble(text);
-    }
-
-    public static int GetNodeListLength(Document d, String xPath)
-    {
-        NodeList list = EvaluateXPath(d, xPath);
-
-        return list == null ? 0 : list.getLength();
-    }
-
-    //Private Methods
-    private static NodeList EvaluateXPath(Document d, String xPath)
+    private NodeList EvaluateXPath(Document d, String xPath) throws Exception
     {
         try
         {
@@ -95,7 +77,7 @@ public final class XMLParser
         catch(Exception e)
         {
             LumberJack.LogException("Failed to compile xpath.", e);
-            return null;
+            throw e;
         }
     }
 
