@@ -1,5 +1,6 @@
 package XMLParsing;
 
+import Logging.LumberJack;
 import org.w3c.dom.Document;
 import org.w3c.dom.NodeList;
 
@@ -20,30 +21,38 @@ public final class XMLParser
     private XMLParser() {}
 
     //Public Methods
-    public static Document CreateDocument(String filePath) throws Exception
+    public static Document CreateDocument(String filePath)
     {
-        File textFile = new File(filePath);
-        DocumentBuilder dBuilder = _dFactory.newDocumentBuilder();
-        Document d = dBuilder.parse(textFile);
-        d.getDocumentElement().normalize();
+        try
+        {
+            File textFile = new File(filePath);
+            DocumentBuilder dBuilder = _dFactory.newDocumentBuilder();
+            Document d = dBuilder.parse(textFile);
+            d.getDocumentElement().normalize();
 
-        return d;
+            return d;
+        }
+        catch(Exception e)
+        {
+            LumberJack.LogException("Failed to initialize document.", e);
+            return null;
+        }
     }
 
-    public static String ParseStringPathContents(Document d, String xPath) throws Exception
+    public static String ParseStringPathContents(Document d, String xPath)
     {
         NodeList node = EvaluateXPath(d, xPath);
         return node.item(0).getTextContent();
     }
 
-    public static int ParseIntPathContents(Document d, String xPath) throws Exception
+    public static int ParseIntPathContents(Document d, String xPath)
     {
         NodeList node = EvaluateXPath(d, xPath);
         String text = node.item(0).getTextContent();
         return Integer.parseInt(text);
     }
 
-    public static double ParseDoublePathContents(Document d, String xPath) throws Exception
+    public static double ParseDoublePathContents(Document d, String xPath)
     {
         NodeList node = EvaluateXPath(d, xPath);
         String text = node.item(0).getTextContent();
@@ -51,11 +60,19 @@ public final class XMLParser
     }
 
     //Private Methods
-    private static NodeList EvaluateXPath(Document d, String xPath) throws Exception
+    private static NodeList EvaluateXPath(Document d, String xPath)
     {
-        XPathExpression expr = _xPathParser.compile(xPath);
-        NodeList node = (NodeList)expr.evaluate(d, XPathConstants.NODESET);
-        return node;
+        try
+        {
+            XPathExpression expr = _xPathParser.compile(xPath);
+            NodeList node = (NodeList) expr.evaluate(d, XPathConstants.NODESET);
+            return node;
+        }
+        catch(Exception e)
+        {
+            LumberJack.LogException("Failed to compile xpath.", e);
+            return null;
+        }
     }
 
 }
