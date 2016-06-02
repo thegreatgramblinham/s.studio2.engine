@@ -30,20 +30,20 @@ public class XMLParser
     }
 
     //Public Static Methods
-    public static String ParseStringPathContents(NodeList list, int i)
+    public static String ParseStringPathContents(NodeList list)
     {
-        return list.item(i).getTextContent();
+        return list.item(0).getTextContent();
     }
 
-    public static int ParseIntPathContents(NodeList list, int i)
+    public static int ParseIntPathContents(NodeList list)
     {
-        String text = list.item(i).getTextContent();
+        String text = list.item(0).getTextContent();
         return Integer.parseInt(text);
     }
 
-    public double ParseDoublePathContents(NodeList list, int i)
+    public static double ParseDoublePathContents(NodeList list)
     {
-        String text = list.item(i).getTextContent();
+        String text = list.item(0).getTextContent();
         return Double.parseDouble(text);
     }
 
