@@ -47,6 +47,23 @@ public class XMLParser
         return Double.parseDouble(text);
     }
 
+    public static String ParseStringPathContents(NodeList list, int i)
+    {
+        return list.item(i).getTextContent();
+    }
+
+    public static int ParseIntPathContents(NodeList list, int i)
+    {
+        String text = list.item(i).getTextContent();
+        return Integer.parseInt(text);
+    }
+
+    public static double ParseDoublePathContents(NodeList list, int i)
+    {
+        String text = list.item(i).getTextContent();
+        return Double.parseDouble(text);
+    }
+
     //Private Methods
     private Document CreateDocument(String filePath) throws Exception
     {
