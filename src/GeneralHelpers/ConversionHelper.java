@@ -39,6 +39,29 @@ public final class ConversionHelper
         return null;
     }
 
+    public static Side StringToSide(String side)
+    {
+        Side enumSide = null;
+
+        switch(side.toUpperCase())
+        {
+            case "TOP":
+                enumSide = Side.Top;
+                break;
+            case "RIGHT":
+                enumSide = Side.Right;
+                break;
+            case "LEFT":
+                enumSide = Side.Left;
+                break;
+            case "BOTTOM":
+                enumSide = Side.Bottom;
+                break;
+        }
+
+        return enumSide;
+    }
+
     public static Direction RadianToDirection(double radians)
     {
         if(radians == 0.0D)
