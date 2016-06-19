@@ -39,6 +39,38 @@ public final class ConversionHelper
         return null;
     }
 
+    public static Direction GetOppositeDirectionFromSide(Side s)
+    {
+        switch (s)
+        {
+            case Top:
+                return Direction.Down;
+            case Bottom:
+                return Direction.Up;
+            case Left:
+                return Direction.Right;
+            case Right:
+                return Direction.Left;
+        }
+        return null;
+    }
+
+    public static Direction GetDirectionFromSide(Side s)
+    {
+        switch (s)
+        {
+            case Top:
+                return Direction.Up;
+            case Bottom:
+                return Direction.Down;
+            case Left:
+                return Direction.Left;
+            case Right:
+                return Direction.Right;
+        }
+        return null;
+    }
+
     public static Side StringToSide(String side)
     {
         Side enumSide = null;
