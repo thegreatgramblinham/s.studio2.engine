@@ -113,5 +113,46 @@ public final class ConversionHelper
         return radians + Math.PI;
     }
 
+    /**
+     * Converts a slope to degrees
+     * @param slope slope to convert
+     * @return slope in degrees
+     */
+    public static double SlopeToDegrees(double slope)
+    {
+        return Math.atan(slope);
+    }
+
+    /**
+     * Converts slope to radians.
+     * @param slope slope to convert
+     * @return slope in radians
+     */
+    public static double SlopeToRadians(double slope)
+    {
+        double degrees = SlopeToDegrees(slope);
+        return DegreesToRadians(degrees);
+    }
+
+    /**
+     * Converts degrees to radians
+     * @param degrees degrees to convert
+     * @return degrees in radians
+     */
+    public static double DegreesToRadians(double degrees)
+    {
+        return (degrees * Math.PI)/180.0;
+    }
+
+    /**
+     * Converts radians to degrees
+     * @param radians radians to convert
+     * @return radians in degrees
+     */
+    public static double RadiansToDegrees(double radians)
+    {
+        return (radians * 180.0)/Math.PI;
+    }
+
     //Private Methods
 }
