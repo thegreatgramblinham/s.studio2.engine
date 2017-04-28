@@ -2,7 +2,6 @@ package Engine;
 
 import GameObjectBase.GameWorldObject;
 import PhysicsBase.CollisionRules.CollisionGroupNamePair;
-import PhysicsBase.CollisionRules.CollisionGroupPair;
 import PhysicsBase.CollisionRules.enums.CollisionRule;
 import SectorBase.Sector;
 import SectorBase.enums.GravityApplication;
@@ -140,7 +139,7 @@ public class GameEngine
 
         for(GameWorldObject gObj : needsDeletion)
         {
-            gObj.OnRemoval();
+            gObj.OnDeletion();
             _activeSector.RemoveObject(gObj);
         }
     }
