@@ -1,6 +1,5 @@
-package EngineTesting.GameObjectBase;
+package GameObjectBase;
 
-import GameObjectBase.GameWorldObject;
 
 import java.awt.*;
 

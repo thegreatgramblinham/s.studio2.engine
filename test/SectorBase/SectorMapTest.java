@@ -1,8 +1,8 @@
-package EngineTesting.SectorBase;
+package SectorBase;
 
-import EngineTesting.GameObjectBase.DummyGameObject;
+
+import GameObjectBase.DummyGameObject;
 import GameObjectBase.GameWorldObject;
-import SectorBase.SectorMap;
 import org.junit.Assert;
 import org.junit.Test;
 

@@ -1,6 +1,5 @@
-package EngineTesting.Engine;
+package Engine;
 
-import Engine.GameEngine;
 import SectorBase.Sector;
 import SectorBase.enums.GravityApplication;
 import org.junit.Assert;

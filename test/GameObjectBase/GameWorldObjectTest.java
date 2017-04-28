@@ -1,6 +1,5 @@
-package EngineTesting.GameObjectBase;
+package GameObjectBase;
 
-import GameObjectBase.HitBox;
 import PhysicsBase.Vectors.VelocityVector;
 import org.junit.Assert;
 import org.junit.Before;

@@ -1,6 +1,5 @@
-package EngineTesting.GameObjectBase;
+package GameObjectBase;
 
-import GameObjectBase.BoundedObject;
 import Global.DPoint;
 import org.junit.Assert;
 import org.junit.Before;
@@ -8,7 +7,6 @@ import org.junit.Test;
 
 import java.awt.*;
 
-import static org.junit.Assert.*;
 
 public class BoundedObjectTest
 {

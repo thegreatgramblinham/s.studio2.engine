@@ -1,9 +1,6 @@
-package EngineTesting.PhysicsBase.Lines;
+package PhysicsBase.Lines;
 
-import PhysicsBase.Lines.LineHelper;
-import PhysicsBase.Lines.NLine;
 import org.junit.Assert;
-import org.junit.Before;
 import org.junit.Test;
 
 import java.awt.*;

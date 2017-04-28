@@ -1,6 +1,6 @@
-package EngineTesting.PhysicsBase;
+package PhysicsBase;
 
-import EngineTesting.GameObjectBase.DummyGameObject;
+import GameObjectBase.DummyGameObject;
 import PhysicsBase.CollisionManager;
 import PhysicsBase.CollisionCollections.ObjectCollisionPair;
 import PhysicsBase.CollisionRules.CollisionRuleManager;
