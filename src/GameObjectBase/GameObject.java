@@ -1,9 +1,11 @@
 package GameObjectBase;
 
+import Interfaces.IGameObject;
+
 import java.awt.*;
 import java.util.UUID;
 
-abstract class GameObject extends BoundedObject
+abstract class GameObject extends BoundedObject implements IGameObject
 {
     //Properties
     private UUID _id;

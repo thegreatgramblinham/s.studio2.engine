@@ -2,7 +2,6 @@ package GameObjectBase;
 
 import Interfaces.IGameWorldObject;
 import PhysicsBase.Vectors.VelocityVector;
-import javafx.scene.image.Image;
 
 import java.awt.*;
 
@@ -12,7 +11,6 @@ public abstract class GameWorldObject extends GameObject implements IGameWorldOb
     private HitBox _hitBox;
 
     //Properties
-    private Image _sprite;
     private VelocityVector _velocity;
     private VelocityVector _acceleration;
     private String _alias;
@@ -66,11 +64,6 @@ public abstract class GameWorldObject extends GameObject implements IGameWorldOb
     public boolean GetIsAccelerating()
     {
         return _isAccelerating;
-    }
-
-    public Image GetSprite()
-    {
-        return _sprite;
     }
 
     public boolean GetCanCollide()
@@ -128,11 +121,6 @@ public abstract class GameWorldObject extends GameObject implements IGameWorldOb
 
         super.NSetLocation(p);
         _hitBox.NSetLocation(p);
-    }
-
-    public void SetSprite(Image sprite)
-    {
-        _sprite = sprite;
     }
 
     public void SetNeedsDeletion(boolean needsDeletion)
@@ -194,17 +182,4 @@ public abstract class GameWorldObject extends GameObject implements IGameWorldOb
         _isImmobile = false;
         this.SetMass(mass);
     }
-//
-//    //Override Handling
-//    @Override
-//    public void setLocation(Point p)
-//    {
-//        this.NSetLocation(p);
-//    }
-//
-//    @Override
-//    public void setLocation(int x, int y)
-//    {
-//        this.NSetLocation(new Point(x,y));
-//    }
 }

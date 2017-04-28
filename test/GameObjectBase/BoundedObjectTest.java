@@ -51,34 +51,34 @@ public class BoundedObjectTest
     public void testGetSetDX() throws Exception
     {
         Assert.assertTrue(_dummyObject.GetDX() == 0.0);
-        Assert.assertTrue(_dummyObject.x == 0);
+        Assert.assertTrue(_dummyObject.getX() == 0);
 
         _dummyObject.SetDX(65.4321D);
 
         Assert.assertTrue(_dummyObject.GetDX() == 65.4321);
-        Assert.assertTrue(_dummyObject.x == 65);
+        Assert.assertTrue(_dummyObject.getX() == 65);
 
         _dummyObject.SetDX(76.54321D);
 
         Assert.assertTrue(_dummyObject.GetDX() == 76.54321);
-        Assert.assertTrue(_dummyObject.x == 77);
+        Assert.assertTrue(_dummyObject.getX() == 77);
     }
 
     @Test
     public void testGetSetDY() throws Exception
     {
         Assert.assertTrue(_dummyObject.GetDY() == 0.0);
-        Assert.assertTrue(_dummyObject.y == 0);
+        Assert.assertTrue(_dummyObject.getY() == 0);
 
         _dummyObject.SetDY(65.4321D);
 
         Assert.assertTrue(_dummyObject.GetDY() == 65.4321);
-        Assert.assertTrue(_dummyObject.y == 65);
+        Assert.assertTrue(_dummyObject.getY() == 65);
 
         _dummyObject.SetDY(76.54321D);
 
         Assert.assertTrue(_dummyObject.GetDY() == 76.54321);
-        Assert.assertTrue(_dummyObject.y == 77);
+        Assert.assertTrue(_dummyObject.getY() == 77);
     }
 
     @Test

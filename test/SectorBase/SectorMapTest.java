@@ -3,6 +3,7 @@ package SectorBase;
 
 import GameObjectBase.DummyGameObject;
 import GameObjectBase.GameWorldObject;
+import Interfaces.IGameWorldObject;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -37,12 +38,12 @@ public class SectorMapTest
         _map.InsertObject(testObject2);
         _map.InsertObject(testObject3);
 
-        Iterator<GameWorldObject> objIter = _map.GetAllObjectIterator();
+        Iterator<IGameWorldObject> objIter = _map.GetAllObjectIterator();
 
         int cnt = 0;
         while(objIter.hasNext())
         {
-            GameWorldObject obj = objIter.next();
+            IGameWorldObject obj = objIter.next();
 
             Assert.assertTrue(obj == _testObject
                 || obj == testObject2
@@ -66,7 +67,7 @@ public class SectorMapTest
     {
         //Check origin location
         _map.InsertObject(_testObject);
-        Iterator<GameWorldObject> objIter
+        Iterator<IGameWorldObject> objIter
                 = _map.GetObjectsAtSubSector(_testPoint);
 
         Assert.assertTrue(objIter.next() == _testObject);
@@ -94,7 +95,7 @@ public class SectorMapTest
         //Insertion
         _map.InsertObject(_testObject);
         Assert.assertTrue(_map.GetObjectCount() == 1);
-        Iterator<GameWorldObject> objIter = _map.GetObjectsAtSubSector(_testPoint);
+        Iterator<IGameWorldObject> objIter = _map.GetObjectsAtSubSector(_testPoint);
 
         Assert.assertTrue(objIter.next() == _testObject);
         Assert.assertTrue(!objIter.hasNext());
@@ -112,10 +113,10 @@ public class SectorMapTest
     {
         _map.InsertObject(_testObject);
 
-        Iterator<GameWorldObject> objIter
+        Iterator<IGameWorldObject> objIter
                 = _map.GetObjectsAtSubSector(_testPoint);
 
-        GameWorldObject obj = null;
+        IGameWorldObject obj = null;
 
         int cnt = 0;
         while (objIter.hasNext())
@@ -138,13 +139,13 @@ public class SectorMapTest
 
         //Rect covering sectors where both test objects should be located
         //at least partially within.
-        Iterator<GameWorldObject> objIter
+        Iterator<IGameWorldObject> objIter
                 = _map.GetObjectsAtSubSectors(new Rectangle(20, 20, 150, 150));
 
         int cnt = 0;
         while(objIter.hasNext())
         {
-            GameWorldObject obj = objIter.next();
+            IGameWorldObject obj = objIter.next();
 
             Assert.assertTrue(obj.equals(_testObject) || obj.equals(testObject2));
 

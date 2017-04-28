@@ -3,6 +3,7 @@ package SectorBase;
 import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
 import Global.DataStructures.IdHashSet;
+import Interfaces.IGameWorldObject;
 
 import java.awt.*;
 import java.util.HashMap;
@@ -17,8 +18,8 @@ public class SectorMap extends BoundedObject
 
     private int _gridUnitSize;
     private int _totalObjectCount;
-    private IdHashSet<GameWorldObject>[][] _map;
-    private HashMap<GameWorldObject, HashSet<IdHashSet<GameWorldObject>>> _objectToSubSector;
+    private IdHashSet<IGameWorldObject>[][] _map;
+    private HashMap<IGameWorldObject, HashSet<IdHashSet<IGameWorldObject>>> _objectToSubSector;
 
     //Properties
 
@@ -37,7 +38,7 @@ public class SectorMap extends BoundedObject
         return _totalObjectCount;
     }
 
-    public Iterator<GameWorldObject> GetAllObjectIterator()
+    public Iterator<IGameWorldObject> GetAllObjectIterator()
     {
         return _objectToSubSector.keySet().iterator();
     }
@@ -45,7 +46,7 @@ public class SectorMap extends BoundedObject
     //SetMethods
 
     //Public Methods
-    public void InsertObject(GameWorldObject obj)
+    public void InsertObject(IGameWorldObject obj)
     {
         if(obj == null) return;
 
@@ -55,7 +56,7 @@ public class SectorMap extends BoundedObject
 
         int failedPlacement = 0;
         Iterator<Point> pIter = points.iterator();
-        HashSet<IdHashSet<GameWorldObject>> subSectors = new HashSet<>();
+        HashSet<IdHashSet<IGameWorldObject>> subSectors = new HashSet<>();
 
         while(pIter.hasNext())
         {
@@ -93,7 +94,7 @@ public class SectorMap extends BoundedObject
         }
     }
 
-    public void UpdateObjectLocation(GameWorldObject obj)
+    public void UpdateObjectLocation(IGameWorldObject obj)
     {
         if(obj == null) return;
         if(!_objectToSubSector.containsKey(obj)) return;
@@ -105,7 +106,7 @@ public class SectorMap extends BoundedObject
         //remove from old location
         HashSet oldSectors = _objectToSubSector.get(obj);
 
-        Iterator<HashSet<GameWorldObject>> oldIter = oldSectors.iterator();
+        Iterator<HashSet<IGameWorldObject>> oldIter = oldSectors.iterator();
 
         while(oldIter.hasNext())
         {
@@ -115,7 +116,7 @@ public class SectorMap extends BoundedObject
 
         int failedPlacement = 0;
         Iterator<Point> pIter = points.iterator();
-        HashSet<IdHashSet<GameWorldObject>> subSectors = new HashSet<>();
+        HashSet<IdHashSet<IGameWorldObject>> subSectors = new HashSet<>();
 
         while(pIter.hasNext())
         {
@@ -154,14 +155,14 @@ public class SectorMap extends BoundedObject
 
     }
 
-    public void RemoveObject(GameWorldObject obj)
+    public void RemoveObject(IGameWorldObject obj)
     {
         if(obj == null) return;
         if(!_objectToSubSector.containsKey(obj)) return;
 
         HashSet oldSectors = _objectToSubSector.get(obj);
 
-        Iterator<HashSet<GameWorldObject>> oldIter = oldSectors.iterator();
+        Iterator<HashSet<IGameWorldObject>> oldIter = oldSectors.iterator();
 
         while(oldIter.hasNext())
         {
@@ -174,7 +175,7 @@ public class SectorMap extends BoundedObject
         _totalObjectCount--;
     }
 
-    public Iterator<GameWorldObject> GetObjectsAtSubSector(Point point)
+    public Iterator<IGameWorldObject> GetObjectsAtSubSector(Point point)
     {
         Point p = SectorMapHelper.CoordinateToGridPosition(point.x,
                 point.y, _gridUnitSize);
@@ -191,17 +192,17 @@ public class SectorMap extends BoundedObject
         }
     }
 
-    public Iterator<GameWorldObject> GetObjectsAtSubSector(int x, int y)
+    public Iterator<IGameWorldObject> GetObjectsAtSubSector(int x, int y)
     {
         return GetObjectsAtSubSector(new Point(x,y));
     }
 
-    public Iterator<GameWorldObject> GetObjectsAtSubSectors(Rectangle rect)
+    public Iterator<IGameWorldObject> GetObjectsAtSubSectors(Rectangle rect)
     {
         HashSet<Point> gPoints
                 = SectorMapHelper.RectToGridPositions(rect, _gridUnitSize);
 
-        HashSet<GameWorldObject> totalObjSet = new HashSet<>();
+        HashSet<IGameWorldObject> totalObjSet = new HashSet<>();
 
         Iterator<Point> pIter = gPoints.iterator();
 

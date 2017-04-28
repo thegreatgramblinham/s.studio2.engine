@@ -2,6 +2,7 @@ package SectorBase;
 
 import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
+import Interfaces.IGameWorldObject;
 import PhysicsBase.CollisionManager;
 import PhysicsBase.CollisionCollections.ObjectCollisionPair;
 import PhysicsBase.CollisionRules.CollisionGroupNamePair;
@@ -26,7 +27,7 @@ public class Sector extends BoundedObject
     private float _gravity;
     private GravityApplication _gravityApp;
 
-    private ArrayList<HashSet<GameWorldObject>> _renderGroups;
+    private ArrayList<HashSet<IGameWorldObject>> _renderGroups;
 
     //Constructor
     public Sector(int width, int height, int gridUnitSize,
@@ -38,12 +39,12 @@ public class Sector extends BoundedObject
     }
 
     //GetMethods
-    public Iterator<GameWorldObject> GetObjectsInSector()
+    public Iterator<IGameWorldObject> GetObjectsInSector()
     {
         return _map.GetAllObjectIterator();
     }
 
-    public HashSet<GameWorldObject> GetRenderGroup(int group)
+    public HashSet<IGameWorldObject> GetRenderGroup(int group)
     {
         if(group >= _renderGroups.size()
                 || _renderGroups.get(group) == null)
@@ -82,7 +83,7 @@ public class Sector extends BoundedObject
         _vectorManager.AdvancePositions();
     }
 
-    public void AddObject(GameWorldObject obj, int renderGroup,
+    public void AddObject(IGameWorldObject obj, int renderGroup,
                           String collisionGroupName)
     {
         _map.InsertObject(obj);
@@ -97,7 +98,7 @@ public class Sector extends BoundedObject
             {
                 _renderGroups.add(i, null);
             }
-            _renderGroups.add(renderGroup, new HashSet<GameWorldObject>());
+            _renderGroups.add(renderGroup, new HashSet<>());
             _renderGroups.get(renderGroup).add(obj);
         }
         else
@@ -108,11 +109,11 @@ public class Sector extends BoundedObject
         _collisionRuleManager.AddObject(obj, collisionGroupName);
     }
 
-    public void RemoveObject(GameWorldObject obj)
+    public void RemoveObject(IGameWorldObject obj)
     {
         _map.RemoveObject(obj);
 
-        for (HashSet<GameWorldObject> renderGroup : _renderGroups)
+        for (HashSet<IGameWorldObject> renderGroup : _renderGroups)
         {
             if(renderGroup == null) continue;
 
@@ -123,7 +124,7 @@ public class Sector extends BoundedObject
         _collisionRuleManager.RemoveObject(obj);
     }
 
-    public Iterator<GameWorldObject> GetObjectsAtPoint(Point p)
+    public Iterator<IGameWorldObject> GetObjectsAtPoint(Point p)
     {
         return _map.GetObjectsAtSubSector(p);
     }

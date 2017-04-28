@@ -1,10 +1,11 @@
 package GameObjectBase;
 
 import Global.DPoint;
+import Interfaces.IBoundedObject;
 
 import java.awt.*;
 
-public abstract class BoundedObject extends Rectangle
+public abstract class BoundedObject extends Rectangle implements IBoundedObject
 {
     //Private Variables
     protected double _dx;
@@ -79,7 +80,7 @@ public abstract class BoundedObject extends Rectangle
 
     public Point NGetLocation()
     {
-        return new Point(x,y);
+        return new Point(super.x,super.y);
     }
 
     public Point GetUpperLeft()
@@ -123,21 +124,21 @@ public abstract class BoundedObject extends Rectangle
     public void SetDX(double x)
     {
         _dx = x;
-        this.x = (int)Math.round(_dx);
+        super.x = (int)Math.round(_dx);
     }
 
     public void SetDY(double y)
     {
         _dy = y;
-        this.y = (int)Math.round(y);
+        super.y = (int)Math.round(y);
     }
 
     public void DSetLocation(double x, double y)
     {
-        this.x = (int)Math.round(x);
+        super.x = (int)Math.round(x);
         SetDX(x);
 
-        this.y = (int)Math.round(y);
+        super.y = (int)Math.round(y);
         SetDY(y);
     }
 
@@ -158,8 +159,8 @@ public abstract class BoundedObject extends Rectangle
 
     public boolean BoundsEquals(Rectangle other)
     {
-        return this.x == other.x &&
-                this.y == other.y &&
+        return super.x == other.x &&
+                super.y == other.y &&
                 this.width == other.width &&
                 this.height == other.height;
     }
@@ -187,8 +188,8 @@ public abstract class BoundedObject extends Rectangle
     //Private Methods
     private void Init()
     {
-        _dx = x;
-        _dy = y;
+        _dx = super.x;
+        _dy = super.y;
     }
 
     //Override Handling

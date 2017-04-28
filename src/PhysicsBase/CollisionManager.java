@@ -3,6 +3,7 @@ package PhysicsBase;
 import GameObjectBase.GameWorldObject;
 import GameObjectBase.enums.Side;
 import GeneralHelpers.PointHelper;
+import Interfaces.IGameWorldObject;
 import PhysicsBase.CollisionCollections.ObjectCollisionPair;
 import PhysicsBase.CollisionRules.CollisionGroupPair;
 import PhysicsBase.CollisionRules.CollisionRuleManager;
@@ -38,26 +39,26 @@ public class CollisionManager
     {
         HashSet<ObjectCollisionPair> collisions = new HashSet<>();
 
-        Iterator<GameWorldObject> allObjIter = _map.GetAllObjectIterator();
+        Iterator<IGameWorldObject> allObjIter = _map.GetAllObjectIterator();
 
         if(allObjIter == null || !allObjIter.hasNext()) return collisions;
 
         while(allObjIter.hasNext())
         {
-            GameWorldObject gameObj = allObjIter.next();
+            IGameWorldObject gameObj = allObjIter.next();
 
             if(gameObj.GetIsImmobile()) continue;
             if(gameObj.GetCanCollide() == false) continue;
 
             //check for collisions within each object in the same subsector(s)
-            Iterator<GameWorldObject> sectorObjs
+            Iterator<IGameWorldObject> sectorObjs
                     = _map.GetObjectsAtSubSectors(gameObj.GetHitBox());
 
             ObjectCollisionPair e = null;
 
             while (sectorObjs.hasNext())
             {
-                GameWorldObject sectorGameObj = sectorObjs.next();
+                IGameWorldObject sectorGameObj = sectorObjs.next();
 
                 if(CheckAutoFailCollisionCases(gameObj, sectorGameObj)) continue;
 
@@ -213,8 +214,8 @@ public class CollisionManager
         }
     }
 
-    private boolean CheckAutoFailCollisionCases(GameWorldObject gObj,
-                                                GameWorldObject sectorObj)
+    private boolean CheckAutoFailCollisionCases(IGameWorldObject gObj,
+                                                IGameWorldObject sectorObj)
     {
         //No need to collide with self
         if(sectorObj == gObj) return true;

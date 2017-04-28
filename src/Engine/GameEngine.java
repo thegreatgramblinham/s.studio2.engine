@@ -1,6 +1,7 @@
 package Engine;
 
 import GameObjectBase.GameWorldObject;
+import Interfaces.IGameWorldObject;
 import PhysicsBase.CollisionRules.CollisionGroupNamePair;
 import PhysicsBase.CollisionRules.enums.CollisionRule;
 import SectorBase.Sector;
@@ -124,20 +125,20 @@ public class GameEngine
     private void ActiveSectorGarbageCollection()
     {
         //todo set a flag from another loop to see if this is needed.
-        Iterator<GameWorldObject> iter
+        Iterator<IGameWorldObject> iter
                 = _activeSector.GetObjectsInSector();
 
-        HashSet<GameWorldObject> needsDeletion = new HashSet<>();
+        HashSet<IGameWorldObject> needsDeletion = new HashSet<>();
 
         while(iter.hasNext())
         {
-            GameWorldObject gObj = iter.next();
+            IGameWorldObject gObj = iter.next();
 
             if(gObj.GetNeedsDeletion())
                 needsDeletion.add(gObj);
         }
 
-        for(GameWorldObject gObj : needsDeletion)
+        for(IGameWorldObject gObj : needsDeletion)
         {
             gObj.OnDeletion();
             _activeSector.RemoveObject(gObj);

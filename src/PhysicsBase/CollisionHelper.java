@@ -3,6 +3,7 @@ package PhysicsBase;
 import GameObjectBase.GameWorldObject;
 import GameObjectBase.HitBox;
 import GeneralHelpers.PointHelper;
+import Interfaces.IGameWorldObject;
 import PhysicsBase.Lines.LineHelper;
 import PhysicsBase.Lines.NLine;
 import PhysicsBase.Vectors.DistanceVector;
@@ -16,7 +17,7 @@ final class CollisionHelper
     private CollisionHelper(){}
 
     //Public Methods
-    public static boolean Collision(GameWorldObject o1, GameWorldObject o2)
+    public static boolean Collision(IGameWorldObject o1, IGameWorldObject o2)
     {
         return CheckHorizontalOverlap(o1.GetHitBox(), o2.GetHitBox())
                 && CheckVerticalOverlap(o1.GetHitBox(), o2.GetHitBox());

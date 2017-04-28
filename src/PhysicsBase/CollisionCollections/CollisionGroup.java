@@ -1,6 +1,7 @@
 package PhysicsBase.CollisionCollections;
 
 import GameObjectBase.GameWorldObject;
+import Interfaces.IGameWorldObject;
 
 import java.util.HashSet;
 import java.util.UUID;
@@ -8,7 +9,7 @@ import java.util.UUID;
 public class CollisionGroup
 {
     //Private Fields
-    private HashSet<GameWorldObject> _group;
+    private HashSet<IGameWorldObject> _group;
     private UUID _id;
     private String _name;
 
@@ -28,17 +29,17 @@ public class CollisionGroup
     public String GetName(){ return _name; }
 
     //Public Methods
-    public void Add(GameWorldObject gObj)
+    public void Add(IGameWorldObject gObj)
     {
         _group.add(gObj);
     }
 
-    public void Remove(GameWorldObject gObj)
+    public void Remove(IGameWorldObject gObj)
     {
         _group.remove(gObj);
     }
 
-    public boolean Contains(GameWorldObject gObj)
+    public boolean Contains(IGameWorldObject gObj)
     {
         return _group.contains(gObj);
     }

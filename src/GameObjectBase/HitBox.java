@@ -1,7 +1,5 @@
 package GameObjectBase;
 
-import GameObjectBase.BoundedObject;
-
 import java.awt.*;
 
 public class HitBox extends BoundedObject

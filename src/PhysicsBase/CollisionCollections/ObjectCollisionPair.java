@@ -3,14 +3,15 @@ package PhysicsBase.CollisionCollections;
 import GameObjectBase.GameWorldObject;
 import GameObjectBase.HitBox;
 import GameObjectBase.enums.Side;
+import Interfaces.IGameWorldObject;
 
 import java.util.UUID;
 
 public class ObjectCollisionPair
 {
     //Public Variables
-    public GameWorldObject object1;
-    public GameWorldObject object2;
+    public IGameWorldObject object1;
+    public IGameWorldObject object2;
 
     public Side object1CollisionSide;
     public Side object2CollisionSide;
@@ -18,7 +19,7 @@ public class ObjectCollisionPair
     public boolean activelyColliding;
 
     //Constructor
-    public ObjectCollisionPair(GameWorldObject obj1, GameWorldObject obj2,
+    public ObjectCollisionPair(IGameWorldObject obj1, IGameWorldObject obj2,
                                Side obj1CollisionSide, Side obj2CollisionSide)
     {
         object1 = obj1;

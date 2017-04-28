@@ -1,6 +1,7 @@
 package PhysicsBase.CollisionRules;
 
 import GameObjectBase.GameWorldObject;
+import Interfaces.IGameWorldObject;
 import PhysicsBase.CollisionCollections.CollisionGroup;
 import PhysicsBase.CollisionRules.enums.CollisionRule;
 
@@ -10,7 +11,7 @@ public class CollisionRuleManager
 {
     //Private Fields
     private HashMap<CollisionGroupPair, CollisionRule> _groupToRules;
-    private HashMap<GameWorldObject, CollisionGroup> _objectToGroup;
+    private HashMap<IGameWorldObject, CollisionGroup> _objectToGroup;
     private HashMap<String, CollisionGroup> _groupNameToGroup;
 
     //Variables
@@ -51,7 +52,7 @@ public class CollisionRuleManager
                 : null;
     }
 
-    public CollisionGroup GetGroup(GameWorldObject gObj)
+    public CollisionGroup GetGroup(IGameWorldObject gObj)
     {
         return  _objectToGroup.containsKey(gObj)
                 ? _objectToGroup.get(gObj)
@@ -66,7 +67,7 @@ public class CollisionRuleManager
         _groupToRules.put(pair, rule);
     }
 
-    public void AddObject(GameWorldObject gObj, String groupName)
+    public void AddObject(IGameWorldObject gObj, String groupName)
     {
         CollisionGroup group;
 
@@ -88,7 +89,7 @@ public class CollisionRuleManager
         }
     }
 
-    public void RemoveObject(GameWorldObject gObj)
+    public void RemoveObject(IGameWorldObject gObj)
     {
         if(!_objectToGroup.containsKey(gObj)) return;
 

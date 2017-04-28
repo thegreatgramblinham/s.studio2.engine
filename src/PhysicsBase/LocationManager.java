@@ -3,10 +3,12 @@ package PhysicsBase;
 import GameObjectBase.GameWorldObject;
 import GeneralHelpers.PointHelper;
 import Global.DPoint;
+import Interfaces.IGameWorldObject;
 import PhysicsBase.Vectors.DistanceVector;
 import PhysicsBase.Vectors.VelocityVector;
 import SectorBase.SectorMap;
 import SectorBase.enums.GravityApplication;
+import sun.reflect.generics.reflectiveObjects.NotImplementedException;
 
 import java.util.Iterator;
 
@@ -35,11 +37,11 @@ public class LocationManager
     //Public Methods
     public void AdvancePositions()
     {
-        Iterator<GameWorldObject> objIter = _map.GetAllObjectIterator();
+        Iterator<IGameWorldObject> objIter = _map.GetAllObjectIterator();
 
         while(objIter.hasNext())
         {
-            GameWorldObject gObj = objIter.next();
+            IGameWorldObject gObj = objIter.next();
 
             VelocityVector v = gObj.GetVelocity();
 
@@ -67,7 +69,7 @@ public class LocationManager
     }
 
     //Private Methods
-    public void ApplyGravityToObject(GameWorldObject obj)
+    public void ApplyGravityToObject(IGameWorldObject obj)
     {
         VelocityVector v = obj.GetVelocity();
         switch (_gravityApp)
@@ -76,14 +78,16 @@ public class LocationManager
                 obj.SetVelocity(new VelocityVector(v.GetRadianRotation(),
                         v.GetSpeed()*(1-(_gravity * obj.GetMass()))));
                 break;
-            case Up:
-                break;
-            case Down:
-                break;
-            case Left:
-                break;
-            case Right:
-                break;
+//            case Up:
+//                break;
+//            case Down:
+//                break;
+//            case Left:
+//                break;
+//            case Right:
+//                break;
+            default:
+                throw new NotImplementedException();
         }
 
     }
