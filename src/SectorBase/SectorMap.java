@@ -2,7 +2,7 @@ package SectorBase;
 
 import GameObjectBase.BoundedObject;
 import GameObjectBase.GameWorldObject;
-import Global.IdHashSet;
+import Global.DataStructures.IdHashSet;
 
 import java.awt.*;
 import java.util.HashMap;

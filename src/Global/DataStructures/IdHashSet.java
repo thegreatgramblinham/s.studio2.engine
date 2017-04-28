@@ -1,4 +1,4 @@
-package Global;
+package Global.DataStructures;
 
 import java.util.HashSet;
 import java.util.UUID;
