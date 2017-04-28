@@ -1,11 +1,12 @@
 package GameObjectBase;
 
+import Interfaces.IGameWorldObject;
 import PhysicsBase.Vectors.VelocityVector;
 import javafx.scene.image.Image;
 
 import java.awt.*;
 
-public abstract class GameWorldObject extends GameObject
+public abstract class GameWorldObject extends GameObject implements IGameWorldObject
 {
     //Private Variables
     private HitBox _hitBox;
@@ -174,9 +175,9 @@ public abstract class GameWorldObject extends GameObject
         _velocity = null;
     }
 
-    public void OnCollide(GameWorldObject other){}
+    public void OnCollide(IGameWorldObject other){}
 
-    public void OnRemoval()
+    public void OnDeletion()
     {
         System.out.println("DELETION! - <["+GetAlias()+" removed from sector]>");
     }
@@ -193,17 +194,17 @@ public abstract class GameWorldObject extends GameObject
         _isImmobile = false;
         this.SetMass(mass);
     }
-
-    //Override Handling
-    @Override
-    public void setLocation(Point p)
-    {
-        this.NSetLocation(p);
-    }
-
-    @Override
-    public void setLocation(int x, int y)
-    {
-        this.NSetLocation(new Point(x,y));
-    }
+//
+//    //Override Handling
+//    @Override
+//    public void setLocation(Point p)
+//    {
+//        this.NSetLocation(p);
+//    }
+//
+//    @Override
+//    public void setLocation(int x, int y)
+//    {
+//        this.NSetLocation(new Point(x,y));
+//    }
 }
