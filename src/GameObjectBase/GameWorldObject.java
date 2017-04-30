@@ -33,7 +33,7 @@ public abstract class GameWorldObject extends GameObject implements IGameWorldOb
         _isImmobile = isImmobile;
     }
 
-    //GetMethods
+    //region Get Methods
     public HitBox GetHitBox()
     {
         return _hitBox;
@@ -75,8 +75,9 @@ public abstract class GameWorldObject extends GameObject implements IGameWorldOb
     {
         return _needsDeletion;
     }
+    //endregion
 
-    //SetMethods
+    //region Set Methods
     public void SetVelocity(VelocityVector velocity)
     {
         if(_isImmobile) return;
@@ -127,8 +128,9 @@ public abstract class GameWorldObject extends GameObject implements IGameWorldOb
     {
         _needsDeletion = needsDeletion;
     }
+    //endregion
 
-    //Public Methods
+    //region Public Methods
     public void AccelerateBy(VelocityVector v)
     {
         if(_isImmobile) return;
@@ -163,23 +165,27 @@ public abstract class GameWorldObject extends GameObject implements IGameWorldOb
         _velocity = null;
     }
 
+    public boolean IsMoving()
+    {
+        return GetVelocity() != null && GetVelocity().GetSpeed() != 0.0D;
+    }
+    //endregion
+
+    //region Event Methods
     public void OnCollide(IGameWorldObject other){}
 
     public void OnDeletion()
     {
         System.out.println("DELETION! - <["+GetAlias()+" removed from sector]>");
     }
+    //endregion
 
-    public boolean IsMoving()
-    {
-        return GetVelocity() != null && GetVelocity().GetSpeed() != 0.0D;
-    }
-
-    //Private Methods
+    //region Private Methods
     private void Init(float mass)
     {
         _velocity = null;
         _isImmobile = false;
         this.SetMass(mass);
     }
+    //endregion
 }

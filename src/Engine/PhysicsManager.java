@@ -26,6 +26,9 @@ class PhysicsManager
     //Public Methods
     public void CyclePhysicsFrame()
     {
+        if(_sector == null)
+            throw new IllegalStateException("No sector defined.");
+
         //todo advance location here - according to vectors+gravity.
         _sector.HandleCollisions();
         _sector.UpdateVectors();
