@@ -92,23 +92,23 @@ public class CollisionManager
 
         if(e.object2CollisionSide == Side.Top)
         {
-            e.object1.NSetLocation(new Point(e.object1.x, e.object1.y-1));
-            e.object2.NSetLocation(new Point(e.object2.x, e.object2.y+1));
+            e.object1.NSetLocation(new Point((int)e.object1.getX(), (int)e.object1.getY()-1));
+            e.object2.NSetLocation(new Point((int)e.object2.getX(), (int)e.object2.getY()+1));
         }
         else if (e.object2CollisionSide == Side.Left )
         {
-            e.object1.NSetLocation(new Point(e.object1.x-1, e.object1.y));
-            e.object2.NSetLocation(new Point(e.object2.x+1, e.object2.y));
+            e.object1.NSetLocation(new Point((int)e.object1.getX()-1, (int)e.object1.getY()));
+            e.object2.NSetLocation(new Point((int)e.object2.getX()+1, (int)e.object2.getY()));
         }
         else if(e.object2CollisionSide == Side.Bottom)
         {
-            e.object1.NSetLocation(new Point(e.object1.x, e.object1.y+1));
-            e.object2.NSetLocation(new Point(e.object2.x, e.object2.y-1));
+            e.object1.NSetLocation(new Point((int)e.object1.getX(), (int)e.object1.getY()+1));
+            e.object2.NSetLocation(new Point((int)e.object2.getX(), (int)e.object2.getY()-1));
         }
         else if(e.object2CollisionSide == Side.Right)
         {
-            e.object1.NSetLocation(new Point(e.object1.x+1, e.object1.y));
-            e.object2.NSetLocation(new Point(e.object2.x-1, e.object2.y));
+            e.object1.NSetLocation(new Point((int)e.object1.getX()+1, (int)e.object1.getY()));
+            e.object2.NSetLocation(new Point((int)e.object2.getX()-1, (int)e.object2.getY()));
         }
 
 

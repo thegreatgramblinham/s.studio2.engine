@@ -83,6 +83,19 @@ public class Sector extends BoundedObject
         _vectorManager.AdvancePositions();
     }
 
+    public void UpdateObjectLocations()
+    {
+        Iterator<IGameWorldObject> iter = _map.GetAllObjectIterator();
+
+        if(iter == null) return;
+
+        while (iter.hasNext())
+        {
+            IGameWorldObject gObj = iter.next();
+            _map.UpdateObjectLocation(gObj);
+        }
+    }
+
     public void AddObject(IGameWorldObject obj, int renderGroup,
                           String collisionGroupName)
     {
